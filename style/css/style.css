@@ -11,15 +11,32 @@
   background-image: url("../asset/football.jpg");
   background-size: 100%;
   background-repeat: no-repeat, repeat;
-  height: 500px;
+  height: 480px;
+  border: 2px solid black;
+  border-radius: 5px;
+  box-shadow: 0px 0px 9px grey;
+}
+#draw .draw {
+  margin-left: 10%;
 }
 
 #set {
-  background-color: salmon;
+  box-shadow: 0px 0px 9px grey;
+  border: 2px solid black;
+  border-radius: 7px;
+  background-color: #d6d85f;
+}
+#set input {
+  max-width: 100%;
+}
+#set .body {
+  border: 1px solid #ecf0f0;
+  padding: 10px 4em;
+  border-radius: 5%;
 }
 
 img {
-  width: 100%;
+  width: 80%;
 }
 
 h2 {

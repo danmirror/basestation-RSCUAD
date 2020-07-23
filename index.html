@@ -18,68 +18,76 @@
 <!-- <script src="/socket.io/socket.io.js"></script> -->
 <body>
 </body>
-<h1 class="title">BASESTATION R-SCUAD</h1>
+<h1 class="title">BASE STATION R-SCUAD</h1>
 <div class="container">
   <div class="row" id="draw">
-    <div class="col-sm-4">
-      <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt dignissimos reprehenderit fugit nam nobis! Cupiditate reiciendis eligendi, ducimus totam error ad odio aspernatur doloribus tempora sunt itaque, deserunt qui deleniti?</p> -->
-      
+    <div class="col-sm-4 ">
       <div class="name">
         <h2 id="r1">Robot 1</h2>
       </div>
-      <img src="asset/robo.png" alt="" >
+      <img class="draw" src="asset/robo.png" alt="" >
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-4 ">
       <div class="name">
         <h2 id="r2">Robot 2</h2>
       </div>
-      <img src="asset/robo.png" alt="" >
+      <img class="draw"  src="asset/robo.png" alt="" >
     </div>
     <div class="col-sm-4">
       <div class="name">
         <h2 id="r3">Robot 3</h2>
       </div>
-      <img src="asset/robo.png" alt="" >
+      <img class="draw"  src="asset/robo.png" alt="" >
     </div>
   </div>
-  <div class="row mt-2" id="set">
-    <div class="col-sm-4">
-      <ul>
-        <li>
-          <label for="">TILT</label>
-          <input type="text" id="tilt_1" value="">
-        </li>
-        <li>
-          <label for="">PAN</label>
-          <input type="text" id="pan_1" value="">
-        </li>
-      </ul>
-    </div>
-    <div class="col-sm-4">
-      <ul>
-        <li>
-          <label for="">TILT</label>
-          <input type="text" id="tilt_2" value="">
-        </li>
-        <li>
-          <label for="">PAN</label>
-          <input type="text" id="pan_2" value="">
-        </li>
-      </ul>
-    </div>
-    <div class="col-sm-4">
-      <ul>
-        <li>
-          <label for="">TILT</label>
-          <input type="text" id="tilt_3" value="">
-        </li>
-        <li>
-          <label for="">PAN</label>
-          <input type="text" id="pan_3" value="">
-        </li>
-      </ul>
-    </div>
-  </div>
+  
+  <div class="row mt-1" id="set">
+  
+      <div class="col-sm-4 body">
+
+        <div class="input-group input-group-sm mb-1">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-sm"> TILT</span>
+          </div>
+          <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="Value Tilt Robot" id="tilt_1" value="">
+        </div>
+        <div class="input-group input-group-sm mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-sm"> PAN</span>
+          </div>
+          <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="Value Pan Robot" id="pan_1" value="">
+        </div>
+
+      </div>
+      <div class="col-sm-4 body">
+        <div class="input-group input-group-sm mb-1">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-sm"> TILT</span>
+          </div>
+          <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="Value Tilt Robot" id="tilt_2" value="">
+        </div>
+        <div class="input-group input-group-sm mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-sm"> PAN</span>
+          </div>
+          <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="Value Pan Robot" id="pan_2" value="">
+        </div>
+      </div>
+      <div class="col-sm-4 body">
+        <div class="input-group input-group-sm mb-1">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-sm"> TILT</span>
+          </div>
+          <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="Value Tilt Robot" id="tilt_3" value="">
+        </div>
+        <div class="input-group input-group-sm mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-sm"> PAN</span>
+          </div>
+          <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="Value Pan Robot" id="pan_3" value="">
+        </div>
+      </div>
+  </div> <!--end set-->
 </div>
 
 
