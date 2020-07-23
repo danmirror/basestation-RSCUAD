@@ -1,0 +1,34 @@
+.mystyle{
+    color:red;
+  }
+  .title{
+    text-align: center;
+
+  }
+#draw{
+  // background-color:slateblue!important;
+  padding: 3em 3em;
+  background-image: url("../asset/football.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat, repeat;
+  height: 500px;
+  
+}
+#set{
+  background-color: salmon;
+}
+img {
+  width: 100%;
+}
+h2{
+  text-align: center;
+  padding: 10px 10px;
+  background-color: rgb(218, 194, 194);
+  border-radius: 5%;
+}
+
+.name{
+  padding: 1em 1em;
+  // background-color: blue;
+  
+}
