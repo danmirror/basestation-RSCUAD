@@ -45,46 +45,63 @@
   
       <div class="col-sm-4 body">
 
-        <div class="input-group input-group-sm mb-1">
+        <div class="input-group input-group-sm ">
           <div class="input-group-prepend">
             <span class="input-group-text" id="inputGroup-sizing-sm"> TILT</span>
           </div>
           <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="Value Tilt Robot" id="tilt_1" value="">
         </div>
-        <div class="input-group input-group-sm mb-3">
+        <div class="input-group input-group-sm mb-1">
           <div class="input-group-prepend">
             <span class="input-group-text" id="inputGroup-sizing-sm"> PAN</span>
           </div>
           <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="Value Pan Robot" id="pan_1" value="">
         </div>
-
+        <div class="input-group input-group-sm mb-1">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-sm">GYRO</span>
+          </div>
+          <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="Value Gyro Robot" id="gyro_1" value="">
+        </div>
       </div>
       <div class="col-sm-4 body">
-        <div class="input-group input-group-sm mb-1">
+        <div class="input-group input-group-sm ">
           <div class="input-group-prepend">
             <span class="input-group-text" id="inputGroup-sizing-sm"> TILT</span>
           </div>
           <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="Value Tilt Robot" id="tilt_2" value="">
         </div>
-        <div class="input-group input-group-sm mb-3">
+        <div class="input-group input-group-sm mb-1">
           <div class="input-group-prepend">
             <span class="input-group-text" id="inputGroup-sizing-sm"> PAN</span>
           </div>
           <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="Value Pan Robot" id="pan_2" value="">
         </div>
+        <div class="input-group input-group-sm mb-1">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-sm">GYRO</span>
+          </div>
+          <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="Value Gyro Robot" id="gyro_2" value="">
+        </div>
       </div>
       <div class="col-sm-4 body">
-        <div class="input-group input-group-sm mb-1">
+        <div class="input-group input-group-sm ">
           <div class="input-group-prepend">
             <span class="input-group-text" id="inputGroup-sizing-sm"> TILT</span>
           </div>
           <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="Value Tilt Robot" id="tilt_3" value="">
         </div>
-        <div class="input-group input-group-sm mb-3">
+        <div class="input-group input-group-sm mb-1">
           <div class="input-group-prepend">
             <span class="input-group-text" id="inputGroup-sizing-sm"> PAN</span>
           </div>
           <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="Value Pan Robot" id="pan_3" value="">
+        </div>
+        <div class="input-group input-group-sm mb-1">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-sm">GYRO</span>
+          </div>
+          <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="Value Gyro Robot" id="gyro_3" value="">
         </div>
       </div>
   </div> <!--end set-->
@@ -115,6 +132,7 @@
 
       document.getElementById("tilt_1").value =data_all[1];
       document.getElementById("pan_1").value = data_all[2];
+      document.getElementById("gyro_1").value = data_all[3];
       console.log("masuk")
     }
     else if(data_all[0]=="21"){
@@ -124,6 +142,7 @@
 
       document.getElementById("tilt_2").value =data_all[1];
       document.getElementById("pan_2").value = data_all[2];
+      document.getElementById("gyro_2").value = data_all[3];
 
       console.log("masuk")
     }
@@ -134,6 +153,7 @@
 
       document.getElementById("tilt_3").value =data_all[1];
       document.getElementById("pan_3").value = data_all[2];
+      document.getElementById("gyro_3").value = data_all[3];
 
       console.log("masuk")
     }

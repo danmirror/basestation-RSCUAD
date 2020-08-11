@@ -1,5 +1,11 @@
+$font : cooperblack !important;
+$size_font : 510!important;
+.container{
+  min-height: 34rem;
+}
 .mystyle{
-    color:red;
+    background-color:red;
+    box-shadow: 0px 0px 12px black;
   }
   .title{
     text-align: center;
@@ -24,6 +30,9 @@
   input{
     max-width: 100%;
   }
+  .input-group-text{
+    width: 60px;
+  }
   .body{
     border: 1px solid rgb(236, 240, 240);
     padding: 10px 4em;
@@ -37,11 +46,18 @@
 img {
   width: 80%;
 }
+h1{
+  font-family: $font;
+  font-weight: $size_font;
+}
 h2{
   text-align: center;
   padding: 10px 10px;
-  background-color: rgb(218, 194, 194);
+  background-color: #b4d5ea;
   border-radius: 5%;
+
+  font-family: $font;
+  font-weight: $size_font;
 }
 
 .name{
