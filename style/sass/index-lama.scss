@@ -1,0 +1,67 @@
+$font : cooperblack !important;
+$size_font : 510!important;
+.container{
+  min-height: 34rem;
+}
+.mystyle{
+    background-color:red;
+    box-shadow: 0px 0px 12px black;
+  }
+  .title{
+    text-align: center;
+
+  }
+
+#draw{
+  .draw{
+    margin-left: 10%;
+  }
+  // background-color:slateblue!important;
+  padding: 3em 3em;
+  background-image: url("../asset/football.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat, repeat;
+  height: 480px;
+  border: 2px solid black;
+  border-radius: 5px;
+  box-shadow: 0px 0px 9px grey;
+}
+#set{
+  input{
+    max-width: 100%;
+  }
+  .input-group-text{
+    width: 60px;
+  }
+  .body{
+    border: 1px solid rgb(236, 240, 240);
+    padding: 10px 4em;
+    border-radius: 5%;
+  }
+  box-shadow: 0px 0px 9px grey;
+  border: 2px solid black;
+  border-radius: 7px;
+  background-color: rgb(214, 216, 95);
+}
+img {
+  width: 80%;
+}
+h1{
+  font-family: $font;
+  font-weight: $size_font;
+}
+h2{
+  text-align: center;
+  padding: 10px 10px;
+  background-color: #b4d5ea;
+  border-radius: 5%;
+
+  font-family: $font;
+  font-weight: $size_font;
+}
+
+.name{
+  padding: 1em 1em;
+  // background-color: blue;
+  
+}

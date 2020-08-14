@@ -1,0 +1,10 @@
+html, body {
+    height: 100%;
+}
+.container{
+    flex: 1 0 auto;
+}
+body{
+    display: flex;
+    flex-direction: column;
+}

@@ -1,15 +1,29 @@
+@import 'auto_buttom';
 $font : cooperblack !important;
 $size_font : 510!important;
-.container{
-  min-height: 34rem;
+
+body{
+  background-image: url("../asset/bg.png");
+  background-size: 100%;
+  background-repeat: no-repeat, repeat;
 }
-.mystyle{
-    background-color:red;
+.selection{
+  padding: 2px;
+}
+.run{
+    background-color:rgb(180, 240, 180);
     box-shadow: 0px 0px 12px black;
   }
+.standby{
+  background-color:rgb(194, 223, 223);
+  box-shadow: 0px 0px 12px black;
+}
+.loss{
+  background-color:rgb(255, 63, 63);
+  box-shadow: 0px 0px 12px black;
+}
   .title{
-    text-align: center;
-
+    // text-align: center;
   }
 
 #draw{
@@ -17,32 +31,38 @@ $size_font : 510!important;
     margin-left: 10%;
   }
   // background-color:slateblue!important;
-  padding: 3em 3em;
-  background-image: url("../asset/football.jpg");
-  background-size: 100%;
-  background-repeat: no-repeat, repeat;
-  height: 480px;
-  border: 2px solid black;
-  border-radius: 5px;
-  box-shadow: 0px 0px 9px grey;
+  // padding: 3em 3em;
+  // background-image: url("../asset/bg.png");
+  // background-size: 100%;
+  // background-repeat: no-repeat, repeat;
+  // height: 480px;
+  // border: 2px solid black;
+  // border-radius: 5px;
+  // box-shadow: 0px 0px 9px grey;
 }
 #set{
+  .card{
+    // background-color:  rgb(240, 241, 145);
+  }
   input{
     max-width: 100%;
   }
   .input-group-text{
     width: 60px;
   }
-  .body{
-    border: 1px solid rgb(236, 240, 240);
-    padding: 10px 4em;
-    border-radius: 5%;
-  }
+  // .body{
+  //   border: 1px solid rgb(236, 240, 240);
+  //   padding: 10px 4em;
+  //   border-radius: 5%;
+  // }
   box-shadow: 0px 0px 9px grey;
-  border: 2px solid black;
-  border-radius: 7px;
-  background-color: rgb(214, 216, 95);
+  // border: 2px solid black;
+  border-radius: 9px;
+  margin: 0px !important;
+  // background-color: rgb(236, 238, 148);
 }
+
+
 img {
   width: 80%;
 }
@@ -53,15 +73,15 @@ h1{
 h2{
   text-align: center;
   padding: 10px 10px;
-  background-color: #b4d5ea;
+  // background-color: #b4d5ea;
   border-radius: 5%;
 
   font-family: $font;
   font-weight: $size_font;
 }
 
-.name{
-  padding: 1em 1em;
+// .name{
+  // padding: 1em 1em;
   // background-color: blue;
   
-}
+// }

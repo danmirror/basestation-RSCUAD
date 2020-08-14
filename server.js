@@ -19,7 +19,7 @@ var netServer = net.createServer(function(c) {
 
     // send to web with net to client
     io.sockets.emit('hi', data_last.toString());
-  
+    // send to client
     c.write(data_last.toString());
     c.pipe(c);
   });

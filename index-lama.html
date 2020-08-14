@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>R-SCUAD TECH</title>
+ <!-- <link type="text/css" href="/css/style.css"> -->
+ <link rel="stylesheet" type="text/css" href="css/style.css" />
+ <!-- <link rel="stylesheet" href="style/css/style.css"> -->
+
+<!-- -------------bootstrap------------>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<!-- ------------------------------------->
+
+</head>
+<!-- <script src="http://localhost:4040//socket.io/socket.io.js"></script> -->
+<!-- <script src="/socket.io/socket.io.js"></script> -->
+<body>
+</body>
+<h1 class="title">BASE STATION R-SCUAD</h1>
+<div class="container">
+  <div class="row" id="draw">
+    <div class="col-sm-4 ">
+      <div class="name">
+        <h2 id="r1">Robot 1</h2>
+      </div>
+      <img class="draw" src="asset/robo.png" alt="" >
+    </div>
+    <div class="col-sm-4 ">
+      <div class="name">
+        <h2 id="r2">Robot 2</h2>
+      </div>
+      <img class="draw"  src="asset/robo.png" alt="" >
+    </div>
+    <div class="col-sm-4">
+      <div class="name">
+        <h2 id="r3">Robot 3</h2>
+      </div>
+      <img class="draw"  src="asset/robo.png" alt="" >
+    </div>
+  </div>
+  
+  <div class="row mt-1" id="set">
+  
+      <div class="col-sm-4 body">
+
+        <div class="input-group input-group-sm ">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-sm"> TILT</span>
+          </div>
+          <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="Value Tilt Robot" id="tilt_1" value="">
+        </div>
+        <div class="input-group input-group-sm mb-1">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-sm"> PAN</span>
+          </div>
+          <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="Value Pan Robot" id="pan_1" value="">
+        </div>
+        <div class="input-group input-group-sm mb-1">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-sm">GYRO</span>
+          </div>
+          <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="Value Gyro Robot" id="gyro_1" value="">
+        </div>
+      </div>
+      <div class="col-sm-4 body">
+        <div class="input-group input-group-sm ">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-sm"> TILT</span>
+          </div>
+          <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="Value Tilt Robot" id="tilt_2" value="">
+        </div>
+        <div class="input-group input-group-sm mb-1">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-sm"> PAN</span>
+          </div>
+          <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="Value Pan Robot" id="pan_2" value="">
+        </div>
+        <div class="input-group input-group-sm mb-1">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-sm">GYRO</span>
+          </div>
+          <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="Value Gyro Robot" id="gyro_2" value="">
+        </div>
+      </div>
+      <div class="col-sm-4 body">
+        <div class="input-group input-group-sm ">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-sm"> TILT</span>
+          </div>
+          <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="Value Tilt Robot" id="tilt_3" value="">
+        </div>
+        <div class="input-group input-group-sm mb-1">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-sm"> PAN</span>
+          </div>
+          <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="Value Pan Robot" id="pan_3" value="">
+        </div>
+        <div class="input-group input-group-sm mb-1">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-sm">GYRO</span>
+          </div>
+          <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="Value Gyro Robot" id="gyro_3" value="">
+        </div>
+      </div>
+  </div> <!--end set-->
+</div>
+
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  var robot1 = document.getElementById('r1');
+  var robot2 = document.getElementById('r2');
+  var robot3 = document.getElementById('r3');
+ 
+
+
+  var socket = io.connect('http://localhost:8081');
+  // function kirim(){
+  //   socket.emit('my other event', { my: 'data' });
+  // }
+  socket.on('hi', data=>{
+    data_all = JSON.parse("["+data+"]"); 
+    
+
+    console.log(data_all[0]);
+     if(data_all[0]=="11"){
+      robot1.classList.add("mystyle");
+      robot2.classList.remove("mystyle");
+      robot3.classList.remove("mystyle");
+
+      document.getElementById("tilt_1").value =data_all[1];
+      document.getElementById("pan_1").value = data_all[2];
+      document.getElementById("gyro_1").value = data_all[3];
+      console.log("masuk")
+    }
+    else if(data_all[0]=="21"){
+      robot2.classList.add("mystyle");
+      robot1.classList.remove("mystyle");
+      robot3.classList.remove("mystyle");
+
+      document.getElementById("tilt_2").value =data_all[1];
+      document.getElementById("pan_2").value = data_all[2];
+      document.getElementById("gyro_2").value = data_all[3];
+
+      console.log("masuk")
+    }
+    else if(data_all[0]=="31"){
+      robot3.classList.add("mystyle");
+      robot1.classList.remove("mystyle");
+      robot2.classList.remove("mystyle");
+
+      document.getElementById("tilt_3").value =data_all[1];
+      document.getElementById("pan_3").value = data_all[2];
+      document.getElementById("gyro_3").value = data_all[3];
+
+      console.log("masuk")
+    }
+  });
+
+  // socket.on('news', data=> {
+  //   console.log(data);
+  //   socket.emit('my other event', { my: 'data' });
+  // });
+
+ console.log("try")
+</script>
+</html>
