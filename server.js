@@ -61,8 +61,14 @@ var netServer = net.createServer(function(c) {
       }
     }
 
-    if(data_last[0]=="20"){robot2 = 0;}
-    else if(data_last[0]=="21"){robot2=1; }
+    if(data_last[0]=="20"){
+      count2=sec; 
+      min_2=min;
+      robot2 = 0;}
+    else if(data_last[0]=="21"){
+      count2=sec; 
+      min_2=min;
+      robot2=1; }
     else{
       //check loss robot
       let set_2 = sec-count2;
@@ -74,8 +80,14 @@ var netServer = net.createServer(function(c) {
       }
 
     }
-    if(data_last[0]=="30"){robot3=0; }
-    else if(data_last[0]=="31"){robot3=1;  }
+    if(data_last[0]=="30"){
+      count3=sec; 
+      min_3=min;
+      robot3=0; }
+    else if(data_last[0]=="31"){
+      count3=sec; 
+      min_3=min;
+      robot3=1;  }
     else{
       //check loss robot
       let set_3 = sec-count3;
@@ -87,8 +99,14 @@ var netServer = net.createServer(function(c) {
       }
 
     }
-    if(data_last[0]=="40"){ robot4=0;}
-    else if(data_last[0]=="41"){ robot4=1;}
+    if(data_last[0]=="40"){ 
+      count4=sec; 
+      min_4=min;
+      robot4=0;}
+    else if(data_last[0]=="41"){ 
+      count4=sec; 
+      min_4=min;
+      robot4=1;}
       
     else{
       //check loss robot
@@ -101,10 +119,10 @@ var netServer = net.createServer(function(c) {
       }
 
     }
-    if(robot1==1){ datarobot="satu"}
-    else if(robot2==1){ datarobot="dua"}
-    else if(robot3==1){ datarobot="tiga"}
-    else if(robot4==1){ datarobot="empat"}
+    if(robot1==1 &&robot2==0&&robot3==0&&robot4==0){ datarobot="satu"}
+    else if(robot1==0 &&robot2==1&&robot3==0&&robot4==0){ datarobot="dua"}
+    else if(robot1==0 &&robot2==0&&robot3==1&&robot4==0){ datarobot="tiga"}
+    else if(robot1==0 &&robot2==0&&robot3==0&&robot4==1){ datarobot="empat"}
     else{
       datarobot="null"
     }
