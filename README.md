@@ -18,7 +18,7 @@
 - npm install
 
 ## run
-- node server.js
+- node server_udp.js
 
 
 # author
