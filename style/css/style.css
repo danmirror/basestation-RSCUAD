@@ -1,72 +1,57 @@
 html, body {
-  height: 100%;
-}
+  height: 100%; }
 
 .container {
-  flex: 1 0 auto;
-}
+  flex: 1 0 auto; }
 
 body {
   display: flex;
-  flex-direction: column;
-}
+  flex-direction: column; }
 
 body {
   background-image: url("../asset/bg.png");
   background-size: 100%;
-  background-repeat: no-repeat, repeat;
-}
+  background-repeat: no-repeat, repeat; }
 
 .selection {
-  padding: 2px;
-}
+  padding: 2px; }
 
 .run {
-  background-color: #b4f0b4;
-  box-shadow: 0px 0px 12px black;
-}
+  background-color: #7de77d;
+  box-shadow: 0px 0px 12px black; }
 
 .standby {
   background-color: #c2dfdf;
-  box-shadow: 0px 0px 12px black;
-}
+  box-shadow: 0px 0px 12px black; }
 
 .loss {
   background-color: #ff3f3f;
-  box-shadow: 0px 0px 12px black;
-}
+  box-shadow: 0px 0px 12px black; }
 
 #draw .draw {
-  margin-left: 10%;
-}
+  margin-left: 10%; }
 
 #set {
   box-shadow: 0px 0px 9px grey;
   border-radius: 9px;
-  margin: 0px !important;
-}
-#set input {
-  max-width: 100%;
-}
-#set .input-group-text {
-  width: 60px;
-}
+  margin: 0px !important; }
+  #set input {
+    max-width: 100%; }
+  #set .input-group-text {
+    width: 60px; }
 
 img {
-  width: 80%;
-}
+  width: 80%; }
 
 h1 {
   font-family: cooperblack !important;
-  font-weight: 510 !important;
-}
+  font-weight: 510 !important; }
 
 h2 {
   text-align: center;
   padding: 10px 10px;
   border-radius: 5%;
   font-family: cooperblack !important;
-  font-weight: 510 !important;
-}
+  font-weight: 510 !important; }
 
 /*# sourceMappingURL=style.css.map */
