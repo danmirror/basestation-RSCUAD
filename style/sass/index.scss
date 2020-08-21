@@ -25,6 +25,18 @@ body{
   .title{
     // text-align: center;
   }
+  .page{
+    margin: auto;
+  width: 50%;
+  border: 3px solid green;
+  padding: 10px;
+      img{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;
+    }
+  }
 
 #draw{
   .draw{
