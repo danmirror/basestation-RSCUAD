@@ -138,16 +138,18 @@ server_udp.on('message', (msg, rinfo) => {
     datarobot="null"
   }
 
-  
+  msgTimer = setInterval(() => {
+    server_udp.send(datarobot,rinfo.port,rinfo.address);
+   }, 100);
 //sending msg
-  server_udp.send(datarobot,rinfo.port,rinfo.address,function(error){
-    if(error){
-      client.close();
-    }else{
-      console.log('Data sent !!!');
-    }
+  // server_udp.send(datarobot,rinfo.port,rinfo.address,function(error){
+  //   if(error){
+  //     client.close();
+  //   }else{
+  //     console.log('Data sent !!!');
+  //   }
 
-  });
+  // });
 
 });
 
