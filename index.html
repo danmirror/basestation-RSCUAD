@@ -56,7 +56,7 @@
               <div class="name">
                 <h2 >Robot 1</h2>
               </div>
-              <img class="draw" src="asset/robo.png" alt="" >
+              <img class="draw" src="asset/robot-standby.png" alt="" id="rr1">
             </div>
           </div>
         </div>
@@ -66,7 +66,7 @@
               <div class="name">
                 <h2 >Robot 2</h2>
               </div>
-              <img class="draw" src="asset/robo.png" alt="" >
+              <img class="draw" src="asset/robot-standby.png" alt="" id="rr2">
             </div>
           </div>
         </div>
@@ -76,7 +76,7 @@
               <div class="name">
                 <h2 >Robot 3</h2>
               </div>
-              <img class="draw" src="asset/robo.png" alt="" >
+              <img class="draw" src="asset/robot-standby.png" alt="" id="rr3">
             </div>
           </div>
         </div>
@@ -86,7 +86,7 @@
               <div class="name">
                 <h2 >Robot 4</h2>
               </div>
-              <img class="draw" src="asset/robo.png" alt="" >
+              <img class="draw" src="asset/robot-standby.png" alt="" id="rr4">
             </div>
           </div>
         </div>
@@ -275,6 +275,7 @@
       robot2.classList.remove("run");
       robot3.classList.remove("run");
       robot4.classList.remove("run");
+      document.getElementById('rr1').src='robot-active.png';
       val_robot1();
     }
     else if(data_all[0]=="10"){
@@ -283,6 +284,7 @@
       robot1.classList.remove("loss");
       robot1.classList.remove("run");
       robot1.classList.add("standby");
+      document.getElementById('rr1').src='asset/robot-standby.png';
       val_robot1();
     }
     else{
@@ -294,6 +296,7 @@
       // console.log("-----3",sec-count3,"set--", set_1);
       if(set_1 >= 20 || min!=min_1 ){
         // console.log("1 losss",sec-count1 );
+        document.getElementById('rr1').src='asset/robot-error.png';
 
         robot1.classList.add("loss");
         robot1.classList.remove("standby");
@@ -311,6 +314,7 @@
       robot1.classList.remove("run");
       robot3.classList.remove("run");
       robot4.classList.remove("run");
+      document.getElementById('rr2').src='asset/robot-active.png';
       val_robot2();
     }
     else if(data_all[0]=="20"){
@@ -319,6 +323,7 @@
       robot2.classList.remove("loss");
       robot2.classList.remove("run");
       robot2.classList.add("standby");
+      document.getElementById('rr2').src='asset/robot-standby.png';
       val_robot2();
     }
     else{
@@ -330,6 +335,7 @@
       // console.log("-----2",sec-count2,"set--", set_2);
       if(set_2 >= 20 || min !=min_2 ){
         // console.log("2 losss",sec-count2);
+        document.getElementById('rr2').src='asset/robot-error.png';
         robot2.classList.remove("standby");
         robot2.classList.remove("run");
         robot2.classList.add("loss");
@@ -347,6 +353,7 @@
       robot1.classList.remove("run");
       robot2.classList.remove("run");
       robot4.classList.remove("run");
+      document.getElementById('rr3').src='asset/robot-active.png';
       val_robot3();
     }
     else if(data_all[0]=="30"){
@@ -355,6 +362,7 @@
       robot3.classList.remove("run");
       robot3.classList.remove("loss");
       robot3.classList.add("standby");
+      document.getElementById('rr3').src='asset/robot-standby.png';
       val_robot3();
     }
     else{
@@ -365,6 +373,7 @@
       }
       console.log("-----3",sec-count3,"set--", set_3);
       if(set_3 >= 20 || min !=min_3 ){
+        document.getElementById('rr3').src='asset/robot-error.png';
         console.log("masuk");
         robot3.classList.remove("standby");
         robot3.classList.remove("run");
@@ -381,6 +390,7 @@
       robot1.classList.remove("run");
       robot2.classList.remove("run");
       robot3.classList.remove("run");
+      document.getElementById('rr4').src='asset/robot-active.png';
       val_robot4();
     }
     else if(data_all[0]=="40"){
@@ -389,6 +399,7 @@
       robot4.classList.remove("run");
       robot4.classList.remove("loss");
       robot4.classList.add("standby");
+      document.getElementById('rr4').src='asset/robot-standby.png';
       val_robot4();
     }
     else{
@@ -400,6 +411,7 @@
       // console.log("-----4",sec-count4,"set--", set_4);
       if(set_4 >= 20 || min!=min_4 ){
         // console.log("4 losss",sec-count4);
+        document.getElementById('rr4').src='asset/robot-error.png';
         robot4.classList.add("loss");
         robot4.classList.remove("standby");
         robot4.classList.remove("run");
