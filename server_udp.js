@@ -40,7 +40,7 @@ server_udp.on('error', (err) => {
 
 server_udp.on('message', (msg, rinfo) => {
   // console.log('server_udp got: ${msg} from ${rinfo.address}:${rinfo.port}');
-  console.log('Receivedd: ' + msg);
+  console.log('Receivedd: ' + msg+"\t ip"+rinfo.address);
   data_last = msg;
     
   data_last = JSON.parse("["+data_last+"]");    // convert string to array
@@ -48,7 +48,7 @@ server_udp.on('message', (msg, rinfo) => {
   io.sockets.emit('hi', data_last.toString());
   console.log('data terakhir',data_last);
 
-  //algoritma=====================================================
+  // algoritma=====================================================
   var d = new Date();
   var sec = d.getSeconds();
   var min = d.getMinutes();
@@ -130,10 +130,10 @@ server_udp.on('message', (msg, rinfo) => {
     }
 
   }
-  if(robot1==1 &&robot2==0&&robot3==0&&robot4==0){ datarobot="satu"}
-  else if(robot2==1){ datarobot="dua"}
-  else if(robot3==1){ datarobot="tiga"}
-  else if(robot1==0 &&robot2==0&&robot3==0&&robot4==1){ datarobot="empat"}
+  if(robot1==1 &&robot2==0&&robot3==0&&robot4==0){ datarobot="11"}
+  else if(robot2==1){ datarobot="21"}
+  else if(robot3==1){ datarobot="31"}
+  else if(robot1==0 &&robot2==0&&robot3==0&&robot4==1){ datarobot="41"}
   else{
     datarobot="null"
   }
@@ -146,7 +146,7 @@ server_udp.on('message', (msg, rinfo) => {
     if(error){
       client.close();
     }else{
-      console.log('Data sent !!!');
+      // console.log('Data sent !!!');
     }
 
   });
