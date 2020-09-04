@@ -4,6 +4,7 @@
   <title>R-SCUAD TECH</title>
  <!-- <link type="text/css" href="/css/style.css"> -->
  <link rel="stylesheet" type="text/css" href="css/style.css" />
+
  <!-- <link rel="stylesheet" href="style/css/style.css"> -->
 
 <!-- -------------bootstrap------------>
@@ -93,12 +94,15 @@
       </div>
     </div>
     <div class="tab-pane fade" id="pills-stream" role="tabpanel" aria-labelledby="list-stream-list">
-      Page under construction
+      <div class="page">
+        <img src="asset/cat.png" alt="">
+        <p class="tab-font"> Page under construction...!</p>
+      </div>
     </div>
     <div class="tab-pane fade" id="pills-position" role="tabpanel" aria-labelledby="list-position-list">
       <div class="page">
-        <img src="asset/cat.jpg" alt="">
-        <p>Page under construction</p>
+        <img src="asset/cat.png" alt="">
+        <p class="tab-font"> Page under construction...!</p>
       </div>
     </div>
   </div>
@@ -275,7 +279,7 @@
       robot2.classList.remove("run");
       robot3.classList.remove("run");
       robot4.classList.remove("run");
-      document.getElementById('rr1').src='robot-active.png';
+      document.getElementById('rr1').src='asset/robot-active.png';
       val_robot1();
     }
     else if(data_all[0]=="10"){

@@ -1,3 +1,6 @@
+@import url("https://fonts.googleapis.com/css?family=Comic+Sans+MS");
+@import url("https://db.onlinewebfonts.com/c/1284fed5b849cf2914ad995665825e2f?family=Marker+Felt");
+@import url("https://db.onlinewebfonts.com/c/54b2a3b34aabaa9a318018c8673e707e?family=Blippo");
 html, body {
   height: 100%; }
 
@@ -31,13 +34,12 @@ body {
 .page {
   margin: auto;
   width: 50%;
-  border: 3px solid green;
   padding: 10px; }
   .page img {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 50%; }
+    width: 60%; }
 
 #draw .draw {
   margin-left: 10%; }
@@ -45,7 +47,8 @@ body {
 #set {
   box-shadow: 0px 0px 9px grey;
   border-radius: 9px;
-  margin: 0px !important; }
+  margin: 0px !important;
+  font-family: "Marker Felt" !important; }
   #set input {
     max-width: 100%; }
   #set .input-group-text {
@@ -55,14 +58,18 @@ img {
   width: 80%; }
 
 h1 {
-  font-family: cooperblack !important;
+  font-family: "Marker Felt" !important;
   font-weight: 510 !important; }
 
 h2 {
   text-align: center;
   padding: 10px 10px;
   border-radius: 5%;
-  font-family: cooperblack !important;
+  font-family: "Marker Felt" !important;
   font-weight: 510 !important; }
+
+.tab-font {
+  font-family: "Comic Sans MS" !important;
+  text-align: center; }
 
 /*# sourceMappingURL=style.css.map */
