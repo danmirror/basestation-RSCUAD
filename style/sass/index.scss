@@ -1,5 +1,13 @@
+
+
 @import 'auto_buttom';
-$font : cooperblack !important;
+@import url('https://fonts.googleapis.com/css?family=Comic+Sans+MS');
+@import url('https://db.onlinewebfonts.com/c/1284fed5b849cf2914ad995665825e2f?family=Marker+Felt');
+@import url('https://db.onlinewebfonts.com/c/54b2a3b34aabaa9a318018c8673e707e?family=Blippo');
+//cooperblack
+$font :'Marker Felt' !important;
+$font1 :'Comic Sans MS' !important;
+$font2 :'Blippo' !important;
 $size_font : 510!important;
 
 body{
@@ -11,8 +19,9 @@ body{
   padding: 2px;
 }
 .run{
-    background-color:rgb(125, 231, 125);
+    background-color:rgb(180, 240, 180);
     box-shadow: 0px 0px 12px black;
+    
   }
 .standby{
   background-color:rgb(194, 223, 223);
@@ -22,8 +31,20 @@ body{
   background-color:rgb(255, 63, 63);
   box-shadow: 0px 0px 12px black;
 }
-  .title{
-    // text-align: center;
+  // .title{
+  //   // text-align: center;
+  // }
+  .page{
+    margin: auto;
+  width: 50%;
+  // border: 3px solid rgb(152, 183, 248);
+  padding: 10px;
+      img{
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 60%;
+    }
   }
 
 #draw{
@@ -59,6 +80,7 @@ body{
   // border: 2px solid black;
   border-radius: 9px;
   margin: 0px !important;
+  font-family: $font;
   // background-color: rgb(236, 238, 148);
 }
 
@@ -78,6 +100,10 @@ h2{
 
   font-family: $font;
   font-weight: $size_font;
+}
+.tab-font{
+  font-family: $font1;
+  text-align:center;
 }
 
 // .name{
