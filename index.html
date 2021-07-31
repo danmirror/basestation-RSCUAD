@@ -5,6 +5,7 @@
   
   <meta name="description" content="Basestation Robot RSCUAD">
   <meta name="author" content="Danu Andrean">
+  <meta name="author" content="Yenny Rahmawati">
   <!-- <link type="text/css" href="/css/style.css"> -->
   <link rel="stylesheet" type="text/css" href="css/style.css" />
 
@@ -344,7 +345,7 @@
     var d = new Date();
     var sec = d.getSeconds();
     var min = d.getMinutes();
-    console.log("sec",sec);
+    console.log("time ",d);
     
     function val_robot1(){
       document.getElementById("tilt_1").value =data_all[1];
@@ -363,8 +364,8 @@
       document.getElementById("pan_2").value = data_all[2];
       document.getElementById("gyro_2").value = data_all[3];
       document.getElementById("ball_2").value = data_all[4];
-      document.getElementById("count_2").value = data_all[5]
-      document.getElementById("limit_2").value = data_all[6];;
+      document.getElementById("count_2").value = data_all[5];
+      document.getElementById("limit_2").value = data_all[6];
       document.getElementById("send_2").value = data_all[7];
       document.getElementById("recv_2").value = sec;
       

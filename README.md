@@ -1,5 +1,5 @@
 # basestation-RSCUAD
-> base for communication Robot RSCUAD
+> base for communication Robot RSCUAD using checksum
 
 ## required
 - [x] Npm ^6.14.4
@@ -22,4 +22,4 @@
 
 
 # author
-> <a href="https://me-danuandrean.github.io/">Danu andrean</a>
+> <a href="https://me-danuandrean.github.io/">Danu andrean</a>, Yenny Rahmawati
