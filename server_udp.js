@@ -81,9 +81,9 @@ server_udp.on('message', (msg, rinfo) => {
   data_last = msg;
     
   data_last = JSON.parse("["+data_last+"]");    // convert string to array
-  for(let i=0;i<8; i++)
+  for(let i=0;i<7; i++)
   {
-    all_data_arr.push(data_last[i]);
+    all_data_arr.push( Math.abs(data_last[i]));
   }
   all_data = all_data_arr.join("");
   console.log("all data ",all_data);
