@@ -199,6 +199,7 @@ server_udp.on('message', (msg, rinfo) => {
   else
   {
     console.log("DATA CORUPT");
+    datarobot="null";
   }
   // msgTimer = setInterval(() => {
   //   server_udp.send(datarobot,rinfo.port,rinfo.address);
