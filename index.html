@@ -345,6 +345,8 @@
     var d = new Date();
     var sec = d.getSeconds();
     var min = d.getMinutes();
+    var milli = d.getMilliseconds();
+    var times = sec +"."+milli;
     console.log("time ",d);
     
     function val_robot1(){
@@ -355,7 +357,7 @@
       document.getElementById("count_1").value = data_all[5];
       document.getElementById("limit_1").value = data_all[6];
       document.getElementById("send_1").value = data_all[7];
-      document.getElementById("recv_1").value = sec;
+      document.getElementById("recv_1").value = times;
      
    
     }
@@ -367,7 +369,7 @@
       document.getElementById("count_2").value = data_all[5];
       document.getElementById("limit_2").value = data_all[6];
       document.getElementById("send_2").value = data_all[7];
-      document.getElementById("recv_2").value = sec;
+      document.getElementById("recv_2").value = times;
       
 
     }
@@ -379,7 +381,7 @@
       document.getElementById("count_3").value = data_all[5];
       document.getElementById("limit_3").value = data_all[6];
       document.getElementById("send_3").value = data_all[7];
-      document.getElementById("recv_3").value = sec;
+      document.getElementById("recv_3").value = times;
      
 
     }
@@ -391,7 +393,7 @@
       document.getElementById("count_4").value = data_all[5];
       document.getElementById("limit_4").value = data_all[6];
       document.getElementById("send_4").value = data_all[7];
-      document.getElementById("recv_4").value = sec;
+      document.getElementById("recv_4").value = times;
 
     }
 
