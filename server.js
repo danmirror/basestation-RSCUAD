@@ -6,9 +6,12 @@ var net = require('net');
 
 var dgram = require('dgram');
 var server_udp = dgram.createSocket('udp4');
+var server_referee = dgram.createSocket('udp4');
 
 
 //variable====================================================
+var referee = 0;
+
 var count1 = 0;
 var count2 = 0;
 var count3 = 0;
@@ -63,7 +66,7 @@ server_udp.on('error', (err) => {
 
 /*
  *
- * get message
+ * get message from robot
  *  
  */
 
@@ -215,6 +218,24 @@ server_udp.on('message', (msg, rinfo) => {
 
 });
 server_udp.bind(8124);
+
+
+/*
+ *
+ * get message from refree box
+ *  
+ */
+
+server_referee.on('message', (msg, rinfo) => {
+
+    // console.log('server_udp got: ${msg} from ${rinfo.address}:${rinfo.port}');
+    console.log('buff 9: ' +msg[9]+" -- buff 10:"+msg[10]+"\t ip"+rinfo.address);
+    // console.log("referee" + referee);
+    referee = msg[9] + msg[10];
+    io.sockets.emit('refree', referee.toString());
+
+});
+server_referee.bind(3838);
 
 // ==================== web ====================
 app.get('/', function (req, res) {

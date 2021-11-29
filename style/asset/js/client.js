@@ -21,6 +21,19 @@ var socket = io.connect('http://localhost:8081');
 // function kirim(){
 //   socket.emit('my other event', { my: 'data' });
 // }
+socket.on('refree', data=>{
+  let data_refree = JSON.parse("["+data+"]");
+  let tag_name;
+  if(data_refree == 1)
+    tag_name = "INIT";
+  if(data_refree == 2)
+    tag_name = "READY";
+  if(data_refree == 3)
+    tag_name = "PLAY";
+  document.getElementById("refree").innerHTML = tag_name;
+  console.log(data_refree);
+});
+
 socket.on('hi', data=>{
   data_all = JSON.parse("["+data+"]"); 
   console.log(data_all[0]);
