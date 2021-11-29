@@ -218,7 +218,7 @@ server_udp.bind(8124);
 
 // ==================== web ====================
 app.get('/', function (req, res) {
-  res.sendFile(__dirname+'/index.html');
+    res.sendFile(__dirname+'/index.html');
 });
 // mengizinkan folder
 app.use(express.static(__dirname + '/style/'));
