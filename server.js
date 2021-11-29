@@ -77,9 +77,9 @@ server_udp.on('message', (msg, rinfo) => {
     data_last = msg;
 
     data_last = JSON.parse("["+data_last+"]");    // convert string to array
-    for(let i=0;i<7; i++)
-    {
-    all_data_arr.push( Math.abs(data_last[i]));
+    
+    for(let i=0;i<7; i++){
+        all_data_arr.push( Math.abs(data_last[i]));
     }
     all_data = all_data_arr.join("");
     console.log("all data ",all_data);
@@ -164,7 +164,7 @@ server_udp.on('message', (msg, rinfo) => {
                 set_3 = sec+(60-count3);
             }
             if(set_3 >= 10 || min!=min_3 ){
-            robot3=0;
+                robot3=0;
             }
         }
         if(data_last[0]=="40"){ 
