@@ -21,5 +21,17 @@
 - node server_udp.js
 
 
+## package
+- code 
+        robot+","+tilt.str()
+				+","+pan.str()+","+gyro.str()
+				+","+ball.str()+","+count.str()
+				+","+limit.str()+","+times.str()
+				+","+result_checksum;
+
+> example
+        "31,0,0,360,0,200,200,60,100200200630013"
+
+
 # author
 > <a href="https://me-danuandrean.github.io/">Danu andrean</a>, Yenny Rahmawati
