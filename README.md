@@ -14,11 +14,11 @@
 - [x] sass
 
 ## install 
-- git clone
+- git clone https://github.com/danmirror/basestation-RSCUAD
 - npm install
 
 ## run
-- node server_udp.js
+- node server.js
 
 
 ## package
@@ -29,7 +29,7 @@
 				+","+limit.str()+","+times.str()
 				+","+result_checksum;
 
-> example
+- example
         "31,0,0,360,0,200,200,60,100200200630013"
 
 
