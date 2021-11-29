@@ -17,9 +17,9 @@
 - git clone
 - npm install
 
-## run
+## run option protocol
 - node server_udp.js
-
+- node server_tcp.js
 
 # author
 > <a href="https://me-danuandrean.github.io/">Danu andrean</a>
