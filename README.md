@@ -1,7 +1,9 @@
 ## basestation-RSCUAD
 > base for communication Robot RSCUAD soccer mode
 
-![alt text](https://github.com/danmirror/basestation-RSCUAD/style/asset/ss.png)
+
+## screenshot
+![alt text](https://github.com/danmirror/basestation-RSCUAD/blob/master/style/asset/ss.png?raw=true)
 
 ### required
 - [x] Npm ^6.14.4
