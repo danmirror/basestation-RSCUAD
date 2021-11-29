@@ -1,5 +1,5 @@
 ## basestation-RSCUAD
-> base for communication Robot RSCUAD using checksum
+> base for communication Robot RSCUAD soccer mode
 
 ### required
 - [x] Npm ^6.14.4
