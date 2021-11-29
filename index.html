@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>R-SCUAD TECH</title>
+  
+  <meta name="description" content="Basestation Robot RSCUAD">
+  <meta name="author" content="Danu Andrean">
+  <!-- <link type="text/css" href="/css/style.css"> -->
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+
+  <!-- <link rel="stylesheet" href="style/css/style.css"> -->
+
+  <!-- -------------bootstrap------------>
+  <link rel="stylesheet" href="asset/css/bootstrap-min.css" >
+
+  <script src="asset/js/jquery-slim.js" ></script>
+  <script src="asset/js/popper.js" ></script>
+  <script src="asset/js/bootstrap-min.js" ></script>
+  <!-- ------------------------------------->
+
+</head>
+<!-- <script src="http://localhost:4040//socket.io/socket.io.js"></script> -->
+<!-- <script src="/socket.io/socket.io.js"></script> -->
+<body>
+
+
+
+<div class="container">
+  <div class="row mt-3">
+    <div class="col-8 ">
+      <h1 class="title">BASE STATION R-SCUAD</h1>
+    </div>
+    <div class="col-4">
+      <div class="selection">
+        <div class="list-group" id="pills-tab" >
+          <ul class="nav nav-pills" id="pills-tab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="list-robot-list" data-toggle="pill" href="#pills-robot" role="tab" aria-controls="robot">ROBOT</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="list-stream-list" data-toggle="pill" href="#pills-stream" role="tab" aria-controls="stream">STREAM</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="list-position-list" data-toggle="pill" href="#pills-position" role="tab" aria-controls="position" aria-selected="false">POSITION</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="pills-robot" role="tabpanel" aria-labelledby="list-robot-list">
+      <div class="row" id="draw">
+        <div class="col-sm-3 ">
+          <div class="card">
+            <div class="card-body" id="r1">
+              <div class="name">
+                <h2 >Robot 1</h2>
+              </div>
+              <img class="draw" src="asset/robot-standby.png" alt="" id="rr1">
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3 ">
+          <div class="card">
+            <div class="card-body" id="r2">
+              <div class="name">
+                <h2 >Robot 2</h2>
+              </div>
+              <img class="draw" src="asset/robot-standby.png" alt="" id="rr2">
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3 ">
+          <div class="card " >
+            <div class="card-body" id="r3">
+              <div class="name">
+                <h2 >Robot 3</h2>
+              </div>
+              <img class="draw" src="asset/robot-standby.png" alt="" id="rr3">
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3 ">
+          <div class="card" >
+            <div class="card-body" id="r4">
+              <div class="name">
+                <h2 >Robot 4</h2>
+              </div>
+              <img class="draw" src="asset/robot-standby.png" alt="" id="rr4">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="pills-stream" role="tabpanel" aria-labelledby="list-stream-list">
+      <div class="page">
+        <img src="asset/cat.png" alt="">
+        <p class="tab-font"> Page under construction...!</p>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="pills-position" role="tabpanel" aria-labelledby="list-position-list">
+      <div class="page">
+        <img src="asset/cat.png" alt="">
+        <p class="tab-font"> Page under construction...!</p>
+      </div>
+    </div>
+  </div>
+ 
+</div> 
+<div class="row mt-5" id="set">
+    <div class="col-sm-3  ">
+      <div class="card">
+        <div class="card-body">
+          <div class="input-group input-group-sm ">
+
+            <div class="input-group-prepend ">
+              <span class="input-group-text" id="inputGroup-sizing-sm"> TILT</span>
+            </div>
+            <input type="text" class="form-control mr-2" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="tilt_1" value="">
+
+            <div class="input-group-prepend ">
+              <span class="input-group-text" id="inputGroup-sizing-sm"> BALL</span>
+            </div>
+            <input type="text" class="form-control " aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="ball_1" value="">
+          </div>
+          
+          <div class="input-group input-group-sm ">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-sm"> PAN</span>
+            </div>
+            <input type="text" class="form-control mr-2" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="pan_1" value="">
+            <div class="input-group-prepend ">
+              <span class="input-group-text" id="inputGroup-sizing-sm"> COUNT</span>
+            </div>
+            <input type="text" class="form-control " aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="count_1" value="">
+          </div>
+          <div class="input-group input-group-sm mb-2">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-sm">GYRO</span>
+            </div>
+            <input type="text" class="form-control mr-2" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="gyro_1" value="">
+            <div class="input-group-prepend ">
+              <span class="input-group-text" id="inputGroup-sizing-sm">LIMIT</span>
+            </div>
+            <input type="text" class="form-control " aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="limit_1" value="">
+          </div>
+          <div class="input-group input-group-sm ">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-sm">SEND</span>
+            </div>
+            <input type="text" class="form-control mr-2" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="send_1" value="">
+            <div class="input-group-prepend ">
+              <span class="input-group-text" id="inputGroup-sizing-sm">RECV</span>
+            </div>
+            <input type="text" class="form-control " aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="recv_1" value="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3  ">
+      <div class="card">
+        <div class="card-body">
+          <div class="input-group input-group-sm ">
+
+            <div class="input-group-prepend ">
+              <span class="input-group-text" id="inputGroup-sizing-sm"> TILT</span>
+            </div>
+            <input type="text" class="form-control mr-2" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="tilt_2" value="">
+
+            <div class="input-group-prepend ">
+              <span class="input-group-text" id="inputGroup-sizing-sm"> BALL</span>
+            </div>
+            <input type="text" class="form-control " aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="ball_2" value="">
+          </div>
+          
+          <div class="input-group input-group-sm ">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-sm"> PAN</span>
+            </div>
+            <input type="text" class="form-control mr-2" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="pan_2" value="">
+            <div class="input-group-prepend ">
+              <span class="input-group-text" id="inputGroup-sizing-sm"> COUNT</span>
+            </div>
+            <input type="text" class="form-control " aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="count_2" value="">
+          </div>
+          <div class="input-group input-group-sm mb-2">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-sm">GYRO</span>
+            </div>
+            <input type="text" class="form-control mr-2" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="gyro_2" value="">
+            <div class="input-group-prepend ">
+              <span class="input-group-text" id="inputGroup-sizing-sm">LIMIT</span>
+            </div>
+            <input type="text" class="form-control " aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="limit_2" value="">
+          </div>
+          <div class="input-group input-group-sm ">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-sm">SEND</span>
+            </div>
+            <input type="text" class="form-control mr-2" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="send_2" value="">
+            <div class="input-group-prepend ">
+              <span class="input-group-text" id="inputGroup-sizing-sm">RECV</span>
+            </div>
+            <input type="text" class="form-control " aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="recv_2" value="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3  ">
+      <div class="card">
+        <div class="card-body">
+          <div class="input-group input-group-sm ">
+
+            <div class="input-group-prepend ">
+              <span class="input-group-text" id="inputGroup-sizing-sm"> TILT</span>
+            </div>
+            <input type="text" class="form-control mr-2" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="tilt_3" value="">
+
+            <div class="input-group-prepend ">
+              <span class="input-group-text" id="inputGroup-sizing-sm"> BALL</span>
+            </div>
+            <input type="text" class="form-control " aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="ball_3" value="">
+          </div>
+          
+          <div class="input-group input-group-sm ">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-sm"> PAN</span>
+            </div>
+            <input type="text" class="form-control mr-2" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="pan_3" value="">
+            <div class="input-group-prepend ">
+              <span class="input-group-text" id="inputGroup-sizing-sm"> COUNT</span>
+            </div>
+            <input type="text" class="form-control " aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="count_3" value="">
+          </div>
+          <div class="input-group input-group-sm mb-2">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-sm">GYRO</span>
+            </div>
+            <input type="text" class="form-control mr-2" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="gyro_3" value="">
+            <div class="input-group-prepend ">
+              <span class="input-group-text" id="inputGroup-sizing-sm">LIMIT</span>
+            </div>
+            <input type="text" class="form-control " aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="limit_3" value="">
+          </div>
+          <div class="input-group input-group-sm ">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-sm">SEND</span>
+            </div>
+            <input type="text" class="form-control mr-2" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="send_3" value="">
+            <div class="input-group-prepend ">
+              <span class="input-group-text" id="inputGroup-sizing-sm">RECV</span>
+            </div>
+            <input type="text" class="form-control " aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="recv_3" value="">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3  ">
+      <div class="card">
+        <div class="card-body">
+          <div class="input-group input-group-sm ">
+
+            <div class="input-group-prepend ">
+              <span class="input-group-text" id="inputGroup-sizing-sm"> TILT</span>
+            </div>
+            <input type="text" class="form-control mr-2" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="tilt_4" value="">
+
+            <div class="input-group-prepend ">
+              <span class="input-group-text" id="inputGroup-sizing-sm"> BALL</span>
+            </div>
+            <input type="text" class="form-control " aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="ball_4" value="">
+          </div>
+          
+          <div class="input-group input-group-sm ">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-sm"> PAN</span>
+            </div>
+            <input type="text" class="form-control mr-2" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="pan_4" value="">
+            <div class="input-group-prepend ">
+              <span class="input-group-text" id="inputGroup-sizing-sm"> COUNT</span>
+            </div>
+            <input type="text" class="form-control " aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="count_4" value="">
+          </div>
+          <div class="input-group input-group-sm mb-2">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-sm">GYRO</span>
+            </div>
+            <input type="text" class="form-control mr-2" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="gyro_4" value="">
+            <div class="input-group-prepend ">
+              <span class="input-group-text" id="inputGroup-sizing-sm">LIMIT</span>
+            </div>
+            <input type="text" class="form-control " aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="limit_4" value="">
+          </div>
+          <div class="input-group input-group-sm ">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-sm">SEND</span>
+            </div>
+            <input type="text" class="form-control mr-2" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="send_4" value="">
+            <div class="input-group-prepend ">
+              <span class="input-group-text" id="inputGroup-sizing-sm">RECV</span>
+            </div>
+            <input type="text" class="form-control " aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="recv_4" value="">
+          </div>
+        </div>
+      </div>
+    </div>
+   
+</div> <!--end set-->
+
+
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="asset/js/client.js" ></script>
+
+</body>
+</html>
