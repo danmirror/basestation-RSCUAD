@@ -24,12 +24,17 @@ var socket = io.connect('http://localhost:8081');
 socket.on('refree', data=>{
   let data_refree = JSON.parse("["+data+"]");
   let tag_name;
-  if(data_refree == 1)
+  if(data_refree == 0)
     tag_name = "INIT";
-  if(data_refree == 2)
+  if(data_refree == 1)
     tag_name = "READY";
+  if(data_refree == 2)
+    tag_name = "SET";
   if(data_refree == 3)
     tag_name = "PLAY";
+  if(data_refree == 4)
+    tag_name = "FINISH";
+    
   document.getElementById("refree").innerHTML = tag_name;
   console.log(data_refree);
 });

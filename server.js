@@ -188,34 +188,31 @@ server_udp.on('message', (msg, rinfo) => {
             }
             if(set_4 >= 10 || min!=min_4 ){
                 robot4=0;
+            }
         }
-    }
-    if(robot1==1 &&robot2==0&&robot3==0&&robot4==0)
-        datarobot="11"
-    else if(robot2==1)
-        datarobot="21"
-    else if(robot3==1)
-        datarobot="31"
-    else if(robot1==0 &&robot2==0&&robot3==0&&robot4==1)
-        datarobot="41"
-    else
-        datarobot="null"
-    
+        if(robot1==1 &&robot2==0&&robot3==0&&robot4==0)
+            datarobot="11"
+        else if(robot2==1)
+            datarobot="21"
+        else if(robot3==1)
+            datarobot="31"
+        else if(robot1==0 &&robot2==0&&robot3==0&&robot4==1)
+            datarobot="41"
+        else
+            datarobot="00"
     }
     else{
         console.log("DATA CORUPT");
-        datarobot="null";
+        datarobot="00";
     }
-    // msgTimer = setInterval(() => {
-    //   server_udp.send(datarobot,rinfo.port,rinfo.address);
-    //  }, 100);
-    //sending msg
+
+    datarobot += referee;
+    
     server_udp.send(datarobot,rinfo.port,rinfo.address,function(error){
         if(error){
             client.close();
         }
     });
-
 });
 server_udp.bind(8124);
 
