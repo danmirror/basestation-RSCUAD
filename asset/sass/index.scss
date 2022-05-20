@@ -9,7 +9,7 @@ $font2 :'Blippo' !important;
 $size_font : 510!important;
 
 body{
-  background-image: url("../asset/bg.png");
+  background-image: url("../image/bg.png");
   background-size: 100%;
   background-repeat: no-repeat, repeat;
 }
@@ -49,26 +49,32 @@ body{
   .draw{
     margin-left: 10%;
   }
-  // background-color:slateblue!important;
-  // padding: 3em 3em;
-  // background-image: url("../asset/bg.png");
-  // background-size: 100%;
-  // background-repeat: no-repeat, repeat;
-  // height: 480px;
-  // border: 2px solid black;
-  // border-radius: 5px;
-  // box-shadow: 0px 0px 9px grey;
+  .card-body{
+    padding: 0.5rem!important;
+  }
 }
 #set{
-  .card{
-    // background-color:  rgb(240, 241, 145);
-  }
+ 
   input{
     max-width: 100%;
   }
   .input-group-text{
-    width: 60px;
+    width: 48px;
   }
+  span{
+    font-size: 11px;
+  }
+  input{
+    font-size: 11px;
+  }
+  .card-body{
+    padding: 0.5rem!important;
+  }
+  .bar{
+    padding-right: 5px!important;
+    padding-left: 5px!important;
+  }
+  
   // .body{
   //   border: 1px solid rgb(236, 240, 240);
   //   padding: 10px 4em;
@@ -79,6 +85,8 @@ body{
   border-radius: 9px;
   margin: 0px !important;
   font-family: $font;
+  padding-top: 1em;
+  padding-bottom: 1.5em;
   // background-color: rgb(236, 238, 148);
 }
 
@@ -154,3 +162,4 @@ h2{
   text-decoration: none;
   cursor: pointer;
 }
+

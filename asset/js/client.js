@@ -2,15 +2,18 @@ var robot1 = document.getElementById('r1');
 var robot2 = document.getElementById('r2');
 var robot3 = document.getElementById('r3');
 var robot4 = document.getElementById('r4');
+var robot5 = document.getElementById('r5');
 
 var count1 = 0;
 var count2 = 0;
 var count3 = 0;
 var count4 = 0;
+var count5 = 0;
 var min_1 = 0;
 var min_2 = 0;
 var min_3 = 0;
 var min_4 = 0;
+var min_5 = 0;
 
 // var robot4 = document.getElementById('r4');
 
@@ -97,19 +100,32 @@ socket.on('hi', data=>{
     document.getElementById("recv_4").value = times;
 
   }
+  function val_robot5(){
+    document.getElementById("tilt_5").value =data_all[1];
+    document.getElementById("pan_5").value = data_all[2];
+    document.getElementById("gyro_5").value = data_all[3];
+    document.getElementById("ball_5").value = data_all[4];
+    document.getElementById("count_5").value = data_all[5];
+    document.getElementById("limit_5").value = data_all[6];
+    document.getElementById("send_5").value = data_all[7];
+    document.getElementById("recv_5").value = times;
+
+  }
 
 
  
   if(data_all[0]=="11"){
     min_1 = min
     count1 = sec;
+    document.body.style.zoom=1.0;this.blur();
     robot1.classList.remove("standby");
     robot1.classList.remove("loss");
     robot1.classList.add("run");
     robot2.classList.remove("run");
     robot3.classList.remove("run");
     robot4.classList.remove("run");
-    document.getElementById('rr1').src='asset/robot-active.png';
+    robot5.classList.remove("run");
+    document.getElementById('rr1').src='image/robot-active.png';
     val_robot1();
   }
   else if(data_all[0]=="10"){
@@ -118,7 +134,7 @@ socket.on('hi', data=>{
     robot1.classList.remove("loss");
     robot1.classList.remove("run");
     robot1.classList.add("standby");
-    document.getElementById('rr1').src='asset/robot-standby.png';
+    document.getElementById('rr1').src='image/robot-standby.png';
     val_robot1();
   }
   else{
@@ -130,7 +146,7 @@ socket.on('hi', data=>{
     // console.log("-----3",sec-count3,"set--", set_1);
     if(set_1 >= 20 || min!=min_1 ){
       // console.log("1 losss",sec-count1 );
-      document.getElementById('rr1').src='asset/robot-error.png';
+      document.getElementById('rr1').src='image/robot-error.png';
 
       robot1.classList.add("loss");
       robot1.classList.remove("standby");
@@ -148,7 +164,8 @@ socket.on('hi', data=>{
     robot1.classList.remove("run");
     robot3.classList.remove("run");
     robot4.classList.remove("run");
-    document.getElementById('rr2').src='asset/robot-active.png';
+    robot5.classList.remove("run");
+    document.getElementById('rr2').src='image/robot-active.png';
     val_robot2();
   }
   else if(data_all[0]=="20"){
@@ -157,7 +174,7 @@ socket.on('hi', data=>{
     robot2.classList.remove("loss");
     robot2.classList.remove("run");
     robot2.classList.add("standby");
-    document.getElementById('rr2').src='asset/robot-standby.png';
+    document.getElementById('rr2').src='image/robot-standby.png';
     val_robot2();
   }
   else{
@@ -169,7 +186,7 @@ socket.on('hi', data=>{
     // console.log("-----2",sec-count2,"set--", set_2);
     if(set_2 >= 20 || min !=min_2 ){
       // console.log("2 losss",sec-count2);
-      document.getElementById('rr2').src='asset/robot-error.png';
+      document.getElementById('rr2').src='image/robot-error.png';
       robot2.classList.remove("standby");
       robot2.classList.remove("run");
       robot2.classList.add("loss");
@@ -187,7 +204,8 @@ socket.on('hi', data=>{
     robot1.classList.remove("run");
     robot2.classList.remove("run");
     robot4.classList.remove("run");
-    document.getElementById('rr3').src='asset/robot-active.png';
+    robot5.classList.remove("run");
+    document.getElementById('rr3').src='image/robot-active.png';
     val_robot3();
   }
   else if(data_all[0]=="30"){
@@ -196,7 +214,7 @@ socket.on('hi', data=>{
     robot3.classList.remove("run");
     robot3.classList.remove("loss");
     robot3.classList.add("standby");
-    document.getElementById('rr3').src='asset/robot-standby.png';
+    document.getElementById('rr3').src='image/robot-standby.png';
     val_robot3();
   }
   else{
@@ -207,13 +225,14 @@ socket.on('hi', data=>{
     }
     console.log("-----3",sec-count3,"set--", set_3);
     if(set_3 >= 20 || min !=min_3 ){
-      document.getElementById('rr3').src='asset/robot-error.png';
-      console.log("masuk");
+      document.getElementById('rr3').src='image/robot-error.png';
       robot3.classList.remove("standby");
       robot3.classList.remove("run");
       robot3.classList.add("loss");
     }
   }
+
+
   if(data_all[0]=="41"){
     min_4 = min;
     count4 = sec;
@@ -224,7 +243,8 @@ socket.on('hi', data=>{
     robot1.classList.remove("run");
     robot2.classList.remove("run");
     robot3.classList.remove("run");
-    document.getElementById('rr4').src='asset/robot-active.png';
+    robot5.classList.remove("run");
+    document.getElementById('rr4').src='image/robot-active.png';
     val_robot4();
   }
   else if(data_all[0]=="40"){
@@ -233,7 +253,7 @@ socket.on('hi', data=>{
     robot4.classList.remove("run");
     robot4.classList.remove("loss");
     robot4.classList.add("standby");
-    document.getElementById('rr4').src='asset/robot-standby.png';
+    document.getElementById('rr4').src='image/robot-standby.png';
     val_robot4();
   }
   else{
@@ -245,7 +265,7 @@ socket.on('hi', data=>{
     // console.log("-----4",sec-count4,"set--", set_4);
     if(set_4 >= 20 || min!=min_4 ){
       // console.log("4 losss",sec-count4);
-      document.getElementById('rr4').src='asset/robot-error.png';
+      document.getElementById('rr4').src='image/robot-error.png';
       robot4.classList.add("loss");
       robot4.classList.remove("standby");
       robot4.classList.remove("run");
@@ -253,13 +273,43 @@ socket.on('hi', data=>{
   }
 
 
+  if(data_all[0]=="51"){
+    min_5 = min;
+    count5 = sec;
+    robot5.classList.add("run");
+    robot5.classList.remove("standby");
+    robot5.classList.remove("loss");
+   
+    robot1.classList.remove("run");
+    robot2.classList.remove("run");
+    robot3.classList.remove("run");
+    robot4.classList.remove("run");
+    document.getElementById('rr5').src='image/robot-active.png';
+    val_robot5();
+  }
+  else if(data_all[0]=="50"){
+    min_5 = min;
+    count5 = sec;
+    robot5.classList.remove("run");
+    robot5.classList.remove("loss");
+    robot5.classList.add("standby");
+    document.getElementById('rr5').src='image/robot-standby.png';
+    val_robot5();
+  }
+  else{
+    let set_5 = sec-count5;
 
+    if(set_5<0){
+      set_5 = sec+(60-count5);
+    }
+    // console.log("-----4",sec-count4,"set--", set_4);
+    if(set_5 >= 20 || min!=min_5 ){
+      // console.log("5 losss",sec-count5);
+      document.getElementById('rr5').src='image/robot-error.png';
+      robot5.classList.add("loss");
+      robot5.classList.remove("standby");
+      robot5.classList.remove("run");
+    }
+  }
 
 });
-
-// socket.on('news', data=> {
-//   console.log(data);
-//   socket.emit('my other event', { my: 'data' });
-// });
-
-console.log("try")

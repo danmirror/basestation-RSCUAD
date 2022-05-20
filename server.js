@@ -16,10 +16,12 @@ var count1 = 0;
 var count2 = 0;
 var count3 = 0;
 var count4 = 0;
+var count5 = 0;
 var min_1 = 0;
 var min_2 = 0;
 var min_3 = 0;
 var min_4 = 0;
+var min_5 = 0;
 
 
 var datarobot;
@@ -190,6 +192,26 @@ server_udp.on('message', (msg, rinfo) => {
                 robot4=0;
             }
         }
+        if(data_last[0]=="50"){ 
+            count5=sec; 
+            min_5=min;
+            robot5=0;
+        }
+        else if(data_last[0]=="51"){ 
+            count5=sec; 
+            min_5=min;
+            robot5=1;
+        }
+        else{
+            //check loss robot
+            let set_5 = sec-count5;
+            if(set_5<0){
+                set_5 = sec+(60-count5);
+            }
+            if(set_5 >= 10 || min!=min_5 ){
+                robot5=0;
+            }
+        }
         if(robot1==1 &&robot2==0&&robot3==0&&robot4==0)
             datarobot="11"
         else if(robot2==1)
@@ -239,5 +261,5 @@ app.get('/', function (req, res) {
     res.sendFile(__dirname+'/index.html');
 });
 // mengizinkan folder
-app.use(express.static(__dirname + '/style/'));
+app.use(express.static(__dirname + '/asset/'));
 server.listen(8081);
