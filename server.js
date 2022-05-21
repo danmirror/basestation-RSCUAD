@@ -212,14 +212,16 @@ server_udp.on('message', (msg, rinfo) => {
                 robot5=0;
             }
         }
-        if(robot1==1 &&robot2==0&&robot3==0&&robot4==0)
+        if(robot1==1)
             datarobot="11"
         else if(robot2==1)
             datarobot="21"
         else if(robot3==1)
             datarobot="31"
-        else if(robot1==0 &&robot2==0&&robot3==0&&robot4==1)
+        else if(robot4==1)
             datarobot="41"
+        else if(robot5==1)
+            datarobot="51"
         else
             datarobot="00"
     }

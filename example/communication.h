@@ -31,10 +31,11 @@ private:
     pthread_t                   m_threadRobot;
     char*                       m_IP;
 
-public:
     static int                  s_sockfd;
     static struct sockaddr_in   s_servaddr;
     static pthread_mutex_t      s_lockMutex;
+
+public:
     static bool                 s_robot;
     static int                  s_referee;
 

@@ -9,6 +9,7 @@ pthread_mutex_t     Communication::s_lockMutex;
 bool                Communication::s_robot;
 int                 Communication::s_referee;
 
+
 Communication::Communication():
     m_IP("127.0.0.1")
 {
@@ -27,8 +28,6 @@ void *Communication::RuntimeRobot(void* i_data)
     char buffer[MAXLINE];
     char* dataFinal = (char *)i_data;
     string buf;
-
-    // cout<<"check "<< (char *)i_data<<endl;
 
     //lock
     pthread_mutex_lock(&s_lockMutex);
@@ -52,14 +51,21 @@ void *Communication::RuntimeRobot(void* i_data)
         buf = buffer;
         // printf("Server : %s\n", buffer);
     }
-    else
+    else{
+        buf = "000";
+    }
+
+    string robotFinal;
+    for(int i=0; i<2; i++)
     {
-        //close connect if ovetime
-        close(s_sockfd);
-	}
+        char val = buf[i];
+        robotFinal += val;
+    }
 
+    char refereeFinal = buf[2];
+    Communication::s_referee = refereeFinal-'0';
 
-	if (buf == "31"||buf == "null" || buf == "")
+	if (robotFinal == "31"||robotFinal == "00" || robotFinal == "")
 	{
 	    Communication::s_robot = false;
 	}
@@ -155,9 +161,6 @@ int Communication::Robot(int i_robot,int i_tilt, int i_pan,
     // new memory alocation
     m_data = new char[100];
     strcpy (m_data,&dataAll[0]);
-
-    // cout<<"check "<<m_data<<endl;
-    // printf(" masuk %s \n\n", m_data);
 
     //check thread
     if (pthread_mutex_init(&s_lockMutex, NULL) != 0) 
