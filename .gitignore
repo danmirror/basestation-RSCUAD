@@ -4,3 +4,4 @@ node_modules
 # c++
 *.o
 *.out
+example/main
