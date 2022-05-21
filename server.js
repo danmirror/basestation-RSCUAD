@@ -249,8 +249,14 @@ server_referee.on('message', (msg, rinfo) => {
 
     // console.log('server_udp got: ${msg} from ${rinfo.address}:${rinfo.port}');
     console.log('buff 9: ' +msg[9]+" -- buff 10:"+msg[10]+"\t ip"+rinfo.address);
-    // console.log("referee" + referee);
-    referee = msg[9] + msg[10];
+
+    if(msg[9] != 0)
+        referee = msg[9];
+    else if(msg[10] != 0)
+        referee = msg[10];
+    else
+        referee = 0;
+
     io.sockets.emit('refree', referee.toString());
 
 });
@@ -260,6 +266,6 @@ server_referee.bind(3838);
 app.get('/', function (req, res) {
     res.sendFile(__dirname+'/index.html');
 });
-// mengizinkan folder
+// allow folder
 app.use(express.static(__dirname + '/asset/'));
 server.listen(8081);
