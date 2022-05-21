@@ -8,7 +8,8 @@ int main()
 
     for(;;)
     {
-        Com.Robot();
+        Com.Robot(1,0,0,360,0,200,200);
+        printf("data all %d\n", Communication::s_robot);
 
         Com.Reset();
     }
