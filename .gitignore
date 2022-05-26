@@ -5,3 +5,4 @@ node_modules
 *.o
 *.out
 example/main
+*.sass-cache
