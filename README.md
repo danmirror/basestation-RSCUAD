@@ -3,7 +3,7 @@
 
 
 ### screenshot
-![alt text](https://github.com/danmirror/basestation-RSCUAD/blob/master/style/asset/screen.png?raw=true)
+![alt text](https://github.com/danmirror/basestation-RSCUAD/blob/master/asset/image/screen.png)
 
 ### required
 - [x] Npm ^6.14.4
