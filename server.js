@@ -248,16 +248,9 @@ server_udp.bind(8124);
  */
 
 server_referee.on('message', (msg, rinfo) => {
-
-    // console.log('server_udp got: ${msg} from ${rinfo.address}:${rinfo.port}');
-    console.log('buff 9: ' +msg[9]+" -- buff 10:"+msg[10]+"\t ip"+rinfo.address);
-
-    if(msg[9] != 0)
+    console.log("buff 8: "+msg[8]+' -- buff 9: ' +msg[9]+" -- buff 10:"+msg[10]+"\t ip"+rinfo.address);
+    if(msg[8] == 6)
         referee = msg[9];
-    else if(msg[10] != 0)
-        referee = msg[10];
-    else
-        referee = 0;
 
     io.sockets.emit('refree', referee.toString());
 
