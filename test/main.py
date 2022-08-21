@@ -1,6 +1,7 @@
 # 
 #   Simple Test to easy understand
-# 
+#   Robot side 
+#
 
 import socket
 import sys

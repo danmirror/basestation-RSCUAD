@@ -1,17 +1,14 @@
 var express = require('express');
-var app = express();
-var server = require("http").Server(app);
-var io = require("socket.io")(server);
-var net = require('net');
+var app     = express();
+var server  = require("http").Server(app);
+var io      = require("socket.io")(server);
 
-var dgram = require('dgram');
-var server_udp = dgram.createSocket('udp4');
-var server_referee = dgram.createSocket('udp4');
+var dgram           = require('dgram');
+var server_udp      = dgram.createSocket('udp4');
+var server_referee  = dgram.createSocket('udp4');
 
 
-//variable====================================================
 var referee = 0;
-
 var count1 = 0;
 var count2 = 0;
 var count3 = 0;

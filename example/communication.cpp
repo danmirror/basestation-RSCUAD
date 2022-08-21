@@ -1,27 +1,13 @@
 #include "swap.h"
 #include "communication.h"
 
+// using thread C
+int                  g_sockfd;
+struct sockaddr_in   g_servaddr;
+pthread_mutex_t      g_lockMutex;
 
-int                 Communication::s_sockfd;
-struct sockaddr_in  Communication::s_servaddr;
-pthread_mutex_t     Communication::s_lockMutex;
-
-bool                Communication::s_robot;
-int                 Communication::s_referee;
-
-
-Communication::Communication():
-    m_IP("127.0.0.1")
-{
-    Communication::s_robot      = false;
-    Communication::s_referee    = false;
-}
-Communication::~Communication()
-{
-    close(s_sockfd);
-}
-
-void *Communication::RuntimeRobot(void* i_data)
+// C style
+void *RoutineRobot(void* i_data)
 {
     int n;
     socklen_t len;
@@ -30,22 +16,24 @@ void *Communication::RuntimeRobot(void* i_data)
     string buf;
 
     //lock
-    pthread_mutex_lock(&s_lockMutex);
+    pthread_mutex_lock(&g_lockMutex);
 
-    sendto(s_sockfd, (const char *)dataFinal, strlen(dataFinal),
-                        MSG_CONFIRM, (const struct sockaddr *) &s_servaddr,
-                        sizeof(s_servaddr));
+    // send packet
+    sendto(g_sockfd, (const char *)dataFinal, strlen(dataFinal),
+                        MSG_CONFIRM, (const struct sockaddr *) &g_servaddr,
+                        sizeof(g_servaddr));
     // set polling
     struct pollfd ufds[1];
-    ufds[0].fd = s_sockfd;
+    ufds[0].fd = g_sockfd;
     ufds[0].events = POLLIN;
 
     int  poll_ret = poll(ufds, 1, timeout_msecs);
     
     if (poll_ret > 0)
     {
-        n = recvfrom(s_sockfd, (char *)buffer, MAXLINE,
-                    MSG_WAITALL, (struct sockaddr *) &s_servaddr,
+        // receive packet
+        n = recvfrom(g_sockfd, (char *)buffer, MAXLINE,
+                    MSG_WAITALL, (struct sockaddr *) &g_servaddr,
                     &len);
         buffer[n] = '\0';
         buf = buffer;
@@ -75,24 +63,42 @@ void *Communication::RuntimeRobot(void* i_data)
 	}
 
     //unlock
-    pthread_mutex_unlock(&s_lockMutex);
+    pthread_mutex_unlock(&g_lockMutex);
 
+}
+
+// static declaration
+bool    Communication::s_robot;
+int     Communication::s_referee;
+
+Communication::Communication(const char * ip)
+{
+    m_IP =  new char[50];
+    memcpy(m_IP, ip, 50);
+
+    Communication::s_robot      = false;
+    Communication::s_referee    = false;
+}
+
+Communication::~Communication()
+{
+    close(g_sockfd);
 }
 
 void Communication::InitRobot()
 {
     // Creating socket file descriptor
-    if ( (s_sockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0 ) {
+    if ( (g_sockfd = socket(AF_INET, SOCK_DGRAM, 0)) < 0 ) {
         perror("socket creation failed");
         exit(EXIT_FAILURE);
     }
     
-    memset(&s_servaddr, 0, sizeof(s_servaddr));
+    memset(&g_servaddr, 0, sizeof(g_servaddr));
         
     // Filling server information
-    s_servaddr.sin_family = AF_INET;
-    s_servaddr.sin_port = htons(PORT);
-    s_servaddr.sin_addr.s_addr = inet_addr(m_IP); 
+    g_servaddr.sin_family = AF_INET;
+    g_servaddr.sin_port = htons(PORT);
+    g_servaddr.sin_addr.s_addr = inet_addr(m_IP); 
 
 }
 
@@ -140,8 +146,8 @@ int Communication::Robot(int i_robot,int i_tilt, int i_pan,
 	times<<ptm->tm_sec<<"."<<milli;
 
     //bit pertama nomer robot bit kedua nilai
-	if (i_robot ==1 ) 
-        robot="31";   //berarti robot tiga nilai 0
+	if (i_robot == 1 ) 
+        robot = "31";   //berarti robot tiga nilai 0
 	else 
         robot = "30";
 
@@ -162,21 +168,30 @@ int Communication::Robot(int i_robot,int i_tilt, int i_pan,
     m_data = new char[100];
     strcpy (m_data,&dataAll[0]);
 
-    //check thread
-    if (pthread_mutex_init(&s_lockMutex, NULL) != 0) 
+    //create thread
+    CreateThread(m_threadRobot, m_data, ROBOT);
+    
+}
+
+void Communication::CreateThread(pthread_t thread, char *data, Mode mode)
+{
+    // check init thread
+    if (pthread_mutex_init(&g_lockMutex, NULL) != 0) 
     {
         printf("\n mutex init has failed\n");
     }
+
+    if(mode == ROBOT)
+        pthread_create(&m_threadRobot, NULL, &RoutineRobot, data);
     
-    //create thread
-    pthread_create(&m_threadRobot, NULL, &Communication::RuntimeRobot, m_data);
 }
+
 
 void Communication::Reset()
 {
     //reset thread
     pthread_join(m_threadRobot, NULL);
     //reset mutex        
-    pthread_mutex_destroy(&s_lockMutex);
+    pthread_mutex_destroy(&g_lockMutex);
     delete [] m_data;
 }

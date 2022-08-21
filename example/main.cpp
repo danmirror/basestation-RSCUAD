@@ -3,7 +3,7 @@
 
 int main()
 {
-    Communication Com;
+    Communication Com("0.0.0.0");
     Com.InitRobot();
 
     for(;;)

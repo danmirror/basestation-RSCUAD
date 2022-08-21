@@ -1,3 +1,11 @@
+/*
+	author	: Danu andrean
+	year	: 2020
+    update  : 2022
+
+    title   : client side robot using multi thread 
+*/
+
 #ifndef COMMUNICATION_H
 #define COMMUNICATION_H
 
@@ -22,31 +30,31 @@
 #define PORT	        8124
 #define MAXLINE         2048
 #define timeout_msecs   200
-using namespace std;
 
 class Communication
 {
 private:
-    char*                       m_data;
-    pthread_t                   m_threadRobot;
-    char*                       m_IP;
-
-    static int                  s_sockfd;
-    static struct sockaddr_in   s_servaddr;
-    static pthread_mutex_t      s_lockMutex;
-
+    char*               m_data;
+    pthread_t           m_threadRobot;
+    char*               m_IP;
+    typedef enum 
+    {
+        ROBOT,REFEREE
+    }Mode;
+    
 public:
-    static bool                 s_robot;
-    static int                  s_referee;
+    static bool         s_robot;
+    static int          s_referee;
 
-    Communication();
+    Communication(const char *ip);
     ~Communication();
     void InitRobot();
     int Robot(int tilt_kom,int int_tilt, int int_pan, 
                 int int_gyro, int int_ball, int int_count,
                 int int_limit);
+    void CreateThread(pthread_t thread, char *data, Mode mode);
     void Reset();
-    static void *RuntimeRobot(void* i_data);
+
 };
 
 #endif

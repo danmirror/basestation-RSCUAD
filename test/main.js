@@ -1,6 +1,7 @@
 // 
-// Simple Test to easy understand
-// 
+//	Simple Test to easy understand
+//	Robot side 
+//
 
 var udp = require('dgram');
 
@@ -13,14 +14,14 @@ var data = Buffer.from('51,0,0,360,0,200,200,60,100200200630015');
 
 function loop(){
 
-    //sending msg
-    client.send(data,8124,'localhost',function(error){
-        if(error){
-          client.close();
-        }else{
-          console.log('...');
-        }
-    });
+	//sending msg
+	client.send(data,8124,'localhost',function(error){
+		if(error){
+			client.close();
+		}else{
+			console.log('...');
+		}
+	});
     
     //receive msg
     client.on('message',function(msg,info){
