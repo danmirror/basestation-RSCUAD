@@ -9,9 +9,6 @@
 ### required
 - [x] GO-lang
 
-### include
-- [x] sass
-
 ### install 
 - git clone https://github.com/danmirror/basestation-RSCUAD
 - make 
