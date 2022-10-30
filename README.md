@@ -4,7 +4,7 @@
 
 
 ### screenshot
-![alt text](https://github.com/danmirror/basestation-RSCUAD/blob/master/asset/image/screen.png)
+![alt text](https://github.com/danmirror/basestation-RSCUAD/blob/master/assets/image/screen.png)
 
 ### required
 - [x] GO-lang
