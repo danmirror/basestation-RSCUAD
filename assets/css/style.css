@@ -1,6 +1,6 @@
-@import url("https://fonts.googleapis.com/css?family=Comic+Sans+MS");
+
 @import url("https://db.onlinewebfonts.com/c/1284fed5b849cf2914ad995665825e2f?family=Marker+Felt");
-@import url("https://db.onlinewebfonts.com/c/54b2a3b34aabaa9a318018c8673e707e?family=Blippo");
+
 html, body {
   height: 100%; }
 
@@ -39,7 +39,7 @@ body {
     display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 60%; }
+    width: 50%; }
 
 #draw .draw {
   margin-left: 10%; }
@@ -82,7 +82,6 @@ h2 {
   font-weight: 510 !important; }
 
 .tab-font {
-  font-family: "Comic Sans MS" !important;
   text-align: center; }
 
 /* The Modal (background) */
@@ -124,6 +123,17 @@ h2 {
 .close:focus {
   color: #000;
   text-decoration: none;
-  cursor: pointer; }
+  cursor: pointer; 
+}
 
-/*# sourceMappingURL=style.css.map */
+#state{
+  padding: 1em;
+  width: 1em;
+  margin: 5px;
+  background-color: red;
+  border-radius: 50%;
+  margin-left: -35px;
+}
+#state.staterun{
+  background-color: rgb(32, 180, 32);
+}

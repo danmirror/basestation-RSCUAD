@@ -1,28 +1,23 @@
 ## basestation-RSCUAD
-> base for communication Robot RSCUAD soccer mode
+> base for communication Robot RSCUAD soccer mode. <br>
+> we decided to migrate to GO-lang for efficiency. if you still decide you want to use nodejs please checkout V1.0.1
 
 
 ### screenshot
 ![alt text](https://github.com/danmirror/basestation-RSCUAD/blob/master/asset/image/screen.png)
 
 ### required
-- [x] Npm ^6.14.4
-- [x] nodejs ^v12.18.0
-- [x] express
-- [x] socket.io
-- [x] bootstrap 4
-- [x] css
-
+- [x] GO-lang
 
 ### include
 - [x] sass
 
 ### install 
 - git clone https://github.com/danmirror/basestation-RSCUAD
-- npm install
+- make 
 
 ### run
-- node server.js
+- make run 
 
 
 ### package
@@ -34,7 +29,7 @@
 				+","+limit.str()+","+times.str()
 				+","+result_checksum;
 
-- example
+- example api
         
             "31,0,0,360,0,200,200,60,100200200630013"
 

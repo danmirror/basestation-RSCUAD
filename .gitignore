@@ -1,8 +1,7 @@
-#ignore modules
-node_modules
+# dont upload to github
+bin/server
 
 # c++
 *.o
 *.out
 example/main
-*.sass-cache
