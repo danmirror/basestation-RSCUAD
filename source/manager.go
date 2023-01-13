@@ -39,6 +39,11 @@ var times = timeRobot{}
 var timeout int64 = 5
 var ref *int
 
+func Init() {
+	memset := -1
+	ref = &memset
+}
+
 func RefereeBox() {
 	addr := net.UDPAddr{
 		Port: 3838,

@@ -221,7 +221,10 @@ class Entry {
 
     Calculation() {
 		if(this.data[0][0] == '0'){
-			if(this.data[1] == '0'){
+			if(this.data[1] == '-1'){
+				document.getElementById("refree").innerHTML = "NONE"
+			}
+			else if(this.data[1] == '0'){
 				document.getElementById("refree").innerHTML = "INIT"
 			}
 			else if(this.data[1] == '1'){

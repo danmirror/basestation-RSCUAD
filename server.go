@@ -11,6 +11,7 @@ import (
 func main() {
 	go manager.RefereeBox()
 	go manager.ClientHandler()
+	manager.Init()
 
 	styles := http.FileServer(http.Dir("./assets/"))
 	http.Handle("/assets/", http.StripPrefix("/assets/", styles))
