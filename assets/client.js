@@ -224,7 +224,7 @@ class Entry {
 			if(this.data[1] == '0'){
 				document.getElementById("refree").innerHTML = "INIT"
 			}
-			if(this.data[1] == '1'){
+			else if(this.data[1] == '1'){
 				document.getElementById("refree").innerHTML = "READY"
 			}
 			else if(this.data[1] == '2'){
