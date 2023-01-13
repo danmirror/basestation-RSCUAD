@@ -220,6 +220,23 @@ class Entry {
 	}
 
     Calculation() {
+		if(this.data[0][0] == '0'){
+			if(this.data[1] == '0'){
+				document.getElementById("refree").innerHTML = "INIT"
+			}
+			if(this.data[1] == '1'){
+				document.getElementById("refree").innerHTML = "READY"
+			}
+			else if(this.data[1] == '2'){
+				document.getElementById("refree").innerHTML = "SET"
+			}
+			else if(this.data[1] == '3'){
+				document.getElementById("refree").innerHTML = "PLAY"
+			}
+			else if(this.data[1] == '4'){
+				document.getElementById("refree").innerHTML = "FINISH"
+			}
+		}
 		if(this.data[0][0] == '1'){
 
 			if(this.statusActive == "on"){

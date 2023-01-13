@@ -168,7 +168,11 @@ func WSResponse(conn *websocket.Conn) {
 
 		t := time.Now()
 
-		if m.Num == 1 {
+		if m.Num == 0 {
+			dataResponse = "00," //for referee
+			dataResponse = dataResponse + strconv.Itoa(*ref)
+
+		} else if m.Num == 1 {
 			var status string
 
 			if times.timeR1+timeout > t.Unix() {

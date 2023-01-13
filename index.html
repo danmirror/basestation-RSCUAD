@@ -452,6 +452,7 @@
 				return socket;
 			}
 			setInterval(function() {
+				ws.send(JSON.stringify({ Num: 0 }));	// get callback for refereebox
 				ws.send(JSON.stringify({ Num: 1 }));
 				ws.send(JSON.stringify({ Num: 2 }));
 				ws.send(JSON.stringify({ Num: 3 }));
