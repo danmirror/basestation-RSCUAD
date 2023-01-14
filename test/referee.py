@@ -8,6 +8,7 @@ import socket
 
 localIP     = "0.0.0.0"
 localPort   = 3838
+sendPort    = 3939
 bufferSize  = 1024
 
 # Create a datagram socket
@@ -18,12 +19,10 @@ UDPServerSocket.bind((localIP, localPort))
 print("UDP server up and listening")
 
 while(True):
-    bytesAddressPair = UDPServerSocket.recvfrom(bufferSize)
-    message = bytesAddressPair[0]
-    address = bytesAddressPair[1]
+    bytesAddressPair,peer = UDPServerSocket.recvfrom(bufferSize)
 
-    clientMsg = "Message from Client:{}".format(message)
-    clientIP  = "Client IP Address:{}".format(address)
+    clientMsg = "Message from Client:{}".format(bytesAddressPair[9])
     
     print(clientMsg)
-    print(clientIP)
+    destination = peer[0], sendPort
+    UDPServerSocket.sendto(b'RGrt\x02\x01\x02', destination)
