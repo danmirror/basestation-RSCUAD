@@ -10,23 +10,23 @@
 - [x] GO-lang
 
 ### install linux
-- $git clone https://github.com/danmirror/basestation-RSCUAD
-- $sudo chmod 777 setup.bash && ./setup.bash
+- $ git clone https://github.com/danmirror/basestation-RSCUAD
+- $ sudo chmod 777 setup.bash && ./setup.bash
 	
 		make sure the go version shows up. otherwise just run manually.
 
 ### install windows
-- download go https://go.dev/dl/go1.13.windows-386.msi
-- donwload mingw https://sourceforge.net/projects/mingw-w64/files/latest/download
+- download go https://go.dev/dl/go1.13.windows-386.msi and install
+- donwload mingw https://sourceforge.net/projects/mingw/files/latest/download
+- install mingw-get-setup.exe in C:\MinGW and checklist mingw32-base
+- rename C:\MinGW\bin mingw32-make.exe -> make.exe
 - add bin to env
 
 ### compile
-- make [for linux]
-- mingw32-make [for windows]
+- make
 
 ### run 
-- make run [for linux]
-- mingw32-make run [for windows]
+- make run
 
 
 ### package API
