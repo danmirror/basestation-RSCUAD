@@ -44,7 +44,7 @@ func Init() {
 	ref = &memset
 }
 
-func RefereeBox() {
+func RefereeBoxHandler() {
 	addr := net.UDPAddr{
 		Port: 3838,
 		IP:   net.ParseIP(GetIP()),

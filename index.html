@@ -109,8 +109,7 @@
 			</div>
 			<div class="tab-pane fade" id="pills-stream" role="tabpanel" aria-labelledby="list-stream-list">
 				<div class="page">
-				<img src="/assets/image/cat.png" alt="">
-				<p class="tab-font"> Page under construction...!</p>
+					<img id="video" src="" alt="Video Stream">
 				</div>
 			</div>
 			<div class="tab-pane fade" id="pills-position" role="tabpanel" aria-labelledby="list-position-list">
@@ -460,6 +459,21 @@
 				ws.send(JSON.stringify({ Num: 5 }));
 			}, 100);
 		});
+
+
+		//stream
+		var socket = new WebSocket('ws://' + window.location.host + '/video');
+
+		socket.onmessage = function(event) {
+			var imageBlob = new Blob([event.data], {type: 'image/jpeg'});
+			var imageURL = URL.createObjectURL(imageBlob);
+
+			document.getElementById("video").src = imageURL;
+		};
+
+		socket.onerror = function(error) {
+			console.error("WebSocket error:", error);
+		};
     </script>
 </body>
 </html>

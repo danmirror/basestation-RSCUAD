@@ -9,13 +9,15 @@ import (
 )
 
 func main() {
-	go manager.RefereeBox()
+	go manager.RefereeBoxHandler()
 	go manager.ClientHandler()
+	go manager.StreamHandler()
 	manager.Init()
 
 	styles := http.FileServer(http.Dir("./assets/"))
 	http.Handle("/assets/", http.StripPrefix("/assets/", styles))
 	http.HandleFunc("/ws", manager.WSHandler)
+	http.HandleFunc("/video", manager.VideoHandler)
 	http.HandleFunc("/", RootHandler)
 
 	panic(http.ListenAndServe(":8081", nil))
