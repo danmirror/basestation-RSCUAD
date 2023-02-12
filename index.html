@@ -55,61 +55,80 @@
 		<div class="tab-content" id="nav-tabContent">
 			<div class="tab-pane fade show active" id="pills-robot" role="tabpanel" aria-labelledby="list-robot-list">
 				<div class="row" id="draw">
-				<div class="col-2 offset-1">
-					<div class="card">
-					<div class="card-body" id="r1">
-						<div class="name">
-						<h2 >Robot 1</h2>
+					<div class="col-2 offset-1">
+						<div class="card">
+						<div class="card-body" id="r1">
+							<div class="name">
+							<h2 >Robot 1</h2>
+							</div>
+							<img class="draw" src="/assets/image/robot-standby.png" alt="" id="rr1">
 						</div>
-						<img class="draw" src="/assets/image/robot-standby.png" alt="" id="rr1">
-					</div>
-					</div>
-				</div>
-				<div class="col-2 ">
-					<div class="card">
-					<div class="card-body" id="r2">
-						<div class="name">
-						<h2 >Robot 2</h2>
 						</div>
-						<img class="draw" src="/assets/image/robot-standby.png" alt="" id="rr2">
 					</div>
-					</div>
-				</div>
-				<div class="col-2 ">
-					<div class="card " >
-					<div class="card-body" id="r3">
-						<div class="name">
-						<h2 >Robot 3</h2>
+					<div class="col-2 ">
+						<div class="card">
+						<div class="card-body" id="r2">
+							<div class="name">
+							<h2 >Robot 2</h2>
+							</div>
+							<img class="draw" src="/assets/image/robot-standby.png" alt="" id="rr2">
 						</div>
-						<img class="draw" src="/assets/image/robot-standby.png" alt="" id="rr3">
-					</div>
-					</div>
-				</div>
-				<div class="col-2 ">
-					<div class="card" >
-					<div class="card-body" id="r4">
-						<div class="name">
-						<h2 >Robot 4</h2>
 						</div>
-						<img class="draw" src="/assets/image/robot-standby.png" alt="" id="rr4">
 					</div>
-					</div>
-				</div>
-				<div class="col-2 ">
-					<div class="card" >
-					<div class="card-body" id="r5">
-						<div class="name">
-						<h2 >Robot 5</h2>
+					<div class="col-2 ">
+						<div class="card " >
+						<div class="card-body" id="r3">
+							<div class="name">
+							<h2 >Robot 3</h2>
+							</div>
+							<img class="draw" src="/assets/image/robot-standby.png" alt="" id="rr3">
 						</div>
-						<img class="draw" src="/assets/image/robot-standby.png" alt="" id="rr5">
+						</div>
 					</div>
+					<div class="col-2 ">
+						<div class="card" >
+						<div class="card-body" id="r4">
+							<div class="name">
+							<h2 >Robot 4</h2>
+							</div>
+							<img class="draw" src="/assets/image/robot-standby.png" alt="" id="rr4">
+						</div>
+						</div>
 					</div>
-				</div>
+					<div class="col-2 ">
+						<div class="card" >
+						<div class="card-body" id="r5">
+							<div class="name">
+							<h2 >Robot 5</h2>
+							</div>
+							<img class="draw" src="/assets/image/robot-standby.png" alt="" id="rr5">
+						</div>
+						</div>
+					</div>
 				</div>
 			</div>
 			<div class="tab-pane fade" id="pills-stream" role="tabpanel" aria-labelledby="list-stream-list">
-				<div class="page">
-					<img id="video" src="" alt="Video Stream">
+				<div class="row">
+					<div class="col-md-4 offset-2 cam-robot">
+						<img id="video1" src="" alt="Video Stream">
+
+					</div>
+					<div class="col-md-4 cam-robot">
+						<img id="video2" src="" alt="Video Stream">
+
+					</div>
+					<div class="col-md-4 cam-robot">
+						<img id="video3" src="" alt="Video Stream">
+
+					</div>
+					<div class="col-md-4 cam-robot">
+						<img id="video4" src="" alt="Video Stream">
+
+					</div>
+					<div class="col-md-4 cam-robot">
+						<img id="video5" src="" alt="Video Stream">
+
+					</div>
 				</div>
 			</div>
 			<div class="tab-pane fade" id="pills-position" role="tabpanel" aria-labelledby="list-position-list">
@@ -461,17 +480,73 @@
 		});
 
 
-		//stream
-		var socket = new WebSocket('ws://' + window.location.host + '/video');
+		//stream 1
+		var socketR1 = new WebSocket('ws://' + window.location.host + '/video1');
 
-		socket.onmessage = function(event) {
+		socketR1.onmessage = function(event) {
 			var imageBlob = new Blob([event.data], {type: 'image/jpeg'});
 			var imageURL = URL.createObjectURL(imageBlob);
 
-			document.getElementById("video").src = imageURL;
+			document.getElementById("video1").src = imageURL;
 		};
 
-		socket.onerror = function(error) {
+		socketR1.onerror = function(error) {
+			console.error("WebSocket error:", error);
+		};
+
+		//stream 2
+		var socketR2 = new WebSocket('ws://' + window.location.host + '/video2');
+
+		socketR2.onmessage = function(event) {
+			var imageBlob = new Blob([event.data], {type: 'image/jpeg'});
+			var imageURL = URL.createObjectURL(imageBlob);
+
+			document.getElementById("video2").src = imageURL;
+		};
+
+		socketR2.onerror = function(error) {
+			console.error("WebSocket error:", error);
+		};
+		
+		//stream 3
+		var socketR3 = new WebSocket('ws://' + window.location.host + '/video3');
+
+		socketR3.onmessage = function(event) {
+			var imageBlob = new Blob([event.data], {type: 'image/jpeg'});
+			var imageURL = URL.createObjectURL(imageBlob);
+
+			document.getElementById("video3").src = imageURL;
+		};
+
+		socketR3.onerror = function(error) {
+			console.error("WebSocket error:", error);
+		};
+
+		//stream 4
+		var socketR4 = new WebSocket('ws://' + window.location.host + '/video4');
+
+		socketR4.onmessage = function(event) {
+			var imageBlob = new Blob([event.data], {type: 'image/jpeg'});
+			var imageURL = URL.createObjectURL(imageBlob);
+
+			document.getElementById("video4").src = imageURL;
+		};
+
+		socketR4.onerror = function(error) {
+			console.error("WebSocket error:", error);
+		};
+
+		//stream 5
+		var socketR5 = new WebSocket('ws://' + window.location.host + '/video5');
+
+		socketR5.onmessage = function(event) {
+			var imageBlob = new Blob([event.data], {type: 'image/jpeg'});
+			var imageURL = URL.createObjectURL(imageBlob);
+
+			document.getElementById("video5").src = imageURL;
+		};
+
+		socketR5.onerror = function(error) {
 			console.error("WebSocket error:", error);
 		};
     </script>

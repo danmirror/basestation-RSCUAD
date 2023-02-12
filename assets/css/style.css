@@ -5,46 +5,61 @@ html, body {
   height: 100%; }
 
 .container {
-  flex: 1 0 auto; }
+  flex: 1 0 auto; 
+}
 
 body {
   display: flex;
-  flex-direction: column; }
+  flex-direction: column; 
+}
 
 body {
   background-image: url("../image/bg.png");
   background-size: 100%;
-  background-repeat: no-repeat, repeat; }
+  background-repeat: no-repeat, repeat; 
+}
 
 .selection {
-  padding: 2px; }
+  padding: 2px; 
+}
 
 .run {
   background-color: #b4f0b4;
-  box-shadow: 0px 0px 12px black; }
+  box-shadow: 0px 0px 12px black; 
+}
 
 .standby {
   background-color: #c2dfdf;
-  box-shadow: 0px 0px 12px black; }
+  box-shadow: 0px 0px 12px black; 
+}
 
 .loss {
   background-color: #ff3f3f;
-  box-shadow: 0px 0px 12px black; }
+  box-shadow: 0px 0px 12px black; 
+}
 
 .page {
   margin: auto;
   width: 50%;
-  padding: 10px; }
-  .page img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%; }
+  padding: 10px; 
+}
+.page img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%; 
+}
+.cam-robot {
+  text-align: center;
+  height: 210px;
+}
 
 #draw .draw {
-  margin-left: 10%; }
+  margin-left: 10%; 
+}
 #draw .card-body {
-  padding: 0.5rem !important; }
+  padding: 0.5rem !important; 
+}
 
 #set {
   box-shadow: 0px 0px 9px grey;
@@ -52,37 +67,47 @@ body {
   margin: 0px !important;
   font-family: "Marker Felt" !important;
   padding-top: 1em;
-  padding-bottom: 1.5em; }
+  padding-bottom: .1em; 
+}
   #set input {
-    max-width: 100%; }
+    max-width: 100%; 
+  }
   #set .input-group-text {
-    width: 48px; }
+    width: 48px; 
+  }
   #set span {
-    font-size: 11px; }
+    font-size: 11px; 
+  }
   #set input {
-    font-size: 11px; }
+    font-size: 11px; 
+  }
   #set .card-body {
-    padding: 0.5rem !important; }
+    padding: 0.5rem !important; 
+  }
   #set .bar {
     padding-right: 5px !important;
-    padding-left: 5px !important; }
+    padding-left: 5px !important; 
+  }
 
 img {
   width: 80%; }
 
 h1 {
   font-family: "Marker Felt" !important;
-  font-weight: 510 !important; }
+  font-weight: 510 !important; 
+}
 
 h2 {
   text-align: center;
   padding: 10px 10px;
   border-radius: 5%;
   font-family: "Marker Felt" !important;
-  font-weight: 510 !important; }
+  font-weight: 510 !important; 
+}
 
 .tab-font {
-  text-align: center; }
+  text-align: center; 
+}
 
 /* The Modal (background) */
 .modals {
@@ -101,7 +126,8 @@ h2 {
   height: 100%;
   /* Full height */
   overflow: auto;
-  /* Enable scroll if needed */ }
+  /* Enable scroll if needed */ 
+}
 
 /* Modal Content */
 .modal-contents {
@@ -110,14 +136,16 @@ h2 {
   top: 0%;
   padding: 1em;
   opacity: 0.6;
-  width: 70%; }
+  width: 70%; 
+}
 
 /* The Close Button */
 .close {
   color: #aaaaaa;
   float: right;
   font-size: 28px;
-  font-weight: bold; }
+  font-weight: bold; 
+}
 
 .close:hover,
 .close:focus {
