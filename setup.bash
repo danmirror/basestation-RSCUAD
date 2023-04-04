@@ -9,7 +9,7 @@ sudo tar -C /usr/local -xvf go1.13.linux-amd64.tar.gz
 sudo rm -rf go1.13.linux-amd64.tar.gz
 
 #add to path
-export PATH=$PATH:/usr/local/go/bin
+echo "export PATH=\$PATH:/usr/local/go/bin:\$HOME/go/bin" >> ~/.bashrc && echo "export GOROOT=/usr/local/go" >> ~/.bashrc && echo "export PATH=\$PATH:/usr/local/go/bin:\$HOME/go/bin" >> ~/.bashrc && echo "export GOROOT=/usr/local/go" >> ~/.bashrc && source ~/.bashrc && source ~/.bashrc
 
 # install dependency
 go mod download
