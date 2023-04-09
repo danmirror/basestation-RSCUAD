@@ -56,7 +56,7 @@ func RefereeBoxHandler() {
 	}
 
 	for {
-		bytes := make([]byte, 100)
+		bytes := make([]byte, 1024)
 		_, _, err := ser.ReadFromUDP(bytes)
 
 		if err != nil {
