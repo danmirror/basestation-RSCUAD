@@ -1,47 +1,48 @@
-## basestation-RSCUAD
+## Basestation-RSCUAD
 > base for communication Robot RSCUAD soccer mode. <br>
-> we decided to migrate to GO-lang for efficiency. if you still decide you want to use nodejs please checkout V1.0.1
+> we decided to migrate to GO-lang for efficiency. if you still want to use nodejs please checkout V1.0.1
 
 
-### screenshot
+### Screenshot
 ![alt text](https://github.com/danmirror/basestation-RSCUAD/blob/master/assets/image/ss.png)
 
-### required
+### Required
 - [x] GO-lang
 
-### install linux
-- $ git clone https://github.com/danmirror/basestation-RSCUAD
-- $ sudo chmod 777 setup.bash && ./setup.bash
-	
-		make sure the go version shows up. otherwise just run manually.
+### Download
+```
+ $ git clone https://github.com/danmirror/basestation-RSCUAD
+```
+### Install Linux
+```
+ $ sudo chmod 777 setup.bash && ./setup.bash
+```
+make sure the go version shows up. otherwise just run manually.
 
-### install windows
+### Install Windows
 - download go https://go.dev/dl/go1.13.windows-386.msi and install
 - donwload mingw https://sourceforge.net/projects/mingw/files/latest/download
 - install mingw-get-setup.exe in C:\MinGW and checklist mingw32-base
 - rename C:\MinGW\bin mingw32-make.exe -> make.exe
 - add bin to env
 
-### compile
+### Compile
 - make
 
-### run 
+### Run 
 - make run
 
 
-### package API
-- code 
-        
-            robot+","+tilt.str()
-				+","+pan.str()+","+gyro.str()
-				+","+ball.str()+","+count.str()
-				+","+limit.str()+","+times.str()
-				+","+result_checksum;
-
+### Package API
 - example api
-        
-            "31,0,0,360,0,200,200,60,100200200630013"
+```
+"31,0,0,360,0,200,200,60,100200200630013"
+```
 
-
-### author
+### Author
 > <a href="https://me-danuandrean.github.io/">Danu andrean</a>
+
+
+### License
+[MIT](https://github.com/danmirror/basestation-RSCUAD/blob/master/LICENSE)
+
