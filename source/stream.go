@@ -7,6 +7,7 @@ import (
 	"image/jpeg"
 	"net"
 	"net/http"
+	"time"
 
 	"github.com/gorilla/websocket"
 )
@@ -47,6 +48,7 @@ func VideoHandlerR1(w http.ResponseWriter, r *http.Request) {
 				fmt.Println(err)
 				return
 			}
+			time.Sleep(100 * time.Millisecond)
 		}
 	}
 }
@@ -70,6 +72,7 @@ func VideoHandlerR2(w http.ResponseWriter, r *http.Request) {
 				fmt.Println(err)
 				return
 			}
+			time.Sleep(100 * time.Millisecond)
 		}
 	}
 }
@@ -93,6 +96,7 @@ func VideoHandlerR3(w http.ResponseWriter, r *http.Request) {
 				fmt.Println(err)
 				return
 			}
+			time.Sleep(100 * time.Millisecond)
 		}
 	}
 }
@@ -116,6 +120,7 @@ func VideoHandlerR4(w http.ResponseWriter, r *http.Request) {
 				fmt.Println(err)
 				return
 			}
+			time.Sleep(100 * time.Millisecond)
 		}
 	}
 }
@@ -139,6 +144,7 @@ func VideoHandlerR5(w http.ResponseWriter, r *http.Request) {
 				fmt.Println(err)
 				return
 			}
+			time.Sleep(100 * time.Millisecond)
 		}
 	}
 }
