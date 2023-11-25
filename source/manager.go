@@ -36,13 +36,8 @@ type Execute struct {
 var execute = Execute{}
 var staging = dataRobot{}
 var times = timeRobot{}
+var gameController = GameController{}
 var timeout int64 = 5
-var ref *int
-
-func Init() {
-	memset := -1
-	ref = &memset
-}
 
 func RefereeBoxHandler() {
 	addr := net.UDPAddr{
@@ -63,9 +58,11 @@ func RefereeBoxHandler() {
 			fmt.Printf("Some error  %v", err)
 			continue
 		}
-		getRef := int(bytes[9])
-		ref = &getRef
-
+		gameController.STATE = int(bytes[9])
+		gameController.KICKOFF = int(bytes[11])
+		gameController.SECOND_STATE = int(bytes[12])
+		gameController.SECOND_STATE_TEAM = int(bytes[13])
+		gameController.SECOND_STATE_CONDITION = int(bytes[14])
 	}
 }
 
@@ -138,9 +135,16 @@ func ClientHandler() {
 func ClientResponse(conn *net.UDPConn, addr *net.UDPAddr, rvRobot string) {
 
 	// refereebox
-	strRef := strconv.Itoa(*ref)
+	intRobot, _ := strconv.Atoi(rvRobot)
+	data := make([]byte, 10)
+	data[0] = byte(intRobot)
+	data[1] = byte(gameController.STATE)
+	data[2] = byte(gameController.KICKOFF)
+	data[3] = byte(gameController.SECOND_STATE)
+	data[4] = byte(gameController.SECOND_STATE_TEAM)
+	data[5] = byte(gameController.SECOND_STATE_CONDITION)
 
-	_, err := conn.WriteToUDP([]byte(rvRobot+strRef), addr)
+	_, err := conn.WriteToUDP(data, addr)
 	if err != nil {
 		fmt.Printf("Couldn't send response %v", err)
 	}
@@ -175,7 +179,7 @@ func WSResponse(conn *websocket.Conn) {
 
 		if m.Num == 0 {
 			dataResponse = "00," //for referee
-			dataResponse = dataResponse + strconv.Itoa(*ref)
+			dataResponse = dataResponse + strconv.Itoa(gameController.STATE)
 
 		} else if m.Num == 1 {
 			var status string
@@ -245,8 +249,8 @@ func WSResponse(conn *websocket.Conn) {
 }
 
 /*
-	selection robot who is execute
-*/
+ * selection robot who is execute
+ */
 func WhoIsExecute(data string) string {
 	// [0,1] => robot see the ball
 
