@@ -31,6 +31,7 @@ type timeRobot struct {
 type Execute struct {
 	robotExecute   string
 	executeTimeout int64
+	privilege      int
 }
 
 var execute = Execute{}
@@ -38,6 +39,12 @@ var staging = dataRobot{}
 var times = timeRobot{}
 var gameController = GameController{}
 var timeout int64 = 5
+
+func Init() {
+	gameController.VERSION = 1
+	execute.robotExecute = "0"
+	execute.privilege = 10 // higher is lower
+}
 
 func RefereeBoxHandler() {
 	addr := net.UDPAddr{
@@ -137,12 +144,13 @@ func ClientResponse(conn *net.UDPConn, addr *net.UDPAddr, rvRobot string) {
 	// refereebox
 	intRobot, _ := strconv.Atoi(rvRobot)
 	data := make([]byte, 10)
-	data[0] = byte(intRobot)
-	data[1] = byte(gameController.STATE)
-	data[2] = byte(gameController.KICKOFF)
-	data[3] = byte(gameController.SECOND_STATE)
-	data[4] = byte(gameController.SECOND_STATE_TEAM)
-	data[5] = byte(gameController.SECOND_STATE_CONDITION)
+	data[0] = byte(gameController.VERSION)
+	data[1] = byte(intRobot)
+	data[2] = byte(gameController.STATE)
+	data[3] = byte(gameController.KICKOFF)
+	data[4] = byte(gameController.SECOND_STATE)
+	data[5] = byte(gameController.SECOND_STATE_TEAM)
+	data[6] = byte(gameController.SECOND_STATE_CONDITION)
 
 	_, err := conn.WriteToUDP(data, addr)
 	if err != nil {
@@ -255,7 +263,13 @@ func WhoIsExecute(data string) string {
 	// [0,1] => robot see the ball
 
 	if data[1] == '1' {
-		execute.robotExecute = data
+
+		privilege := GetPrivilegeRobot(data)
+
+		if privilege < execute.privilege {
+			execute.robotExecute = data
+			execute.privilege = privilege
+		}
 	}
 
 	t := time.Now()
@@ -266,8 +280,27 @@ func WhoIsExecute(data string) string {
 
 	// remove when timeout
 	if execute.executeTimeout+timeout < t.Unix() {
-		execute.robotExecute = "00"
+		execute.robotExecute = "0"
 	}
 
 	return execute.robotExecute
+}
+
+func GetPrivilegeRobot(data string) int {
+	if data[1] == '1' {
+		return 1
+	}
+	if data[1] == '2' {
+		return 2
+	}
+	if data[1] == '3' {
+		return 3
+	}
+	if data[1] == '4' {
+		return 4
+	}
+	if data[1] == '5' {
+		return 5
+	}
+	return 10
 }

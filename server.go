@@ -17,6 +17,8 @@ func main() {
 	go manager.StreamHandlerR4()
 	go manager.StreamHandlerR5()
 
+	manager.Init()
+
 	styles := http.FileServer(http.Dir("./assets/"))
 	http.Handle("/assets/", http.StripPrefix("/assets/", styles))
 	http.HandleFunc("/ws", manager.WSHandler)
