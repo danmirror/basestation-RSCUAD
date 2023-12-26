@@ -96,40 +96,42 @@ func ClientHandler() {
 
 		received := CleanString(string(bytes))
 
+		dataAfterParseLoc := ParseLoc(received)
+
 		s := Split(received)
-		swap := Swap(s[8])
+		swap := Swap(s[10])
 
 		var container string
-		for i := 0; i < 7; i++ {
+		for i := 0; i < 9; i++ {
 			container = container + s[i]
 		}
 		container = CleanString(container)
 		swap = CleanString(swap)
 
 		if container == swap {
-			id := GetID(received)
+			id := GetID(dataAfterParseLoc)
 
 			t := time.Now()
 			// insert to global for send to ws
 			if id[0] == '1' {
 				times.timeR1 = t.Unix()
-				staging.R1 = received
+				staging.R1 = dataAfterParseLoc
 
 			} else if id[0] == '2' {
 				times.timeR2 = t.Unix()
-				staging.R2 = received
+				staging.R2 = dataAfterParseLoc
 
 			} else if id[0] == '3' {
 				times.timeR3 = t.Unix()
-				staging.R3 = received
+				staging.R3 = dataAfterParseLoc
 
 			} else if id[0] == '4' {
 				times.timeR4 = t.Unix()
-				staging.R4 = received
+				staging.R4 = dataAfterParseLoc
 
 			} else if id[0] == '5' {
 				times.timeR5 = t.Unix()
-				staging.R5 = received
+				staging.R5 = dataAfterParseLoc
 			}
 
 			rvRobot := WhoIsExecute(id)

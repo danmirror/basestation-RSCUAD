@@ -131,10 +131,9 @@
 					</div>
 				</div>
 			</div>
-			<div class="tab-pane fade" id="pills-position" role="tabpanel" aria-labelledby="list-position-list">
-				<div class="page">
-				<img src="/assets/image/cat.png" alt="">
-				<p class="tab-font"> Page under construction...!</p>
+			<div class="tab-pane field fade" id="pills-position" role="tabpanel" aria-labelledby="list-position-list">
+				<div class="field-background" id="fieldBackground">
+					<!-- Tidak ada elemen .blue-dot di sini -->
 				</div>
 			</div>
 		</div>
@@ -431,7 +430,7 @@
 
 		function EntryData(data){
 			let status = new Status();
-			let entry = new Entry(data, data[9], status);
+			let entry = new Entry(data, data[11], status);
 			entry.Calculation();
 		}
 
@@ -460,7 +459,7 @@
 					data = data.replace('\"', "");
 
 					data_all = data.split(",");
-					// console.log(e.data);
+					// console.log(data_all);
 					EntryData(data_all);
 				}
 				socket.onclose = function () {

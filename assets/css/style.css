@@ -8,6 +8,9 @@ html, body {
   flex: 1 0 auto; 
 }
 
+.field {
+	padding-left: 15%;
+}
 body {
   display: flex;
   flex-direction: column; 
@@ -17,6 +20,50 @@ body {
   background-image: url("../image/bg.png");
   background-size: 100%;
   background-repeat: no-repeat, repeat; 
+}
+
+.field-background {
+	position: relative;
+	width: 900px;
+	height: 600px;
+	background-image: url('../image/lapangan.png'); /* Replace 'your-image-url.jpg' with the actual image URL */
+	background-size: cover;
+}
+
+.pointR1 {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background-color: rgb(255, 0, 0);
+}
+.pointR2 {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background-color: rgb(255, 205, 5);
+}
+.pointR3 {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background-color: rgb(5, 213, 255);
+}
+.pointR4 {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background-color: rgb(255, 5, 255);
+}
+.pointR5 {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background-color: rgb(255, 134, 5);
 }
 
 .selection {

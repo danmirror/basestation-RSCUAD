@@ -157,6 +157,23 @@ class Entry {
 		this.min 			= this.date.getMinutes();
 		this.milli 			= this.date.getMilliseconds();
 		this.times 			= this.sec +"."+this.milli;
+		// Ambil elemen .red-background
+		this.fieldBackground = document.getElementById('fieldBackground');
+
+		this.pointR1 = document.createElement('div');
+		this.pointR1.className = 'pointR1';
+
+		this.pointR2 = document.createElement('div');
+		this.pointR2.className = 'pointR2';
+
+		this.pointR3 = document.createElement('div');
+		this.pointR3.className = 'pointR3';
+
+		this.pointR4 = document.createElement('div');
+		this.pointR4.className = 'pointR4';
+
+		this.pointR5 = document.createElement('div');
+		this.pointR5.className = 'pointR5';
 		
     }
 
@@ -220,6 +237,8 @@ class Entry {
 	}
 
     Calculation() {
+
+		
 		if(this.data[0][0] == '0'){
 			if(this.data[1] == '-1'){
 				document.getElementById("refree").innerHTML = "NONE"
@@ -251,6 +270,17 @@ class Entry {
 				else if(this.data[0]=="10"){
 					this.status.RobotStandby1();
 				}
+
+
+				var pr1 = document.getElementsByClassName('pointR1')[0];
+				if (pr1) {
+					this.fieldBackground.removeChild(pr1);
+				}
+
+				this.pointR1.style.left = this.data[8] + 'px';
+				this.pointR1.style.top = this.data[7] + 'px';
+				this.fieldBackground.appendChild(this.pointR1);
+
 			}
 			else{
 				this.status.RobotLoss1();
@@ -267,6 +297,15 @@ class Entry {
 				else if(this.data[0]=="20"){
 					this.status.RobotStandby2();
 				}
+
+				var pr2 = document.getElementsByClassName('pointR2')[0];
+				if (pr2) {
+					this.fieldBackground.removeChild(pr2);
+				}
+
+				this.pointR2.style.left = this.data[8] + 'px';
+				this.pointR2.style.top = this.data[7] + 'px';
+				this.fieldBackground.appendChild(this.pointR2);
 			}
 			else{
 				this.status.RobotLoss2();
@@ -283,6 +322,15 @@ class Entry {
 				else if(this.data[0]=="30"){
 					this.status.RobotStandby3();
 				}
+
+				var pr3 = document.getElementsByClassName('pointR3')[0];
+				if (pr3) {
+					this.fieldBackground.removeChild(pr3);
+				}
+
+				this.pointR3.style.left = this.data[8] + 'px';
+				this.pointR3.style.top = this.data[7] + 'px';
+				this.fieldBackground.appendChild(this.pointR3);
 			}
 			else{
 				this.status.RobotLoss3();
@@ -299,6 +347,15 @@ class Entry {
 				else if(this.data[0]=="40"){
 					this.status.RobotStandby4();
 				}
+
+				var pr4 = document.getElementsByClassName('pointR4')[0];
+				if (pr4) {
+					this.fieldBackground.removeChild(pr4);
+				}
+
+				this.pointR4.style.left = this.data[8] + 'px';
+				this.pointR4.style.top = this.data[7] + 'px';
+				this.fieldBackground.appendChild(this.pointR4);
 			}
 			else{
 				this.status.RobotLoss4();
@@ -315,6 +372,15 @@ class Entry {
 				else if(this.data[0]=="50"){
 					this.status.RobotStandby5();
 				}
+
+				var pr5 = document.getElementsByClassName('pointR5')[0];
+				if (pr5) {
+					this.fieldBackground.removeChild(pr5);
+				}
+
+				this.pointR5.style.left = this.data[8] + 'px';
+				this.pointR5.style.top = this.data[7] + 'px';
+				this.fieldBackground.appendChild(this.pointR5);
 			}
 			else{
 				this.status.RobotLoss5();
