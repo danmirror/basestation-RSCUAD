@@ -283,6 +283,7 @@ func WhoIsExecute(data string) string {
 	// remove when timeout
 	if execute.executeTimeout+timeout < t.Unix() {
 		execute.robotExecute = "0"
+		execute.privilege = 10
 	}
 
 	return execute.robotExecute
