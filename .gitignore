@@ -1,5 +1,5 @@
 # dont upload to github
-bin/server
+bin
 
 # c++
 *.o
