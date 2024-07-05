@@ -184,7 +184,7 @@ class Entry {
 		document.getElementById("ball_1").value 	= this.data[4];
 		document.getElementById("count_1").value 	= this.data[5];
 		document.getElementById("limit_1").value 	= this.data[6];
-		document.getElementById("send_1").value 	= this.data[7];
+		document.getElementById("send_1").value 	= this.data[9];
 		document.getElementById("recv_1").value 	= this.times;
 	}
 
@@ -195,7 +195,7 @@ class Entry {
 		document.getElementById("ball_2").value 	= this.data[4];
 		document.getElementById("count_2").value 	= this.data[5];
 		document.getElementById("limit_2").value 	= this.data[6];
-		document.getElementById("send_2").value 	= this.data[7];
+		document.getElementById("send_2").value 	= this.data[9];
 		document.getElementById("recv_2").value 	= this.times;
 
 	}
@@ -207,7 +207,7 @@ class Entry {
 		document.getElementById("ball_3").value 	= this.data[4];
 		document.getElementById("count_3").value 	= this.data[5];
 		document.getElementById("limit_3").value 	= this.data[6];
-		document.getElementById("send_3").value 	= this.data[7];
+		document.getElementById("send_3").value 	= this.data[9];
 		document.getElementById("recv_3").value 	= this.times;
 
 	}
@@ -219,7 +219,7 @@ class Entry {
 		document.getElementById("ball_4").value 	= this.data[4];
 		document.getElementById("count_4").value 	= this.data[5];
 		document.getElementById("limit_4").value 	= this.data[6];
-		document.getElementById("send_4").value 	= this.data[7];
+		document.getElementById("send_4").value 	= this.data[9];
 		document.getElementById("recv_4").value 	= this.times;
 
 	}
@@ -231,7 +231,7 @@ class Entry {
 		document.getElementById("ball_5").value 	= this.data[4];
 		document.getElementById("count_5").value 	= this.data[5];
 		document.getElementById("limit_5").value 	= this.data[6];
-		document.getElementById("send_5").value 	= this.data[7];
+		document.getElementById("send_5").value 	= this.data[9];
 		document.getElementById("recv_5").value 	= this.times;
 
 	}
