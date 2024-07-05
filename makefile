@@ -2,7 +2,7 @@ all:
 	go build -o bin/server server.go
 
 clean:
-	rm -rf main
+	rm -rf bin/*
 
 run:
 	./bin/server
