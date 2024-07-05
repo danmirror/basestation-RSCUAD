@@ -19,19 +19,15 @@
 ```
 make sure the go version shows up. otherwise just run manually.
 
-### Install Windows
-- download go https://go.dev/dl/go1.13.windows-386.msi and install
-- donwload mingw https://sourceforge.net/projects/mingw/files/latest/download
-- install mingw-get-setup.exe in C:\MinGW and checklist mingw32-base
-- rename C:\MinGW\bin mingw32-make.exe -> make.exe
-- add bin to env
-
 ### Compile
 - make
 
 ### Run 
 - make run
 
+### Install and run Windows
+- download go https://go.dev/dl/go1.13.windows-386.msi and install
+- click run.bat
 
 ### Package API
 - example api
