@@ -432,6 +432,7 @@
 			let status = new Status();
 			let entry = new Entry(data, data[11], status);
 			entry.Calculation();
+
 		}
 
 		$(function () {
@@ -481,12 +482,17 @@
 
 		//stream 1
 		var socketR1 = new WebSocket('ws://' + window.location.host + '/video1');
+		socketR1.binaryType = "arraybuffer";
 
 		socketR1.onmessage = function(event) {
 			var imageBlob = new Blob([event.data], {type: 'image/jpeg'});
 			var imageURL = URL.createObjectURL(imageBlob);
 
-			document.getElementById("video1").src = imageURL;
+			var img = document.getElementById("video1");
+			if (img.src) {
+				URL.revokeObjectURL(img.src);
+			}
+			img.src = imageURL;
 		};
 
 		socketR1.onerror = function(error) {
@@ -495,12 +501,17 @@
 
 		//stream 2
 		var socketR2 = new WebSocket('ws://' + window.location.host + '/video2');
+		socketR2.binaryType = "arraybuffer";
 
 		socketR2.onmessage = function(event) {
 			var imageBlob = new Blob([event.data], {type: 'image/jpeg'});
 			var imageURL = URL.createObjectURL(imageBlob);
 
-			document.getElementById("video2").src = imageURL;
+			var img = document.getElementById("video2");
+			if (img.src) {
+				URL.revokeObjectURL(img.src);
+			}
+			img.src = imageURL;
 		};
 
 		socketR2.onerror = function(error) {
@@ -509,12 +520,17 @@
 		
 		//stream 3
 		var socketR3 = new WebSocket('ws://' + window.location.host + '/video3');
+		socketR3.binaryType = "arraybuffer";
 
 		socketR3.onmessage = function(event) {
 			var imageBlob = new Blob([event.data], {type: 'image/jpeg'});
 			var imageURL = URL.createObjectURL(imageBlob);
 
-			document.getElementById("video3").src = imageURL;
+			var img = document.getElementById("video3");
+			if (img.src) {
+				URL.revokeObjectURL(img.src);
+			}
+			img.src = imageURL;
 		};
 
 		socketR3.onerror = function(error) {
@@ -523,12 +539,17 @@
 
 		//stream 4
 		var socketR4 = new WebSocket('ws://' + window.location.host + '/video4');
+		socketR4.binaryType = "arraybuffer";
 
 		socketR4.onmessage = function(event) {
 			var imageBlob = new Blob([event.data], {type: 'image/jpeg'});
 			var imageURL = URL.createObjectURL(imageBlob);
 
-			document.getElementById("video4").src = imageURL;
+			var img = document.getElementById("video4");
+			if (img.src) {
+				URL.revokeObjectURL(img.src);
+			}
+			img.src = imageURL;
 		};
 
 		socketR4.onerror = function(error) {
@@ -537,12 +558,17 @@
 
 		//stream 5
 		var socketR5 = new WebSocket('ws://' + window.location.host + '/video5');
+		socketR5.binaryType = "arraybuffer";
 
 		socketR5.onmessage = function(event) {
 			var imageBlob = new Blob([event.data], {type: 'image/jpeg'});
 			var imageURL = URL.createObjectURL(imageBlob);
 
-			document.getElementById("video5").src = imageURL;
+			var img = document.getElementById("video5");
+			if (img.src) {
+				URL.revokeObjectURL(img.src);
+			}
+			img.src = imageURL;
 		};
 
 		socketR5.onerror = function(error) {
