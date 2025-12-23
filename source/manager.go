@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"strconv"
 	"time"
+	"strings"
 
 	"github.com/gorilla/websocket"
 )
@@ -75,70 +76,94 @@ func RefereeBoxHandler() {
 
 func ClientHandler() {
 
-	addr := net.UDPAddr{
-		Port: 8124,
-		IP:   net.ParseIP(GetIP()),
-	}
-	ser, err := net.ListenUDP("udp", &addr)
-	if err != nil {
-		fmt.Printf("Some error %v\n", err)
-		return
-	}
+    addr := net.UDPAddr{
+        Port: 8124,
+        IP:   net.ParseIP(GetIP()),
+    }
 
-	for {
-		bytes := make([]byte, 100)
-		_, remoteaddr, err := ser.ReadFromUDP(bytes)
+    ser, err := net.ListenUDP("udp", &addr)
+    if err != nil {
+        fmt.Printf("Some error %v\n", err)
+        return
+    }
 
-		if err != nil {
-			fmt.Printf("Some error  %v", err)
-			continue
-		}
+    for {
 
-		received := CleanString(string(bytes))
+        bytes := make([]byte, 512)
 
-		dataAfterParseLoc := ParseLoc(received)
+        n, remoteaddr, err := ser.ReadFromUDP(bytes)
+        if err != nil {
+            fmt.Printf("[ERROR] ReadFromUDP: %v\n", err)
+            continue
+        }
 
-		s := Split(received)
-		swap := Swap(s[10])
+        raw := strings.TrimSpace(string(bytes[:n]))
+        if raw == "" {
+            fmt.Println("[WARN] Received empty data")
+            continue
+        }
 
-		var container string
-		for i := 0; i < 9; i++ {
-			container = container + s[i]
-		}
-		container = CleanString(container)
-		swap = CleanString(swap)
+        parts := strings.Split(raw, "|")
+        if len(parts) < 3 {
+            fmt.Printf("[ERROR] Incomplete encrypted data: %s\n", raw)
+            continue
+        }	
 
-		if container == swap {
-			id := GetID(dataAfterParseLoc)
+		cipher := parts[0]
+		tag := parts[1]
+		iv := parts[2]
+		plaintext, err := DecryptAESGCM(iv, tag, cipher)
 
-			t := time.Now()
-			// insert to global for send to ws
-			if id[0] == '1' {
-				times.timeR1 = t.Unix()
-				staging.R1 = dataAfterParseLoc
+        if err != nil {
+            fmt.Printf("[ERROR] Decryption failed: %v\n", err)
+            continue
+        }
 
-			} else if id[0] == '2' {
-				times.timeR2 = t.Unix()
-				staging.R2 = dataAfterParseLoc
+        fmt.Printf("[OK] Decrypted data: %s\n", plaintext)
 
-			} else if id[0] == '3' {
-				times.timeR3 = t.Unix()
-				staging.R3 = dataAfterParseLoc
+        received := CleanString(plaintext)
+        dataAfterParseLoc := ParseLoc(received)
 
-			} else if id[0] == '4' {
-				times.timeR4 = t.Unix()
-				staging.R4 = dataAfterParseLoc
+        s := Split(received)
+        swap := Swap(s[10])
 
-			} else if id[0] == '5' {
-				times.timeR5 = t.Unix()
-				staging.R5 = dataAfterParseLoc
-			}
+        var container string
+        for i := 0; i < 9; i++ {
+            container = container + s[i]
+        }
 
-			rvRobot := WhoIsExecute(id)
-			go ClientResponse(ser, remoteaddr, rvRobot)
-		}
+        container = CleanString(container)
+        swap = CleanString(swap)
 
-	}
+        if container == swap {
+
+            id := GetID(dataAfterParseLoc)
+
+            t := time.Now()
+
+            switch id[0] {
+            case '1':
+                times.timeR1 = t.Unix()
+                staging.R1 = dataAfterParseLoc
+            case '2':
+                times.timeR2 = t.Unix()
+                staging.R2 = dataAfterParseLoc
+            case '3':
+                times.timeR3 = t.Unix()
+                staging.R3 = dataAfterParseLoc
+            case '4':
+                times.timeR4 = t.Unix()
+                staging.R4 = dataAfterParseLoc
+            case '5':
+                times.timeR5 = t.Unix()
+                staging.R5 = dataAfterParseLoc
+            }
+
+            rvRobot := WhoIsExecute(id)
+            go ClientResponse(ser, remoteaddr, rvRobot)
+        }
+
+    }
 }
 
 func ClientResponse(conn *net.UDPConn, addr *net.UDPAddr, rvRobot string) {
