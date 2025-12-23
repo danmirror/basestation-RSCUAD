@@ -1,10 +1,14 @@
 package manager
 
 import (
+	"crypto/aes"
+    "crypto/cipher"
+    "encoding/hex"
+    "strconv"
+    "strings"
+    "unicode"
 	"net"
-	"strconv"
-	"strings"
-	"unicode"
+	"fmt"
 )
 
 func CleanString(data string) string {
@@ -78,4 +82,51 @@ func GetIP() string {
 		}
 	}
 	return string(ip)
+}
+func DecryptAESGCM(ivHex, tagHex, cipherHex string) (string, error) {
+
+    key := []byte("R5C9u@D!A7xP#LQ2mZ8F$wKJH4S1ErT0")
+
+
+    // Convert HEX → BYTES
+    iv, err := hex.DecodeString(ivHex)
+    if err != nil {
+        return "", fmt.Errorf("[ERR] hex iv decode: %v", err)
+    }
+    tag, err := hex.DecodeString(tagHex)
+    if err != nil {
+        return "", fmt.Errorf("[ERR] hex tag decode: %v", err)
+    }
+    ciphertext, err := hex.DecodeString(cipherHex)
+    if err != nil {
+        return "", fmt.Errorf("[ERR] hex cipher decode: %v", err)
+    }
+
+    // Validate decoded sizes (bytes)
+    if len(iv) != 12 {
+        return "", fmt.Errorf("[ERR] IV must be 12 bytes, got: %s", strconv.Itoa(len(iv)))
+    }
+    if len(tag) != 16 {
+        return "", fmt.Errorf("[ERR] Tag must be 16 bytes, got: %s", strconv.Itoa(len(tag)))
+    }
+
+    // Append tag to ciphertext (GCM expects ciphertext|tag passed to Open)
+    ciphertext = append(ciphertext, tag...)
+
+    block, err := aes.NewCipher(key)
+    if err != nil {
+        return "", fmt.Errorf("[ERR] new cipher: %v", err)
+    }
+
+    gcm, err := cipher.NewGCM(block)
+    if err != nil {
+        return "", fmt.Errorf("[ERR] new GCM: %v", err)
+    }
+
+    plain, err := gcm.Open(nil, iv, ciphertext, nil)
+    if err != nil {
+        return "", fmt.Errorf("[ERR] gcm open: %v", err)
+    }
+
+    return string(plain), nil
 }
