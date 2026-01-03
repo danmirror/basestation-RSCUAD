@@ -5,8 +5,8 @@ import (
 	"net"
 	"net/http"
 	"strconv"
-	"time"
 	"strings"
+	"time"
 
 	"github.com/gorilla/websocket"
 )
@@ -42,7 +42,7 @@ var gameController = GameController{}
 var timeout int64 = 5
 
 func Init() {
-	gameController.VERSION = 1
+	gameController.VERSION = 2
 	execute.robotExecute = "0"
 	execute.privilege = 10 // higher is lower
 }
@@ -76,94 +76,94 @@ func RefereeBoxHandler() {
 
 func ClientHandler() {
 
-    addr := net.UDPAddr{
-        Port: 8124,
-        IP:   net.ParseIP(GetIP()),
-    }
+	addr := net.UDPAddr{
+		Port: 8124,
+		IP:   net.ParseIP(GetIP()),
+	}
 
-    ser, err := net.ListenUDP("udp", &addr)
-    if err != nil {
-        fmt.Printf("Some error %v\n", err)
-        return
-    }
+	ser, err := net.ListenUDP("udp", &addr)
+	if err != nil {
+		fmt.Printf("Some error %v\n", err)
+		return
+	}
 
-    for {
+	for {
 
-        bytes := make([]byte, 512)
+		bytes := make([]byte, 512)
 
-        n, remoteaddr, err := ser.ReadFromUDP(bytes)
-        if err != nil {
-            fmt.Printf("[ERROR] ReadFromUDP: %v\n", err)
-            continue
-        }
+		n, remoteaddr, err := ser.ReadFromUDP(bytes)
+		if err != nil {
+			fmt.Printf("[ERROR] ReadFromUDP: %v\n", err)
+			continue
+		}
 
-        raw := strings.TrimSpace(string(bytes[:n]))
-        if raw == "" {
-            fmt.Println("[WARN] Received empty data")
-            continue
-        }
+		raw := strings.TrimSpace(string(bytes[:n]))
+		if raw == "" {
+			fmt.Println("[WARN] Received empty data")
+			continue
+		}
 
-        parts := strings.Split(raw, "|")
-        if len(parts) < 3 {
-            fmt.Printf("[ERROR] Incomplete encrypted data: %s\n", raw)
-            continue
-        }	
+		parts := strings.Split(raw, "|")
+		if len(parts) < 3 {
+			fmt.Printf("[ERROR] Incomplete encrypted data: %s\n", raw)
+			continue
+		}
 
 		cipher := parts[0]
 		tag := parts[1]
 		iv := parts[2]
 		plaintext, err := DecryptAESGCM(iv, tag, cipher)
 
-        if err != nil {
-            fmt.Printf("[ERROR] Decryption failed: %v\n", err)
-            continue
-        }
+		if err != nil {
+			fmt.Printf("[ERROR] Decryption failed: %v\n", err)
+			continue
+		}
 
-        fmt.Printf("[OK] Decrypted data: %s\n", plaintext)
+		fmt.Printf("[OK] Decrypted data: %s\n", plaintext)
 
-        received := CleanString(plaintext)
-        dataAfterParseLoc := ParseLoc(received)
+		received := CleanString(plaintext)
+		dataAfterParseLoc := ParseLoc(received)
 
-        s := Split(received)
-        swap := Swap(s[10])
+		s := Split(received)
+		swap := Swap(s[10])
 
-        var container string
-        for i := 0; i < 9; i++ {
-            container = container + s[i]
-        }
+		var container string
+		for i := 0; i < 9; i++ {
+			container = container + s[i]
+		}
 
-        container = CleanString(container)
-        swap = CleanString(swap)
+		container = CleanString(container)
+		swap = CleanString(swap)
 
-        if container == swap {
+		if container == swap {
 
-            id := GetID(dataAfterParseLoc)
+			id := GetID(dataAfterParseLoc)
 
-            t := time.Now()
+			t := time.Now()
 
-            switch id[0] {
-            case '1':
-                times.timeR1 = t.Unix()
-                staging.R1 = dataAfterParseLoc
-            case '2':
-                times.timeR2 = t.Unix()
-                staging.R2 = dataAfterParseLoc
-            case '3':
-                times.timeR3 = t.Unix()
-                staging.R3 = dataAfterParseLoc
-            case '4':
-                times.timeR4 = t.Unix()
-                staging.R4 = dataAfterParseLoc
-            case '5':
-                times.timeR5 = t.Unix()
-                staging.R5 = dataAfterParseLoc
-            }
+			switch id[0] {
+			case '1':
+				times.timeR1 = t.Unix()
+				staging.R1 = dataAfterParseLoc
+			case '2':
+				times.timeR2 = t.Unix()
+				staging.R2 = dataAfterParseLoc
+			case '3':
+				times.timeR3 = t.Unix()
+				staging.R3 = dataAfterParseLoc
+			case '4':
+				times.timeR4 = t.Unix()
+				staging.R4 = dataAfterParseLoc
+			case '5':
+				times.timeR5 = t.Unix()
+				staging.R5 = dataAfterParseLoc
+			}
 
-            rvRobot := WhoIsExecute(id)
-            go ClientResponse(ser, remoteaddr, rvRobot)
-        }
+			rvRobot := WhoIsExecute(id)
+			go ClientResponse(ser, remoteaddr, rvRobot)
+		}
 
-    }
+	}
 }
 
 func ClientResponse(conn *net.UDPConn, addr *net.UDPAddr, rvRobot string) {
