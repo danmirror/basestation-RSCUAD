@@ -9,6 +9,10 @@ import (
     "unicode"
 	"net"
 	"fmt"
+	"os"
+	"log"
+
+	"github.com/joho/godotenv"
 )
 
 func CleanString(data string) string {
@@ -85,8 +89,18 @@ func GetIP() string {
 }
 func DecryptAESGCM(ivHex, tagHex, cipherHex string) (string, error) {
 
-    key := []byte("R5C9u@D!A7xP#LQ2mZ8F$wKJH4S1ErT0")
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal(".env tidak ditemukan")
+	}
 
+	keyEnv := os.Getenv("AES_KEY_GCM")
+
+	if len(keyEnv) != 32 {
+		log.Fatal("AES_KEY_GCM tidak valid")
+	}
+
+	key := []byte(keyEnv)	
 
     // Convert HEX → BYTES
     iv, err := hex.DecodeString(ivHex)

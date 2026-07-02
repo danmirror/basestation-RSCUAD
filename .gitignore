@@ -1,4 +1,7 @@
 # dont upload to github
+.env
+.env.*
+!.env.example
 bin
 
 # c++
