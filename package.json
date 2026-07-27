@@ -1,0 +1,29 @@
+{
+  "name": "basestation-rscuad-ui",
+  "version": "1.0.0",
+  "description": "UI dashboard Base Station R-SCUAD (Tailwind CSS)",
+  "directories": {
+    "example": "example",
+    "test": "test"
+  },
+  "scripts": {
+    "build:css": "tailwindcss -i ./assets/css/app.css -o ./assets/css/tailwind.css --minify",
+    "watch:css": "tailwindcss -i ./assets/css/app.css -o ./assets/css/tailwind.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danmirror/basestation-RSCUAD.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/danmirror/basestation-RSCUAD/issues"
+  },
+  "homepage": "https://github.com/danmirror/basestation-RSCUAD#readme",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "tailwindcss": "^4.3.3"
+  },
+  "private": true
+}
