@@ -103,17 +103,18 @@ func ClientHandler() {
 			continue
 		}
 
-		parts := strings.Split(raw, "|")
-		if len(parts) < 3 {
-			fmt.Printf("[ERROR] Incomplete encrypted data: %s\n", raw)
+		// panjang minimal: IV(24) + TAG(32)
+		if len(raw) < 56 {
+			fmt.Printf("[ERROR] Data terlalu pendek: %s\n", raw)
 			continue
 		}
 
-		cipher := parts[0]
-		tag := parts[1]
-		iv := parts[2]
-		plaintext, err := DecryptAESGCM(iv, tag, cipher)
+		// slicing FIXED (HEX)
+		iv := raw[0:24]       // 12 byte
+		tag := raw[24:56]     // 16 byte
+		cipher := raw[56:]    // sisanya
 
+		plaintext, err := DecryptAESGCM(iv, tag, cipher)
 		if err != nil {
 			fmt.Printf("[ERROR] Decryption failed: %v\n", err)
 			continue

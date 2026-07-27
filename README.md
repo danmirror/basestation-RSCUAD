@@ -34,6 +34,14 @@ make sure the go version shows up. otherwise just run manually.
 ```
 "31,0,0,360,0,200,200,60,100200200630013"
 ```
+### Environment Configuration
+
+Copy `.env.example` to `.env`, then set the `AES_KEY_GCM` value.
+
+> **Note**
+> - `AES_KEY_GCM` must be exactly **32 characters**.
+> - Use the **same key** on both the robot and the base station.
+> - Do not upload the `.env` file to GitHub.
 
 ### Author
 > <a href="https://me-danuandrean.github.io/">Danu andrean</a>
