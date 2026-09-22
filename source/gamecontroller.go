@@ -24,7 +24,7 @@ const (
 )
 
 type GameController struct {
-	VERSION                int
+	BS_VERSION             int
 	STATE                  int
 	KICKOFF                int
 	SECOND_STATE           int
