@@ -42,7 +42,7 @@ var gameController = GameController{}
 var timeout int64 = 5
 
 func Init() {
-	gameController.VERSION = 2
+	gameController.BS_VERSION = 3
 	execute.robotExecute = "0"
 	execute.privilege = 10 // higher is lower
 }
@@ -110,9 +110,9 @@ func ClientHandler() {
 		}
 
 		// slicing FIXED (HEX)
-		iv := raw[0:24]       // 12 byte
-		tag := raw[24:56]     // 16 byte
-		cipher := raw[56:]    // sisanya
+		iv := raw[0:24]    // 12 byte
+		tag := raw[24:56]  // 16 byte
+		cipher := raw[56:] // sisanya
 
 		plaintext, err := DecryptAESGCM(iv, tag, cipher)
 		if err != nil {
@@ -172,7 +172,7 @@ func ClientResponse(conn *net.UDPConn, addr *net.UDPAddr, rvRobot string) {
 	// refereebox
 	intRobot, _ := strconv.Atoi(rvRobot)
 	data := make([]byte, 10)
-	data[0] = byte(gameController.VERSION)
+	data[0] = byte(gameController.BS_VERSION)
 	data[1] = byte(intRobot)
 	data[2] = byte(gameController.STATE)
 	data[3] = byte(gameController.KICKOFF)

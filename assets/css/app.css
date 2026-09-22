@@ -1,0 +1,463 @@
+/*
+ * Base Station R-SCUAD — Tailwind source
+ * build: npm run build:css   (output -> assets/css/tailwind.css)
+ */
+
+@import "tailwindcss";
+
+@source "../../index.html";
+@source "../js/ui.js";
+
+@theme {
+	--color-r1: #ff4d4d;
+	--color-r2: #ffcd05;
+	--color-r3: #05d5ff;
+	--color-r4: #ff05ff;
+	--color-r5: #ff8605;
+
+	--font-mono: ui-monospace, "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+}
+
+/* ============================== BASE ============================== */
+
+@layer base {
+	html {
+		color-scheme: dark;
+	}
+
+	body {
+		@apply min-h-screen bg-slate-950 text-slate-100 antialiased;
+		background-image:
+			radial-gradient(1100px 600px at 12% -10%, rgba(56, 189, 248, 0.13), transparent 60%),
+			radial-gradient(900px 520px at 105% 0%, rgba(129, 140, 248, 0.12), transparent 60%),
+			linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px),
+			linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
+		background-size: auto, auto, 44px 44px, 44px 44px;
+		background-attachment: fixed;
+	}
+
+	kbd {
+		@apply rounded-md border border-white/10 bg-white/5 px-1.5 py-0.5 font-mono text-[10px] leading-none text-slate-400;
+	}
+
+	::-webkit-scrollbar {
+		@apply h-2 w-2;
+	}
+
+	::-webkit-scrollbar-thumb {
+		@apply rounded-full bg-white/10;
+	}
+}
+
+/* ============================ ANIMATIONS ========================== */
+
+@keyframes fade-up {
+	from { opacity: 0; transform: translateY(14px); }
+	to { opacity: 1; transform: none; }
+}
+
+@keyframes float-bot {
+	0%, 100% { transform: translateY(0); }
+	50% { transform: translateY(-7px); }
+}
+
+@keyframes glow-ring {
+	0%, 100% { box-shadow: 0 0 0 1px rgb(34 197 94 / 0.25), 0 0 26px -6px rgb(34 197 94 / 0.55); }
+	50% { box-shadow: 0 0 0 1px rgb(34 197 94 / 0.45), 0 0 42px -4px rgb(34 197 94 / 0.75); }
+}
+
+@keyframes sweep {
+	0% { transform: translateX(-100%); }
+	100% { transform: translateX(300%); }
+}
+
+@keyframes flash-value {
+	0% { background-color: rgb(56 189 248 / 0.3); }
+	100% { background-color: transparent; }
+}
+
+@keyframes scan {
+	0% { top: -10%; }
+	100% { top: 110%; }
+}
+
+/* ============================ COMPONENTS ========================== */
+
+@utility surface {
+	@apply rounded-2xl border border-white/10 bg-gradient-to-b from-slate-900/85 to-slate-950/85 shadow-xl shadow-black/40 backdrop-blur-sm;
+}
+
+@utility label-mono {
+	@apply font-mono text-[10px] tracking-[0.18em] text-slate-500 uppercase;
+}
+
+@layer components {
+
+	/* ------------------------------ tabs ------------------------------ */
+	.tab {
+		@apply flex shrink-0 cursor-pointer items-center gap-2 rounded-full border border-white/10 bg-white/[0.02]
+			px-5 py-2.5 font-mono text-[11.5px] tracking-[0.16em] text-slate-400
+			transition hover:border-white/25 hover:text-slate-100;
+	}
+
+	.tab.active {
+		@apply border-transparent bg-gradient-to-br from-sky-400 to-indigo-400 font-bold text-slate-950 shadow-lg shadow-sky-500/25;
+	}
+
+	.tab.active kbd {
+		@apply border-transparent bg-slate-950/25 text-slate-900;
+	}
+
+	.panel {
+		@apply hidden;
+	}
+
+	.panel.active {
+		@apply block;
+		animation: fade-up 0.28s ease both;
+	}
+
+	/* ---------------------------- top bar ----------------------------- */
+	.fleet-chip {
+		@apply flex items-center gap-2 rounded-full px-2.5 py-1.5 font-mono text-[11px] tracking-wider text-slate-500 transition;
+	}
+
+	.fleet-chip .fleet-dot {
+		@apply size-2 rounded-full bg-slate-600 transition;
+	}
+
+	.fleet-chip[data-state="run"] {
+		@apply bg-emerald-500/12 text-emerald-400;
+	}
+
+	.fleet-chip[data-state="run"] .fleet-dot {
+		@apply bg-emerald-400 shadow-[0_0_10px_var(--color-emerald-400)];
+	}
+
+	.fleet-chip[data-state="standby"] {
+		@apply bg-amber-500/12 text-amber-400;
+	}
+
+	.fleet-chip[data-state="standby"] .fleet-dot {
+		@apply bg-amber-400 shadow-[0_0_10px_var(--color-amber-400)];
+	}
+
+	.fleet-chip[data-state="loss"] {
+		@apply bg-red-500/12 text-red-400;
+	}
+
+	.fleet-chip[data-state="loss"] .fleet-dot {
+		@apply bg-red-500;
+	}
+
+	/* koneksi websocket — class .staterun ditambahkan oleh script */
+	#state {
+		@apply size-2.5 shrink-0 rounded-full bg-red-500 ring-4 ring-red-500/15 transition;
+	}
+
+	#state.staterun {
+		@apply animate-pulse bg-emerald-400 ring-emerald-400/20;
+	}
+
+	/* ------------------------------ KPI ------------------------------- */
+	.kpi {
+		@apply surface flex min-w-0 items-center gap-3 px-4 py-3;
+		animation: fade-up 0.35s ease both;
+	}
+
+	.kpi-icon {
+		@apply grid size-9 shrink-0 place-items-center rounded-xl text-base;
+	}
+
+	.kpi-value {
+		@apply font-mono text-lg leading-none font-bold tabular-nums;
+	}
+
+	/* --------------------------- robot card --------------------------- */
+	.robot-card {
+		@apply surface relative flex flex-col overflow-hidden transition duration-300;
+		animation: fade-up 0.4s ease both;
+	}
+
+	.robot-card::before {
+		content: "";
+		@apply absolute inset-x-0 top-0 h-[3px] opacity-70;
+		background: var(--accent);
+	}
+
+	.robot-card:hover {
+		@apply -translate-y-0.5 border-white/20;
+	}
+
+	.robot-card.run {
+		@apply border-emerald-500/40;
+		animation: fade-up 0.4s ease both, glow-ring 2.4s ease-in-out infinite;
+	}
+
+	.robot-card.standby {
+		@apply border-amber-500/35;
+	}
+
+	.robot-card.loss {
+		@apply border-red-500/35;
+	}
+
+	/* status pill */
+	.rc-badge {
+		@apply flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-2.5 py-1
+			font-mono text-[9.5px] tracking-[0.14em] text-slate-500;
+	}
+
+	.rc-badge .badge-dot {
+		@apply size-1.5 rounded-full bg-slate-500;
+	}
+
+	.robot-card.run .rc-badge {
+		@apply border-emerald-500/35 bg-emerald-500/12 text-emerald-400;
+	}
+
+	.robot-card.run .badge-dot {
+		@apply animate-ping bg-emerald-400;
+	}
+
+	.robot-card.standby .rc-badge {
+		@apply border-amber-500/35 bg-amber-500/12 text-amber-400;
+	}
+
+	.robot-card.standby .badge-dot {
+		@apply bg-amber-400;
+	}
+
+	.robot-card.loss .rc-badge {
+		@apply border-red-500/35 bg-red-500/12 text-red-400;
+	}
+
+	.robot-card.loss .badge-dot {
+		@apply bg-red-500;
+	}
+
+	/* visual robot */
+	.rc-visual img {
+		@apply relative z-10 max-h-[124px] w-auto drop-shadow-[0_10px_20px_rgba(0,0,0,0.6)] transition duration-300;
+	}
+
+	.robot-card.run .rc-visual img {
+		animation: float-bot 3.6s ease-in-out infinite;
+	}
+
+	.robot-card.loss .rc-visual img {
+		@apply opacity-60 grayscale;
+	}
+
+	.rc-halo {
+		@apply pointer-events-none absolute inset-0 opacity-40 transition duration-500;
+		background: radial-gradient(60% 55% at 50% 62%, var(--accent), transparent 70%);
+		filter: blur(26px);
+	}
+
+	.robot-card.loss .rc-halo {
+		@apply opacity-10;
+	}
+
+	/* metric bar */
+	.metric {
+		@apply flex items-center gap-2;
+	}
+
+	.metric-label {
+		@apply w-9 shrink-0 font-mono text-[9px] tracking-[0.14em] text-slate-500;
+	}
+
+	.metric-track {
+		@apply relative h-1.5 min-w-0 flex-1 overflow-hidden rounded-full bg-white/8;
+	}
+
+	.metric-fill {
+		@apply absolute inset-y-0 left-0 rounded-full transition-[width] duration-200 ease-out;
+		width: 0;
+		background: var(--accent);
+	}
+
+	.metric-value {
+		@apply w-12 shrink-0 border-0 bg-transparent p-0 text-right font-mono text-[12px] font-semibold tabular-nums text-slate-100 outline-none;
+	}
+
+	/* chip / flag */
+	.chip {
+		@apply flex items-center justify-between gap-1.5 rounded-lg border border-white/10 bg-white/[0.03] px-2.5 py-1.5 transition;
+	}
+
+	.chip-label {
+		@apply font-mono text-[9px] tracking-[0.14em] text-slate-500;
+	}
+
+	.chip-value {
+		@apply w-9 border-0 bg-transparent p-0 text-right font-mono text-[12px] font-bold tabular-nums text-slate-200 outline-none;
+	}
+
+	.chip.on {
+		@apply border-emerald-500/40 bg-emerald-500/12;
+	}
+
+	.chip.on .chip-label {
+		@apply text-emerald-400/70;
+	}
+
+	.chip.on .chip-value {
+		@apply text-emerald-300;
+	}
+
+	.chip.alert {
+		@apply border-amber-500/40 bg-amber-500/12;
+	}
+
+	.chip.alert .chip-label {
+		@apply text-amber-400/70;
+	}
+
+	.chip.alert .chip-value {
+		@apply text-amber-300;
+	}
+
+	/* sparkline aktivitas paket */
+	.spark {
+		@apply flex h-6 items-end gap-[2px];
+	}
+
+	/* tinggi & warna bar di-set langsung oleh ui.js tanpa transisi supaya
+	   grafik tetap tajam saat data masuk 10×/detik */
+	.spark i {
+		@apply block flex-1 rounded-[1px] bg-white/10;
+		height: 12%;
+	}
+
+	.robot-card.run .spark i.hit {
+		@apply bg-emerald-400/80;
+	}
+
+	.robot-card.standby .spark i.hit {
+		@apply bg-amber-400/80;
+	}
+
+	.spark i.hit {
+		@apply bg-sky-400/70;
+	}
+
+	.flash {
+		animation: flash-value 0.55s ease-out;
+	}
+
+	/* ---------------------------- stream ------------------------------ */
+	.stream-card {
+		@apply surface overflow-hidden;
+		animation: fade-up 0.4s ease both;
+	}
+
+	.sc-signal {
+		@apply flex items-center gap-1.5 font-mono text-[9.5px] tracking-[0.14em] text-slate-500;
+	}
+
+	.sc-signal::before {
+		content: "";
+		@apply size-1.5 rounded-full bg-slate-600;
+	}
+
+	.stream-card.live .sc-signal {
+		@apply text-emerald-400;
+	}
+
+	.stream-card.live .sc-signal::before {
+		@apply bg-emerald-400 shadow-[0_0_8px_var(--color-emerald-400)];
+	}
+
+	.sc-view {
+		@apply relative grid aspect-[4/3] place-items-center overflow-hidden bg-slate-950;
+		background-image: repeating-linear-gradient(45deg, rgb(255 255 255 / 0.015) 0 10px, transparent 10px 20px);
+	}
+
+	.sc-view img {
+		@apply absolute inset-0 size-full object-contain opacity-0 transition-opacity duration-300;
+	}
+
+	.stream-card.live .sc-view img {
+		@apply opacity-100;
+	}
+
+	.sc-view::after {
+		content: "";
+		@apply pointer-events-none absolute inset-x-0 h-16 opacity-60;
+		background: linear-gradient(rgb(56 189 248 / 0), rgb(56 189 248 / 0.08), rgb(56 189 248 / 0));
+		animation: scan 4s linear infinite;
+	}
+
+	.stream-card.live .sc-view::after {
+		@apply hidden;
+	}
+
+	.stream-card.live .sc-placeholder {
+		@apply hidden;
+	}
+
+	/* --------------------------- position ----------------------------- */
+	.field-background {
+		@apply relative rounded-xl bg-cover shadow-[inset_0_0_60px_rgba(0,0,0,0.45)];
+		width: 900px;
+		height: 600px;
+		transform-origin: top left;
+		background-image: url('../image/lapangan.png');
+	}
+
+	/* titik robot — elemen dibuat oleh client.js */
+	.pointR1, .pointR2, .pointR3, .pointR4, .pointR5 {
+		@apply absolute size-5 rounded-full border-2 border-white/85;
+	}
+
+	.pointR1::after, .pointR2::after, .pointR3::after,
+	.pointR4::after, .pointR5::after {
+		@apply absolute -top-5 left-1/2 -translate-x-1/2 rounded-md bg-black/60 px-1.5 py-px
+			font-mono text-[10px] font-bold whitespace-nowrap text-white;
+	}
+
+	.pointR1 { background-color: var(--color-r1); box-shadow: 0 0 14px var(--color-r1); }
+	.pointR1::after { content: "R1"; }
+
+	.pointR2 { background-color: var(--color-r2); box-shadow: 0 0 14px var(--color-r2); }
+	.pointR2::after { content: "R2"; }
+
+	.pointR3 { background-color: var(--color-r3); box-shadow: 0 0 14px var(--color-r3); }
+	.pointR3::after { content: "R3"; }
+
+	.pointR4 { background-color: var(--color-r4); box-shadow: 0 0 14px var(--color-r4); }
+	.pointR4::after { content: "R4"; }
+
+	.pointR5 { background-color: var(--color-r5); box-shadow: 0 0 14px var(--color-r5); }
+	.pointR5::after { content: "R5"; }
+
+	/* ------------------------------ log ------------------------------- */
+	.log-line {
+		@apply flex items-center gap-3 border-b border-white/5 px-4 py-2 font-mono text-[11px] last:border-0;
+		animation: fade-up 0.25s ease both;
+	}
+
+	.log-time {
+		@apply shrink-0 text-slate-600 tabular-nums;
+	}
+
+	/* ----------------------------- modal ------------------------------ */
+	.modals {
+		@apply fixed inset-0 z-[90] hidden overflow-auto bg-slate-950/75 p-6 backdrop-blur-sm;
+	}
+
+	.modals.open {
+		@apply block;
+	}
+
+	.modal-contents {
+		@apply surface relative mx-auto mt-[8vh] w-full max-w-md p-6;
+		animation: fade-up 0.22s ease both;
+	}
+
+	.close {
+		@apply absolute top-3 right-4 cursor-pointer text-2xl leading-none text-slate-500 transition hover:text-slate-100;
+	}
+}

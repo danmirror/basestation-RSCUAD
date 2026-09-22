@@ -1,10 +1,35 @@
-# dont upload to github
+# secret — jangan pernah di-upload
 .env
 .env.*
 !.env.example
-bin
 
-# c++
+# go build
+bin/
+*.exe
+server
+
+# c++ (example/)
 *.o
 *.out
 example/main
+
+# node / tailwind
+node_modules/
+npm-debug.log*
+# catatan: assets/css/tailwind.css adalah hasil build TAPI wajib ikut di-commit,
+# karena base station menyajikannya langsung tanpa proses build.
+
+# python (test/)
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# editor & OS
+.vscode/
+.idea/
+*.swp
+*~
+.DS_Store
+Thumbs.db
+.serena

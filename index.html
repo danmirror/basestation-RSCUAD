@@ -1,579 +1,496 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-	<title>R-SCUAD TECH</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>R-SCUAD TECH · Base Station</title>
 
 	<meta name="description" content="Basestation Robot RSCUAD">
 	<meta name="author" content="Danu Andrean">
-	<link rel="stylesheet" type="text/css" href="/assets/css/style.css" />
 
-	<link rel="stylesheet" href="/assets/css/bootstrap-min.css" >
-
-	<script src="/assets/js/jquery-slim.js" ></script>
-	<script src="/assets/js/popper.js" ></script>
-	<script src="/assets/js/bootstrap-min.js" ></script>
-	<script src="/assets/js/bootstrap-min.js" ></script>
-	<script src="/assets/js/ajax.js" ></script>
-	
-	<script src="/assets/client.js" ></script>
-
+	<link rel="stylesheet" href="/assets/css/tailwind.css">
 </head>
 <body>
-	<div class="container">
-		<div class="row mt-3">
-			<div class="col-5 ">
-				<h1 class="title">BASE STATION R-SCUAD</h1>
+
+	<!-- ============================== TOP BAR ============================== -->
+	<header class="sticky top-0 z-40 flex flex-wrap items-center gap-4 border-b border-white/10 bg-slate-950/80 px-5 py-3 backdrop-blur-xl">
+		<div class="flex min-w-0 items-center gap-3">
+			<div class="grid size-11 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-sky-400 to-indigo-400 font-mono text-[15px] font-bold text-slate-950 shadow-lg shadow-sky-500/25">RS</div>
+			<div>
+				<h1 class="text-[15px] font-bold tracking-[0.16em] whitespace-nowrap">BASE STATION</h1>
+				<span class="mt-0.5 block text-[10.5px] tracking-[0.14em] text-slate-500 uppercase">R-SCUAD · Robot Control Center</span>
 			</div>
-			<div class="col-2">
+		</div>
+
+		<div class="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/[0.02] p-1.5" id="fleetStrip" title="Status ringkas seluruh robot">
+			<div class="fleet-chip" id="fleet1" data-state="idle"><span class="fleet-dot"></span>R1</div>
+			<div class="fleet-chip" id="fleet2" data-state="idle"><span class="fleet-dot"></span>R2</div>
+			<div class="fleet-chip" id="fleet3" data-state="idle"><span class="fleet-dot"></span>R3</div>
+			<div class="fleet-chip" id="fleet4" data-state="idle"><span class="fleet-dot"></span>R4</div>
+			<div class="fleet-chip" id="fleet5" data-state="idle"><span class="fleet-dot"></span>R5</div>
+		</div>
+
+		<div class="ml-auto flex items-center gap-2.5">
+			<button type="button" id="myBtn" title="Keterangan game state (G)"
+				class="flex cursor-pointer items-center gap-2.5 rounded-full border border-amber-500/40 bg-amber-500/10 px-4 py-2 font-mono text-amber-400 transition hover:bg-amber-500/20 active:scale-95">
+				<span class="text-[9.5px] tracking-[0.16em] text-slate-500">GAME STATE</span>
+				<span id="refree" class="text-[13px] font-bold tracking-[0.16em]">NONE</span>
+			</button>
+
+			<div class="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.02] px-4 py-2 font-mono text-[11px] tracking-[0.14em] text-red-400" id="linkStatus">
 				<div id="state"></div>
+				<span id="linkText">OFFLINE</span>
 			</div>
-			<div class="col-5">
-				<div class="selection">
-					<div class="list-group" id="pills-tab" >
-					<ul class="nav nav-pills" id="pills-tab" role="tablist">
-						<li class="nav-item">
-						<a class="nav-link btn btn-warning mr-4" id="myBtn">
-							<span id="refree">NONE</span>
-						</a>
-						</li>
-						<li class="nav-item">
-						<a class="nav-link active" id="list-robot-list" data-toggle="pill" href="#pills-robot" role="tab" aria-controls="robot">ROBOT</a>
-						</li>
-						<li class="nav-item">
-						<a class="nav-link" id="list-stream-list" data-toggle="pill" href="#pills-stream" role="tab" aria-controls="stream">STREAM</a>
-						</li>
-						<li class="nav-item">
-						<a class="nav-link" id="list-position-list" data-toggle="pill" href="#pills-position" role="tab" aria-controls="position" aria-selected="false">POSITION</a>
-						</li>
-					</ul>
-					</div>
-				</div>
-			</div>
+
+			<div class="hidden rounded-full border border-white/10 bg-white/[0.02] px-3 py-2 font-mono text-[12px] tracking-wider text-slate-400 tabular-nums lg:block" id="clock">--:--:--</div>
 		</div>
-	</div>
-	<div class="container">
-		<div class="tab-content" id="nav-tabContent">
-			<div class="tab-pane fade show active" id="pills-robot" role="tabpanel" aria-labelledby="list-robot-list">
-				<div class="row" id="draw">
-					<div class="col-2 offset-1">
-						<div class="card">
-						<div class="card-body" id="r1">
-							<div class="name">
-							<h2 >Robot 1</h2>
-							</div>
-							<img class="draw" src="/assets/image/robot-standby.png" alt="" id="rr1">
-						</div>
-						</div>
-					</div>
-					<div class="col-2 ">
-						<div class="card">
-						<div class="card-body" id="r2">
-							<div class="name">
-							<h2 >Robot 2</h2>
-							</div>
-							<img class="draw" src="/assets/image/robot-standby.png" alt="" id="rr2">
-						</div>
-						</div>
-					</div>
-					<div class="col-2 ">
-						<div class="card " >
-						<div class="card-body" id="r3">
-							<div class="name">
-							<h2 >Robot 3</h2>
-							</div>
-							<img class="draw" src="/assets/image/robot-standby.png" alt="" id="rr3">
-						</div>
-						</div>
-					</div>
-					<div class="col-2 ">
-						<div class="card" >
-						<div class="card-body" id="r4">
-							<div class="name">
-							<h2 >Robot 4</h2>
-							</div>
-							<img class="draw" src="/assets/image/robot-standby.png" alt="" id="rr4">
-						</div>
-						</div>
-					</div>
-					<div class="col-2 ">
-						<div class="card" >
-						<div class="card-body" id="r5">
-							<div class="name">
-							<h2 >Robot 5</h2>
-							</div>
-							<img class="draw" src="/assets/image/robot-standby.png" alt="" id="rr5">
-						</div>
-						</div>
-					</div>
+	</header>
+
+	<!-- ================================ TABS =============================== -->
+	<nav class="mx-auto flex w-full max-w-[1700px] gap-2 overflow-x-auto px-5 pt-4" role="tablist">
+		<button type="button" class="tab active" role="tab" data-tab="robot" aria-selected="true">ROBOT <kbd>1</kbd></button>
+		<button type="button" class="tab" role="tab" data-tab="stream" aria-selected="false">STREAM <kbd>2</kbd></button>
+		<button type="button" class="tab" role="tab" data-tab="position" aria-selected="false">POSITION <kbd>3</kbd></button>
+	</nav>
+
+	<main class="mx-auto w-full max-w-[1700px] px-5 pt-4 pb-10">
+
+		<!-- ------------------------------ ROBOT ------------------------------ -->
+		<section class="panel active" id="panel-robot" role="tabpanel">
+
+			<div class="mb-4 grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-6">
+				<div class="kpi">
+					<span class="kpi-icon bg-emerald-500/12 text-emerald-400">▲</span>
+					<span class="min-w-0">
+						<span class="label-mono block">ACTIVE</span>
+						<span class="kpi-value text-emerald-400 mt-1 block" id="kpiActive">—</span>
+					</span>
+				</div>
+				<div class="kpi">
+					<span class="kpi-icon bg-amber-500/12 text-amber-400">❙❙</span>
+					<span class="min-w-0">
+						<span class="label-mono block">STANDBY</span>
+						<span class="kpi-value text-amber-400 mt-1 block" id="kpiStandby">—</span>
+					</span>
+				</div>
+				<div class="kpi">
+					<span class="kpi-icon bg-red-500/12 text-red-400">✕</span>
+					<span class="min-w-0">
+						<span class="label-mono block">OFFLINE</span>
+						<span class="kpi-value text-red-400 mt-1 block" id="kpiOffline">—</span>
+					</span>
+				</div>
+				<div class="kpi">
+					<span class="kpi-icon bg-sky-500/12 text-sky-400">≋</span>
+					<span class="min-w-0">
+						<span class="label-mono block">TELEMETRY</span>
+						<span class="kpi-value text-sky-400 mt-1 block" id="kpiRate">—</span>
+					</span>
+				</div>
+				<div class="kpi">
+					<span class="kpi-icon bg-indigo-500/12 text-indigo-300">◷</span>
+					<span class="min-w-0">
+						<span class="label-mono block">LINK UPTIME</span>
+						<span class="kpi-value text-indigo-300 mt-1 block" id="kpiUptime">—</span>
+					</span>
+				</div>
+				<div class="kpi">
+					<span class="kpi-icon bg-white/6 text-slate-100">⚑</span>
+					<span class="min-w-0">
+						<span class="label-mono block">GAME STATE</span>
+						<span class="kpi-value text-slate-100 mt-1 block" id="kpiState">—</span>
+					</span>
 				</div>
 			</div>
-			<div class="tab-pane fade" id="pills-stream" role="tabpanel" aria-labelledby="list-stream-list">
-				<div class="row">
-					<div class="col-md-4 offset-2 cam-robot">
-						<img id="video1" src="" alt="Video Stream">
 
-					</div>
-					<div class="col-md-4 cam-robot">
-						<img id="video2" src="" alt="Video Stream">
-
-					</div>
-					<div class="col-md-4 cam-robot">
-						<img id="video3" src="" alt="Video Stream">
-
-					</div>
-					<div class="col-md-4 cam-robot">
-						<img id="video4" src="" alt="Video Stream">
-
-					</div>
-					<div class="col-md-4 cam-robot">
-						<img id="video5" src="" alt="Video Stream">
-
-					</div>
-				</div>
+			<div class="mb-3 flex flex-wrap items-baseline gap-x-3 gap-y-1 px-1">
+				<h2 class="font-mono text-[12px] tracking-[0.2em]">FLEET TELEMETRY</h2>
+				<p class="text-[11.5px] text-slate-500">Parameter tiap robot diperbarui ±10×/detik lewat websocket.</p>
 			</div>
-			<div class="tab-pane field fade" id="pills-position" role="tabpanel" aria-labelledby="list-position-list">
-				<div class="field-background" id="fieldBackground">
-					<!-- Tidak ada elemen .blue-dot di sini -->
-				</div>
+
+			<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5" id="draw">
+				<article class="robot-card" id="r1" data-robot="1" style="--accent: var(--color-r1); animation-delay: 0ms">
+					<div class="flex items-center gap-2.5 px-4 pt-4 pb-3">
+						<span class="grid size-7 shrink-0 place-items-center rounded-lg border font-mono text-[11px] font-bold"
+							style="color: var(--accent); border-color: color-mix(in srgb, var(--accent) 35%, transparent); background: color-mix(in srgb, var(--accent) 14%, transparent)">01</span>
+						<h3 class="text-[13px] font-semibold tracking-[0.12em] uppercase">Robot 1</h3>
+						<span class="rc-badge ml-auto"><span class="badge-dot"></span><span id="badge1">IDLE</span></span>
+					</div>
+
+					<div class="relative flex items-center gap-3 px-4 pb-4">
+						<div class="rc-halo"></div>
+						<div class="rc-visual relative grid w-24 shrink-0 place-items-center">
+							<img class="draw" id="rr1" src="/assets/image/robot-standby.png" alt="Robot 1">
+						</div>
+						<div class="relative flex min-w-0 flex-1 flex-col gap-3">
+							<div class="metric"><span class="metric-label">TILT</span><span class="metric-track"><i class="metric-fill" data-fill="tilt_1"></i></span><input type="text" class="metric-value" id="tilt_1" placeholder="—" readonly></div>
+							<div class="metric"><span class="metric-label">PAN</span><span class="metric-track"><i class="metric-fill" data-fill="pan_1"></i></span><input type="text" class="metric-value" id="pan_1" placeholder="—" readonly></div>
+							<div class="metric"><span class="metric-label">GYRO</span><span class="metric-track"><i class="metric-fill" data-fill="gyro_1"></i></span><input type="text" class="metric-value" id="gyro_1" placeholder="—" readonly></div>
+						</div>
+					</div>
+
+					<div class="grid grid-cols-3 gap-1.5 px-4 pb-4">
+						<div class="chip" data-flag="ball_1"><span class="chip-label">BALL</span><input type="text" class="chip-value" id="ball_1" placeholder="—" readonly></div>
+						<div class="chip" data-flag="limit_1" data-flag-style="alert"><span class="chip-label">LIMIT</span><input type="text" class="chip-value" id="limit_1" placeholder="—" readonly></div>
+						<div class="chip"><span class="chip-label">CNT</span><input type="text" class="chip-value" id="count_1" placeholder="—" readonly></div>
+					</div>
+
+					<div class="mt-auto border-t border-white/8 bg-slate-950/40 px-4 py-3">
+						<div class="mb-2 flex items-center justify-between">
+							<span class="label-mono">Packet Activity</span>
+							<span class="font-mono text-[10px] text-slate-400"><span id="hz1" class="text-slate-200 tabular-nums">0.0</span> Hz</span>
+						</div>
+						<div class="spark" id="spark1"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+						<div class="mt-3 grid grid-cols-2 gap-2">
+							<div class="flex items-center justify-between gap-2"><span class="label-mono">Send</span><input type="text" class="metric-value w-14" id="send_1" placeholder="—" readonly></div>
+							<div class="flex items-center justify-between gap-2"><span class="label-mono">Recv</span><input type="text" class="metric-value w-14" id="recv_1" placeholder="—" readonly></div>
+						</div>
+					</div>
+				</article>
+				<article class="robot-card" id="r2" data-robot="2" style="--accent: var(--color-r2); animation-delay: 70ms">
+					<div class="flex items-center gap-2.5 px-4 pt-4 pb-3">
+						<span class="grid size-7 shrink-0 place-items-center rounded-lg border font-mono text-[11px] font-bold"
+							style="color: var(--accent); border-color: color-mix(in srgb, var(--accent) 35%, transparent); background: color-mix(in srgb, var(--accent) 14%, transparent)">02</span>
+						<h3 class="text-[13px] font-semibold tracking-[0.12em] uppercase">Robot 2</h3>
+						<span class="rc-badge ml-auto"><span class="badge-dot"></span><span id="badge2">IDLE</span></span>
+					</div>
+
+					<div class="relative flex items-center gap-3 px-4 pb-4">
+						<div class="rc-halo"></div>
+						<div class="rc-visual relative grid w-24 shrink-0 place-items-center">
+							<img class="draw" id="rr2" src="/assets/image/robot-standby.png" alt="Robot 2">
+						</div>
+						<div class="relative flex min-w-0 flex-1 flex-col gap-3">
+							<div class="metric"><span class="metric-label">TILT</span><span class="metric-track"><i class="metric-fill" data-fill="tilt_2"></i></span><input type="text" class="metric-value" id="tilt_2" placeholder="—" readonly></div>
+							<div class="metric"><span class="metric-label">PAN</span><span class="metric-track"><i class="metric-fill" data-fill="pan_2"></i></span><input type="text" class="metric-value" id="pan_2" placeholder="—" readonly></div>
+							<div class="metric"><span class="metric-label">GYRO</span><span class="metric-track"><i class="metric-fill" data-fill="gyro_2"></i></span><input type="text" class="metric-value" id="gyro_2" placeholder="—" readonly></div>
+						</div>
+					</div>
+
+					<div class="grid grid-cols-3 gap-1.5 px-4 pb-4">
+						<div class="chip" data-flag="ball_2"><span class="chip-label">BALL</span><input type="text" class="chip-value" id="ball_2" placeholder="—" readonly></div>
+						<div class="chip" data-flag="limit_2" data-flag-style="alert"><span class="chip-label">LIMIT</span><input type="text" class="chip-value" id="limit_2" placeholder="—" readonly></div>
+						<div class="chip"><span class="chip-label">CNT</span><input type="text" class="chip-value" id="count_2" placeholder="—" readonly></div>
+					</div>
+
+					<div class="mt-auto border-t border-white/8 bg-slate-950/40 px-4 py-3">
+						<div class="mb-2 flex items-center justify-between">
+							<span class="label-mono">Packet Activity</span>
+							<span class="font-mono text-[10px] text-slate-400"><span id="hz2" class="text-slate-200 tabular-nums">0.0</span> Hz</span>
+						</div>
+						<div class="spark" id="spark2"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+						<div class="mt-3 grid grid-cols-2 gap-2">
+							<div class="flex items-center justify-between gap-2"><span class="label-mono">Send</span><input type="text" class="metric-value w-14" id="send_2" placeholder="—" readonly></div>
+							<div class="flex items-center justify-between gap-2"><span class="label-mono">Recv</span><input type="text" class="metric-value w-14" id="recv_2" placeholder="—" readonly></div>
+						</div>
+					</div>
+				</article>
+				<article class="robot-card" id="r3" data-robot="3" style="--accent: var(--color-r3); animation-delay: 140ms">
+					<div class="flex items-center gap-2.5 px-4 pt-4 pb-3">
+						<span class="grid size-7 shrink-0 place-items-center rounded-lg border font-mono text-[11px] font-bold"
+							style="color: var(--accent); border-color: color-mix(in srgb, var(--accent) 35%, transparent); background: color-mix(in srgb, var(--accent) 14%, transparent)">03</span>
+						<h3 class="text-[13px] font-semibold tracking-[0.12em] uppercase">Robot 3</h3>
+						<span class="rc-badge ml-auto"><span class="badge-dot"></span><span id="badge3">IDLE</span></span>
+					</div>
+
+					<div class="relative flex items-center gap-3 px-4 pb-4">
+						<div class="rc-halo"></div>
+						<div class="rc-visual relative grid w-24 shrink-0 place-items-center">
+							<img class="draw" id="rr3" src="/assets/image/robot-standby.png" alt="Robot 3">
+						</div>
+						<div class="relative flex min-w-0 flex-1 flex-col gap-3">
+							<div class="metric"><span class="metric-label">TILT</span><span class="metric-track"><i class="metric-fill" data-fill="tilt_3"></i></span><input type="text" class="metric-value" id="tilt_3" placeholder="—" readonly></div>
+							<div class="metric"><span class="metric-label">PAN</span><span class="metric-track"><i class="metric-fill" data-fill="pan_3"></i></span><input type="text" class="metric-value" id="pan_3" placeholder="—" readonly></div>
+							<div class="metric"><span class="metric-label">GYRO</span><span class="metric-track"><i class="metric-fill" data-fill="gyro_3"></i></span><input type="text" class="metric-value" id="gyro_3" placeholder="—" readonly></div>
+						</div>
+					</div>
+
+					<div class="grid grid-cols-3 gap-1.5 px-4 pb-4">
+						<div class="chip" data-flag="ball_3"><span class="chip-label">BALL</span><input type="text" class="chip-value" id="ball_3" placeholder="—" readonly></div>
+						<div class="chip" data-flag="limit_3" data-flag-style="alert"><span class="chip-label">LIMIT</span><input type="text" class="chip-value" id="limit_3" placeholder="—" readonly></div>
+						<div class="chip"><span class="chip-label">CNT</span><input type="text" class="chip-value" id="count_3" placeholder="—" readonly></div>
+					</div>
+
+					<div class="mt-auto border-t border-white/8 bg-slate-950/40 px-4 py-3">
+						<div class="mb-2 flex items-center justify-between">
+							<span class="label-mono">Packet Activity</span>
+							<span class="font-mono text-[10px] text-slate-400"><span id="hz3" class="text-slate-200 tabular-nums">0.0</span> Hz</span>
+						</div>
+						<div class="spark" id="spark3"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+						<div class="mt-3 grid grid-cols-2 gap-2">
+							<div class="flex items-center justify-between gap-2"><span class="label-mono">Send</span><input type="text" class="metric-value w-14" id="send_3" placeholder="—" readonly></div>
+							<div class="flex items-center justify-between gap-2"><span class="label-mono">Recv</span><input type="text" class="metric-value w-14" id="recv_3" placeholder="—" readonly></div>
+						</div>
+					</div>
+				</article>
+				<article class="robot-card" id="r4" data-robot="4" style="--accent: var(--color-r4); animation-delay: 210ms">
+					<div class="flex items-center gap-2.5 px-4 pt-4 pb-3">
+						<span class="grid size-7 shrink-0 place-items-center rounded-lg border font-mono text-[11px] font-bold"
+							style="color: var(--accent); border-color: color-mix(in srgb, var(--accent) 35%, transparent); background: color-mix(in srgb, var(--accent) 14%, transparent)">04</span>
+						<h3 class="text-[13px] font-semibold tracking-[0.12em] uppercase">Robot 4</h3>
+						<span class="rc-badge ml-auto"><span class="badge-dot"></span><span id="badge4">IDLE</span></span>
+					</div>
+
+					<div class="relative flex items-center gap-3 px-4 pb-4">
+						<div class="rc-halo"></div>
+						<div class="rc-visual relative grid w-24 shrink-0 place-items-center">
+							<img class="draw" id="rr4" src="/assets/image/robot-standby.png" alt="Robot 4">
+						</div>
+						<div class="relative flex min-w-0 flex-1 flex-col gap-3">
+							<div class="metric"><span class="metric-label">TILT</span><span class="metric-track"><i class="metric-fill" data-fill="tilt_4"></i></span><input type="text" class="metric-value" id="tilt_4" placeholder="—" readonly></div>
+							<div class="metric"><span class="metric-label">PAN</span><span class="metric-track"><i class="metric-fill" data-fill="pan_4"></i></span><input type="text" class="metric-value" id="pan_4" placeholder="—" readonly></div>
+							<div class="metric"><span class="metric-label">GYRO</span><span class="metric-track"><i class="metric-fill" data-fill="gyro_4"></i></span><input type="text" class="metric-value" id="gyro_4" placeholder="—" readonly></div>
+						</div>
+					</div>
+
+					<div class="grid grid-cols-3 gap-1.5 px-4 pb-4">
+						<div class="chip" data-flag="ball_4"><span class="chip-label">BALL</span><input type="text" class="chip-value" id="ball_4" placeholder="—" readonly></div>
+						<div class="chip" data-flag="limit_4" data-flag-style="alert"><span class="chip-label">LIMIT</span><input type="text" class="chip-value" id="limit_4" placeholder="—" readonly></div>
+						<div class="chip"><span class="chip-label">CNT</span><input type="text" class="chip-value" id="count_4" placeholder="—" readonly></div>
+					</div>
+
+					<div class="mt-auto border-t border-white/8 bg-slate-950/40 px-4 py-3">
+						<div class="mb-2 flex items-center justify-between">
+							<span class="label-mono">Packet Activity</span>
+							<span class="font-mono text-[10px] text-slate-400"><span id="hz4" class="text-slate-200 tabular-nums">0.0</span> Hz</span>
+						</div>
+						<div class="spark" id="spark4"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+						<div class="mt-3 grid grid-cols-2 gap-2">
+							<div class="flex items-center justify-between gap-2"><span class="label-mono">Send</span><input type="text" class="metric-value w-14" id="send_4" placeholder="—" readonly></div>
+							<div class="flex items-center justify-between gap-2"><span class="label-mono">Recv</span><input type="text" class="metric-value w-14" id="recv_4" placeholder="—" readonly></div>
+						</div>
+					</div>
+				</article>
+				<article class="robot-card" id="r5" data-robot="5" style="--accent: var(--color-r5); animation-delay: 280ms">
+					<div class="flex items-center gap-2.5 px-4 pt-4 pb-3">
+						<span class="grid size-7 shrink-0 place-items-center rounded-lg border font-mono text-[11px] font-bold"
+							style="color: var(--accent); border-color: color-mix(in srgb, var(--accent) 35%, transparent); background: color-mix(in srgb, var(--accent) 14%, transparent)">05</span>
+						<h3 class="text-[13px] font-semibold tracking-[0.12em] uppercase">Robot 5</h3>
+						<span class="rc-badge ml-auto"><span class="badge-dot"></span><span id="badge5">IDLE</span></span>
+					</div>
+
+					<div class="relative flex items-center gap-3 px-4 pb-4">
+						<div class="rc-halo"></div>
+						<div class="rc-visual relative grid w-24 shrink-0 place-items-center">
+							<img class="draw" id="rr5" src="/assets/image/robot-standby.png" alt="Robot 5">
+						</div>
+						<div class="relative flex min-w-0 flex-1 flex-col gap-3">
+							<div class="metric"><span class="metric-label">TILT</span><span class="metric-track"><i class="metric-fill" data-fill="tilt_5"></i></span><input type="text" class="metric-value" id="tilt_5" placeholder="—" readonly></div>
+							<div class="metric"><span class="metric-label">PAN</span><span class="metric-track"><i class="metric-fill" data-fill="pan_5"></i></span><input type="text" class="metric-value" id="pan_5" placeholder="—" readonly></div>
+							<div class="metric"><span class="metric-label">GYRO</span><span class="metric-track"><i class="metric-fill" data-fill="gyro_5"></i></span><input type="text" class="metric-value" id="gyro_5" placeholder="—" readonly></div>
+						</div>
+					</div>
+
+					<div class="grid grid-cols-3 gap-1.5 px-4 pb-4">
+						<div class="chip" data-flag="ball_5"><span class="chip-label">BALL</span><input type="text" class="chip-value" id="ball_5" placeholder="—" readonly></div>
+						<div class="chip" data-flag="limit_5" data-flag-style="alert"><span class="chip-label">LIMIT</span><input type="text" class="chip-value" id="limit_5" placeholder="—" readonly></div>
+						<div class="chip"><span class="chip-label">CNT</span><input type="text" class="chip-value" id="count_5" placeholder="—" readonly></div>
+					</div>
+
+					<div class="mt-auto border-t border-white/8 bg-slate-950/40 px-4 py-3">
+						<div class="mb-2 flex items-center justify-between">
+							<span class="label-mono">Packet Activity</span>
+							<span class="font-mono text-[10px] text-slate-400"><span id="hz5" class="text-slate-200 tabular-nums">0.0</span> Hz</span>
+						</div>
+						<div class="spark" id="spark5"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+						<div class="mt-3 grid grid-cols-2 gap-2">
+							<div class="flex items-center justify-between gap-2"><span class="label-mono">Send</span><input type="text" class="metric-value w-14" id="send_5" placeholder="—" readonly></div>
+							<div class="flex items-center justify-between gap-2"><span class="label-mono">Recv</span><input type="text" class="metric-value w-14" id="recv_5" placeholder="—" readonly></div>
+						</div>
+					</div>
+				</article>
 			</div>
-		</div>
-	</div> 
 
-	<div class="row mt-5" id="set">
-		<div class="col-2 bar offset-1">
-			<div class="card">
-				<div class="card-body">
-					<div class="input-group input-group-sm ">
-
-						<div class="input-group-prepend ">
-						<span class="input-group-text" id="inputGroup-sizing-sm"> TILT</span>
-						</div>
-						<input type="text" class="form-control mr-2" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="tilt_1" value="">
-
-						<div class="input-group-prepend ">
-						<span class="input-group-text" id="inputGroup-sizing-sm"> BALL</span>
-						</div>
-						<input type="text" class="form-control " aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="ball_1" value="">
-					</div>
-					
-					<div class="input-group input-group-sm ">
-						<div class="input-group-prepend">
-						<span class="input-group-text" id="inputGroup-sizing-sm"> PAN</span>
-						</div>
-						<input type="text" class="form-control mr-2" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="pan_1" value="">
-						<div class="input-group-prepend ">
-						<span class="input-group-text" id="inputGroup-sizing-sm"> COUNT</span>
-						</div>
-						<input type="text" class="form-control " aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="count_1" value="">
-					</div>
-					<div class="input-group input-group-sm mb-2">
-						<div class="input-group-prepend">
-						<span class="input-group-text" id="inputGroup-sizing-sm">GYRO</span>
-						</div>
-						<input type="text" class="form-control mr-2" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="gyro_1" value="">
-						<div class="input-group-prepend ">
-						<span class="input-group-text" id="inputGroup-sizing-sm">LIMIT</span>
-						</div>
-						<input type="text" class="form-control " aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="limit_1" value="">
-					</div>
-					<div class="input-group input-group-sm ">
-						<div class="input-group-prepend">
-						<span class="input-group-text" id="inputGroup-sizing-sm">SEND</span>
-						</div>
-						<input type="text" class="form-control mr-2" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="send_1" value="">
-						<div class="input-group-prepend ">
-						<span class="input-group-text" id="inputGroup-sizing-sm">RECV</span>
-						</div>
-						<input type="text" class="form-control " aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="recv_1" value="">
-					</div>
+			<div class="surface mt-4 overflow-hidden">
+				<div class="flex items-center gap-3 border-b border-white/10 px-4 py-3">
+					<span class="label-mono">System Log</span>
+					<span class="ml-auto font-mono text-[10px] text-slate-600">peristiwa terbaru</span>
 				</div>
+				<div id="logList" class="max-h-56 overflow-y-auto"></div>
 			</div>
-		</div>
-		<div class="col-2 bar ">
-			<div class="card">
-				<div class="card-body">
-					<div class="input-group input-group-sm ">
+		</section>
 
-						<div class="input-group-prepend ">
-						<span class="input-group-text" id="inputGroup-sizing-sm"> TILT</span>
-						</div>
-						<input type="text" class="form-control mr-2" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="tilt_2" value="">
-
-						<div class="input-group-prepend ">
-						<span class="input-group-text" id="inputGroup-sizing-sm"> BALL</span>
-						</div>
-						<input type="text" class="form-control " aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="ball_2" value="">
-					</div>
-					
-					<div class="input-group input-group-sm ">
-						<div class="input-group-prepend">
-						<span class="input-group-text" id="inputGroup-sizing-sm"> PAN</span>
-						</div>
-						<input type="text" class="form-control mr-2" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="pan_2" value="">
-						<div class="input-group-prepend ">
-						<span class="input-group-text" id="inputGroup-sizing-sm"> COUNT</span>
-						</div>
-						<input type="text" class="form-control " aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="count_2" value="">
-					</div>
-					<div class="input-group input-group-sm mb-2">
-						<div class="input-group-prepend">
-						<span class="input-group-text" id="inputGroup-sizing-sm">GYRO</span>
-						</div>
-						<input type="text" class="form-control mr-2" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="gyro_2" value="">
-						<div class="input-group-prepend ">
-						<span class="input-group-text" id="inputGroup-sizing-sm">LIMIT</span>
-						</div>
-						<input type="text" class="form-control " aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="limit_2" value="">
-					</div>
-					<div class="input-group input-group-sm ">
-						<div class="input-group-prepend">
-						<span class="input-group-text" id="inputGroup-sizing-sm">SEND</span>
-						</div>
-						<input type="text" class="form-control mr-2" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="send_2" value="">
-						<div class="input-group-prepend ">
-						<span class="input-group-text" id="inputGroup-sizing-sm">RECV</span>
-						</div>
-						<input type="text" class="form-control " aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="recv_2" value="">
-					</div>
-				</div>
+		<!-- ------------------------------ STREAM ----------------------------- -->
+		<section class="panel" id="panel-stream" role="tabpanel">
+			<div class="mb-3 flex flex-wrap items-baseline gap-x-3 gap-y-1 px-1">
+				<h2 class="font-mono text-[12px] tracking-[0.2em]">CAMERA STREAM</h2>
+				<p class="text-[11.5px] text-slate-500">Label berubah menjadi LIVE saat frame diterima; FPS dihitung tiap detik.</p>
 			</div>
-		</div>
-		<div class="col-2 bar ">
-			<div class="card ">
-				<div class="card-body">
-					<div class="input-group input-group-sm ">
 
-						<div class="input-group-prepend ">
-						<span class="input-group-text" id="inputGroup-sizing-sm"> TILT</span>
-						</div>
-						<input type="text" class="form-control mr-2" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="tilt_3" value="">
-
-						<div class="input-group-prepend ">
-						<span class="input-group-text" id="inputGroup-sizing-sm"> BALL</span>
-						</div>
-						<input type="text" class="form-control " aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="ball_3" value="">
+			<div class="flex flex-wrap justify-center gap-4">
+				<article class="stream-card w-full max-w-[560px] min-w-[min(380px,100%)] flex-1" id="stream1" style="--accent: var(--color-r1); animation-delay: 0ms">
+					<div class="flex items-center gap-2.5 border-b border-white/10 px-4 py-3">
+						<span class="size-2 rounded-full" style="background: var(--accent)"></span>
+						<span class="font-mono text-[11px] tracking-[0.16em]">ROBOT 1</span>
+						<span class="ml-auto flex items-center gap-3">
+							<span class="font-mono text-[10px] text-slate-500"><span id="fps1" class="tabular-nums">0</span> FPS</span>
+							<span class="sc-signal">NO SIGNAL</span>
+						</span>
 					</div>
-					
-					<div class="input-group input-group-sm ">
-						<div class="input-group-prepend">
-						<span class="input-group-text" id="inputGroup-sizing-sm"> PAN</span>
+					<div class="sc-view">
+						<img id="video1" src="" alt="Video Stream Robot 1">
+						<div class="sc-placeholder relative text-center font-mono text-[10.5px] tracking-[0.18em] text-slate-600">
+							MENUNGGU FRAME
+							<span class="mt-2 block animate-pulse text-2xl opacity-40">◍</span>
 						</div>
-						<input type="text" class="form-control mr-2" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="pan_3" value="">
-						<div class="input-group-prepend ">
-						<span class="input-group-text" id="inputGroup-sizing-sm"> COUNT</span>
-						</div>
-						<input type="text" class="form-control " aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="count_3" value="">
 					</div>
-					<div class="input-group input-group-sm mb-2">
-						<div class="input-group-prepend">
-						<span class="input-group-text" id="inputGroup-sizing-sm">GYRO</span>
-						</div>
-						<input type="text" class="form-control mr-2" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="gyro_3" value="">
-						<div class="input-group-prepend ">
-						<span class="input-group-text" id="inputGroup-sizing-sm">LIMIT</span>
-						</div>
-						<input type="text" class="form-control " aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="limit_3" value="">
+				</article>
+				<article class="stream-card w-full max-w-[560px] min-w-[min(380px,100%)] flex-1" id="stream2" style="--accent: var(--color-r2); animation-delay: 60ms">
+					<div class="flex items-center gap-2.5 border-b border-white/10 px-4 py-3">
+						<span class="size-2 rounded-full" style="background: var(--accent)"></span>
+						<span class="font-mono text-[11px] tracking-[0.16em]">ROBOT 2</span>
+						<span class="ml-auto flex items-center gap-3">
+							<span class="font-mono text-[10px] text-slate-500"><span id="fps2" class="tabular-nums">0</span> FPS</span>
+							<span class="sc-signal">NO SIGNAL</span>
+						</span>
 					</div>
-					<div class="input-group input-group-sm ">
-						<div class="input-group-prepend">
-						<span class="input-group-text" id="inputGroup-sizing-sm">SEND</span>
+					<div class="sc-view">
+						<img id="video2" src="" alt="Video Stream Robot 2">
+						<div class="sc-placeholder relative text-center font-mono text-[10.5px] tracking-[0.18em] text-slate-600">
+							MENUNGGU FRAME
+							<span class="mt-2 block animate-pulse text-2xl opacity-40">◍</span>
 						</div>
-						<input type="text" class="form-control mr-2" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="send_3" value="">
-						<div class="input-group-prepend ">
-						<span class="input-group-text" id="inputGroup-sizing-sm">RECV</span>
-						</div>
-						<input type="text" class="form-control " aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="recv_3" value="">
 					</div>
-				</div>
+				</article>
+				<article class="stream-card w-full max-w-[560px] min-w-[min(380px,100%)] flex-1" id="stream3" style="--accent: var(--color-r3); animation-delay: 120ms">
+					<div class="flex items-center gap-2.5 border-b border-white/10 px-4 py-3">
+						<span class="size-2 rounded-full" style="background: var(--accent)"></span>
+						<span class="font-mono text-[11px] tracking-[0.16em]">ROBOT 3</span>
+						<span class="ml-auto flex items-center gap-3">
+							<span class="font-mono text-[10px] text-slate-500"><span id="fps3" class="tabular-nums">0</span> FPS</span>
+							<span class="sc-signal">NO SIGNAL</span>
+						</span>
+					</div>
+					<div class="sc-view">
+						<img id="video3" src="" alt="Video Stream Robot 3">
+						<div class="sc-placeholder relative text-center font-mono text-[10.5px] tracking-[0.18em] text-slate-600">
+							MENUNGGU FRAME
+							<span class="mt-2 block animate-pulse text-2xl opacity-40">◍</span>
+						</div>
+					</div>
+				</article>
+				<article class="stream-card w-full max-w-[560px] min-w-[min(380px,100%)] flex-1" id="stream4" style="--accent: var(--color-r4); animation-delay: 180ms">
+					<div class="flex items-center gap-2.5 border-b border-white/10 px-4 py-3">
+						<span class="size-2 rounded-full" style="background: var(--accent)"></span>
+						<span class="font-mono text-[11px] tracking-[0.16em]">ROBOT 4</span>
+						<span class="ml-auto flex items-center gap-3">
+							<span class="font-mono text-[10px] text-slate-500"><span id="fps4" class="tabular-nums">0</span> FPS</span>
+							<span class="sc-signal">NO SIGNAL</span>
+						</span>
+					</div>
+					<div class="sc-view">
+						<img id="video4" src="" alt="Video Stream Robot 4">
+						<div class="sc-placeholder relative text-center font-mono text-[10.5px] tracking-[0.18em] text-slate-600">
+							MENUNGGU FRAME
+							<span class="mt-2 block animate-pulse text-2xl opacity-40">◍</span>
+						</div>
+					</div>
+				</article>
+				<article class="stream-card w-full max-w-[560px] min-w-[min(380px,100%)] flex-1" id="stream5" style="--accent: var(--color-r5); animation-delay: 240ms">
+					<div class="flex items-center gap-2.5 border-b border-white/10 px-4 py-3">
+						<span class="size-2 rounded-full" style="background: var(--accent)"></span>
+						<span class="font-mono text-[11px] tracking-[0.16em]">ROBOT 5</span>
+						<span class="ml-auto flex items-center gap-3">
+							<span class="font-mono text-[10px] text-slate-500"><span id="fps5" class="tabular-nums">0</span> FPS</span>
+							<span class="sc-signal">NO SIGNAL</span>
+						</span>
+					</div>
+					<div class="sc-view">
+						<img id="video5" src="" alt="Video Stream Robot 5">
+						<div class="sc-placeholder relative text-center font-mono text-[10.5px] tracking-[0.18em] text-slate-600">
+							MENUNGGU FRAME
+							<span class="mt-2 block animate-pulse text-2xl opacity-40">◍</span>
+						</div>
+					</div>
+				</article>
 			</div>
-		</div>
-		<div class="col-2 bar ">
-			<div class="card ">
-				<div class="card-body">
-					<div class="input-group input-group-sm ">
+		</section>
 
-						<div class="input-group-prepend ">
-						<span class="input-group-text" id="inputGroup-sizing-sm"> TILT</span>
-						</div>
-						<input type="text" class="form-control mr-2" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="tilt_4" value="">
-
-						<div class="input-group-prepend ">
-						<span class="input-group-text" id="inputGroup-sizing-sm"> BALL</span>
-						</div>
-						<input type="text" class="form-control " aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="ball_4" value="">
-					</div>
-					
-					<div class="input-group input-group-sm ">
-						<div class="input-group-prepend">
-						<span class="input-group-text" id="inputGroup-sizing-sm"> PAN</span>
-						</div>
-						<input type="text" class="form-control mr-2" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="pan_4" value="">
-						<div class="input-group-prepend ">
-						<span class="input-group-text" id="inputGroup-sizing-sm"> COUNT</span>
-						</div>
-						<input type="text" class="form-control " aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="count_4" value="">
-					</div>
-					<div class="input-group input-group-sm mb-2">
-						<div class="input-group-prepend">
-						<span class="input-group-text" id="inputGroup-sizing-sm">GYRO</span>
-						</div>
-						<input type="text" class="form-control mr-2" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="gyro_4" value="">
-						<div class="input-group-prepend ">
-						<span class="input-group-text" id="inputGroup-sizing-sm">LIMIT</span>
-						</div>
-						<input type="text" class="form-control " aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="limit_4" value="">
-					</div>
-					<div class="input-group input-group-sm ">
-						<div class="input-group-prepend">
-						<span class="input-group-text" id="inputGroup-sizing-sm">SEND</span>
-						</div>
-						<input type="text" class="form-control mr-2" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="send_4" value="">
-						<div class="input-group-prepend ">
-						<span class="input-group-text" id="inputGroup-sizing-sm">RECV</span>
-						</div>
-						<input type="text" class="form-control " aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="recv_4" value="">
-					</div>
-				</div>
+		<!-- ----------------------------- POSITION ---------------------------- -->
+		<section class="panel" id="panel-position" role="tabpanel">
+			<div class="mb-3 flex flex-wrap items-baseline gap-x-3 gap-y-1 px-1">
+				<h2 class="font-mono text-[12px] tracking-[0.2em]">FIELD POSITION</h2>
+				<p class="text-[11.5px] text-slate-500">Posisi robot di lapangan berdasarkan koordinat pada tiap paket.</p>
 			</div>
-		</div>
-		<div class="col-2 bar ">
-			<div class="card ">
-			<div class="card-body">
-				<div class="input-group input-group-sm ">
 
-					<div class="input-group-prepend ">
-						<span class="input-group-text" id="inputGroup-sizing-sm"> TILT</span>
+			<div class="grid grid-cols-1 items-start gap-4 xl:grid-cols-[minmax(0,1fr)_300px]">
+				<div class="surface p-4">
+					<div class="relative mx-auto overflow-hidden rounded-xl" id="fieldViewport">
+						<div class="field-background" id="fieldBackground"></div>
 					</div>
-					<input type="text" class="form-control mr-2" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="tilt_5" value="">
+				</div>
 
-					<div class="input-group-prepend ">
-						<span class="input-group-text" id="inputGroup-sizing-sm"> BALL</span>
+				<aside class="surface overflow-hidden">
+					<h3 class="label-mono border-b border-white/10 px-4 py-3">Koordinat (X, Y)</h3>
+					<div class="flex items-center gap-3 border-b border-white/5 px-4 py-3 last:border-0" style="--accent: var(--color-r1)">
+						<span class="size-3 shrink-0 rounded-full" style="background: var(--accent); box-shadow: 0 0 10px var(--accent)"></span>
+						<span class="text-[12.5px] tracking-wide">Robot 1</span>
+						<span class="ml-auto flex items-center gap-2">
+							<span class="rounded-md border border-white/10 px-1.5 py-0.5 font-mono text-[9px] tracking-[0.12em] text-slate-500" id="legendState1">IDLE</span>
+							<span class="w-20 text-right font-mono text-[11px] text-slate-300 tabular-nums" id="coord1">—</span>
+						</span>
 					</div>
-					<input type="text" class="form-control " aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="ball_5" value="">
-				</div>
-		
-				<div class="input-group input-group-sm ">
-					<div class="input-group-prepend">
-						<span class="input-group-text" id="inputGroup-sizing-sm"> PAN</span>
+					<div class="flex items-center gap-3 border-b border-white/5 px-4 py-3 last:border-0" style="--accent: var(--color-r2)">
+						<span class="size-3 shrink-0 rounded-full" style="background: var(--accent); box-shadow: 0 0 10px var(--accent)"></span>
+						<span class="text-[12.5px] tracking-wide">Robot 2</span>
+						<span class="ml-auto flex items-center gap-2">
+							<span class="rounded-md border border-white/10 px-1.5 py-0.5 font-mono text-[9px] tracking-[0.12em] text-slate-500" id="legendState2">IDLE</span>
+							<span class="w-20 text-right font-mono text-[11px] text-slate-300 tabular-nums" id="coord2">—</span>
+						</span>
 					</div>
-					<input type="text" class="form-control mr-2" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="pan_5" value="">
-					<div class="input-group-prepend ">
-						<span class="input-group-text" id="inputGroup-sizing-sm"> COUNT</span>
+					<div class="flex items-center gap-3 border-b border-white/5 px-4 py-3 last:border-0" style="--accent: var(--color-r3)">
+						<span class="size-3 shrink-0 rounded-full" style="background: var(--accent); box-shadow: 0 0 10px var(--accent)"></span>
+						<span class="text-[12.5px] tracking-wide">Robot 3</span>
+						<span class="ml-auto flex items-center gap-2">
+							<span class="rounded-md border border-white/10 px-1.5 py-0.5 font-mono text-[9px] tracking-[0.12em] text-slate-500" id="legendState3">IDLE</span>
+							<span class="w-20 text-right font-mono text-[11px] text-slate-300 tabular-nums" id="coord3">—</span>
+						</span>
 					</div>
-					<input type="text" class="form-control " aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="count_5" value="">
-				</div>
-				<div class="input-group input-group-sm mb-2">
-					<div class="input-group-prepend">
-						<span class="input-group-text" id="inputGroup-sizing-sm">GYRO</span>
-						</div>
-						<input type="text" class="form-control mr-2" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="gyro_5" value="">
-						<div class="input-group-prepend ">
-							<span class="input-group-text" id="inputGroup-sizing-sm">LIMIT</span>
-						</div>
-						<input type="text" class="form-control " aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="limit_5" value="">
-				</div>
-				<div class="input-group input-group-sm ">
-					<div class="input-group-prepend">
-						<span class="input-group-text" id="inputGroup-sizing-sm">SEND</span>
+					<div class="flex items-center gap-3 border-b border-white/5 px-4 py-3 last:border-0" style="--accent: var(--color-r4)">
+						<span class="size-3 shrink-0 rounded-full" style="background: var(--accent); box-shadow: 0 0 10px var(--accent)"></span>
+						<span class="text-[12.5px] tracking-wide">Robot 4</span>
+						<span class="ml-auto flex items-center gap-2">
+							<span class="rounded-md border border-white/10 px-1.5 py-0.5 font-mono text-[9px] tracking-[0.12em] text-slate-500" id="legendState4">IDLE</span>
+							<span class="w-20 text-right font-mono text-[11px] text-slate-300 tabular-nums" id="coord4">—</span>
+						</span>
 					</div>
-					<input type="text" class="form-control mr-2" aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="send_5" value="">
-					<div class="input-group-prepend ">
-						<span class="input-group-text" id="inputGroup-sizing-sm">RECV</span>
+					<div class="flex items-center gap-3 border-b border-white/5 px-4 py-3 last:border-0" style="--accent: var(--color-r5)">
+						<span class="size-3 shrink-0 rounded-full" style="background: var(--accent); box-shadow: 0 0 10px var(--accent)"></span>
+						<span class="text-[12.5px] tracking-wide">Robot 5</span>
+						<span class="ml-auto flex items-center gap-2">
+							<span class="rounded-md border border-white/10 px-1.5 py-0.5 font-mono text-[9px] tracking-[0.12em] text-slate-500" id="legendState5">IDLE</span>
+							<span class="w-20 text-right font-mono text-[11px] text-slate-300 tabular-nums" id="coord5">—</span>
+						</span>
 					</div>
-					<input type="text" class="form-control " aria-label="Small" aria-describedby="inputGroup-sizing-xm" placeholder="-" id="recv_5" value="">
-				</div>
-				</div>
+				</aside>
 			</div>
-		</div>
-	</div> <!--end set-->
+		</section>
+	</main>
 
-	<!-- The Modal -->
+	<!-- =============================== MODAL =============================== -->
 	<div id="myModal" class="modals">
-		<!-- Modal content -->
-		<div class=" shadow modal-contents rounded">
-			<span class="close">&times;</span>
-			<p>Package Identity</p>
-			<p class="ml-5">0 : Init<br>1 : Ready<br>2 : Set<br>3 : Play<br>4 : Finish</p>
+		<div class="modal-contents">
+			<span class="close" role="button" title="Tutup">&times;</span>
+			<h3 class="font-mono text-[14px] tracking-[0.16em]">PACKAGE IDENTITY</h3>
+			<p class="mt-1 mb-5 text-[11.5px] text-slate-500">Kode game state yang dikirim referee box.</p>
+
+			<div class="grid gap-1.5">
+				<div class="flex items-center gap-3 rounded-lg border border-white/10 bg-white/[0.02] px-3 py-2.5"><b class="grid size-6 place-items-center rounded-md bg-sky-500/15 font-mono text-[11px] font-normal text-sky-400">0</b><span class="font-mono text-[11.5px] tracking-[0.14em]">INIT</span><small class="ml-auto text-[11px] text-slate-500">persiapan awal</small></div>
+				<div class="flex items-center gap-3 rounded-lg border border-white/10 bg-white/[0.02] px-3 py-2.5"><b class="grid size-6 place-items-center rounded-md bg-sky-500/15 font-mono text-[11px] font-normal text-sky-400">1</b><span class="font-mono text-[11.5px] tracking-[0.14em]">READY</span><small class="ml-auto text-[11px] text-slate-500">robot menuju posisi</small></div>
+				<div class="flex items-center gap-3 rounded-lg border border-white/10 bg-white/[0.02] px-3 py-2.5"><b class="grid size-6 place-items-center rounded-md bg-sky-500/15 font-mono text-[11px] font-normal text-sky-400">2</b><span class="font-mono text-[11.5px] tracking-[0.14em]">SET</span><small class="ml-auto text-[11px] text-slate-500">siap kick-off</small></div>
+				<div class="flex items-center gap-3 rounded-lg border border-white/10 bg-white/[0.02] px-3 py-2.5"><b class="grid size-6 place-items-center rounded-md bg-sky-500/15 font-mono text-[11px] font-normal text-sky-400">3</b><span class="font-mono text-[11.5px] tracking-[0.14em]">PLAY</span><small class="ml-auto text-[11px] text-slate-500">pertandingan berjalan</small></div>
+				<div class="flex items-center gap-3 rounded-lg border border-white/10 bg-white/[0.02] px-3 py-2.5"><b class="grid size-6 place-items-center rounded-md bg-sky-500/15 font-mono text-[11px] font-normal text-sky-400">4</b><span class="font-mono text-[11.5px] tracking-[0.14em]">FINISH</span><small class="ml-auto text-[11px] text-slate-500">babak selesai</small></div>
+			</div>
+
+			<div class="mt-5 grid gap-2 border-t border-white/10 pt-4 text-[11.5px] text-slate-400">
+				<div class="flex items-center gap-2"><kbd>1</kbd><kbd>2</kbd><kbd>3</kbd> Pindah tab Robot / Stream / Position</div>
+				<div class="flex items-center gap-2"><kbd>G</kbd> Buka panel ini</div>
+				<div class="flex items-center gap-2"><kbd>Esc</kbd> Tutup panel</div>
+			</div>
 		</div>
 	</div>
 
-	<script>
-
-		var modal = document.getElementById("myModal");
-		var btn = document.getElementById("myBtn");
-		var span = document.getElementsByClassName("close")[0];
-
-		btn.onclick = function() {
-			modal.style.display = "block";
-		}
-		
-		// When the user clicks on <span> (x), close the modal
-		span.onclick = function() {
-			modal.style.display = "none";
-		}
-		
-		// When the user clicks anywhere outside of the modal, close it
-		window.onclick = function(event) {
-			if (event.target == modal) {
-			modal.style.display = "none";
-			}
-		}
-
-		function Init(){
-			let status = new Status();
-			status.RobotLoss1();
-			status.RobotLoss2();
-			status.RobotLoss3();
-			status.RobotLoss4();
-			status.RobotLoss5();	
-		}
-
-		function EntryData(data){
-			let status = new Status();
-			let entry = new Entry(data, data[11], status);
-			entry.Calculation();
-
-		}
-
-		$(function () {
-			var ws;
-			let state = document.getElementById('state');
-
-			if (window.WebSocket === undefined) {
-				alert("Your browser does not support WebSockets");
-				return;
-			} else {
-				ws = initWS();
-			}
-
-			function initWS() {
-				var socket = new WebSocket('ws://' + window.location.host + '/ws'),
-					container = $("#container")
-				socket.onopen = function() {
-					state.classList.add("staterun");
-					Init();
-				};
-				socket.onmessage = function (e) {
-					let data = e.data
-					data = data.replace(/(\r\n|\n|\r)/gm, "");
-					data = data.replace('\"', "");
-					data = data.replace('\"', "");
-
-					data_all = data.split(",");
-					// console.log(data_all);
-					EntryData(data_all);
-				}
-				socket.onclose = function () {
-					state.classList.remove("staterun");
-				}
-
-				return socket;
-			}
-			setInterval(function() {
-				ws.send(JSON.stringify({ Num: 0 }));	// get callback for refereebox
-				ws.send(JSON.stringify({ Num: 1 }));
-				ws.send(JSON.stringify({ Num: 2 }));
-				ws.send(JSON.stringify({ Num: 3 }));
-				ws.send(JSON.stringify({ Num: 4 }));
-				ws.send(JSON.stringify({ Num: 5 }));
-			}, 100);
-		});
-
-
-		//stream 1
-		var socketR1 = new WebSocket('ws://' + window.location.host + '/video1');
-		socketR1.binaryType = "arraybuffer";
-
-		socketR1.onmessage = function(event) {
-			var imageBlob = new Blob([event.data], {type: 'image/jpeg'});
-			var imageURL = URL.createObjectURL(imageBlob);
-
-			var img = document.getElementById("video1");
-			if (img.src) {
-				URL.revokeObjectURL(img.src);
-			}
-			img.src = imageURL;
-		};
-
-		socketR1.onerror = function(error) {
-			console.error("WebSocket error:", error);
-		};
-
-		//stream 2
-		var socketR2 = new WebSocket('ws://' + window.location.host + '/video2');
-		socketR2.binaryType = "arraybuffer";
-
-		socketR2.onmessage = function(event) {
-			var imageBlob = new Blob([event.data], {type: 'image/jpeg'});
-			var imageURL = URL.createObjectURL(imageBlob);
-
-			var img = document.getElementById("video2");
-			if (img.src) {
-				URL.revokeObjectURL(img.src);
-			}
-			img.src = imageURL;
-		};
-
-		socketR2.onerror = function(error) {
-			console.error("WebSocket error:", error);
-		};
-		
-		//stream 3
-		var socketR3 = new WebSocket('ws://' + window.location.host + '/video3');
-		socketR3.binaryType = "arraybuffer";
-
-		socketR3.onmessage = function(event) {
-			var imageBlob = new Blob([event.data], {type: 'image/jpeg'});
-			var imageURL = URL.createObjectURL(imageBlob);
-
-			var img = document.getElementById("video3");
-			if (img.src) {
-				URL.revokeObjectURL(img.src);
-			}
-			img.src = imageURL;
-		};
-
-		socketR3.onerror = function(error) {
-			console.error("WebSocket error:", error);
-		};
-
-		//stream 4
-		var socketR4 = new WebSocket('ws://' + window.location.host + '/video4');
-		socketR4.binaryType = "arraybuffer";
-
-		socketR4.onmessage = function(event) {
-			var imageBlob = new Blob([event.data], {type: 'image/jpeg'});
-			var imageURL = URL.createObjectURL(imageBlob);
-
-			var img = document.getElementById("video4");
-			if (img.src) {
-				URL.revokeObjectURL(img.src);
-			}
-			img.src = imageURL;
-		};
-
-		socketR4.onerror = function(error) {
-			console.error("WebSocket error:", error);
-		};
-
-		//stream 5
-		var socketR5 = new WebSocket('ws://' + window.location.host + '/video5');
-		socketR5.binaryType = "arraybuffer";
-
-		socketR5.onmessage = function(event) {
-			var imageBlob = new Blob([event.data], {type: 'image/jpeg'});
-			var imageURL = URL.createObjectURL(imageBlob);
-
-			var img = document.getElementById("video5");
-			if (img.src) {
-				URL.revokeObjectURL(img.src);
-			}
-			img.src = imageURL;
-		};
-
-		socketR5.onerror = function(error) {
-			console.error("WebSocket error:", error);
-		};
-    </script>
+	<script src="/assets/client.js"></script>
+	<script src="/assets/js/ui.js"></script>
 </body>
 </html>
